@@ -53,16 +53,30 @@
             this.importDatabasePath = new System.Windows.Forms.TextBox();
             this.binFolderPath = new System.Windows.Forms.TextBox();
             this.serversPanel = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.serversListBox = new System.Windows.Forms.ListBox();
-            this.newFtpServer = new System.Windows.Forms.Button();
-            this.editFtpServer = new System.Windows.Forms.Button();
+            this.configServersPanel = new System.Windows.Forms.Panel();
+            this.cancelAction = new System.Windows.Forms.Button();
+            this.makeAction = new System.Windows.Forms.Button();
+            this.serverType = new System.Windows.Forms.ComboBox();
+            this.port = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.username = new System.Windows.Forms.TextBox();
+            this.domainName = new System.Windows.Forms.TextBox();
+            this.actionTitle = new System.Windows.Forms.Label();
             this.deleteFtpServer = new System.Windows.Forms.Button();
+            this.editFtpServer = new System.Windows.Forms.Button();
+            this.newFtpServer = new System.Windows.Forms.Button();
+            this.serversListBox = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
             this.serversPanel.SuspendLayout();
+            this.configServersPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.port)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -349,6 +363,7 @@
             // serversPanel
             // 
             this.serversPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.serversPanel.Controls.Add(this.configServersPanel);
             this.serversPanel.Controls.Add(this.deleteFtpServer);
             this.serversPanel.Controls.Add(this.editFtpServer);
             this.serversPanel.Controls.Add(this.newFtpServer);
@@ -358,6 +373,195 @@
             this.serversPanel.Name = "serversPanel";
             this.serversPanel.Size = new System.Drawing.Size(526, 418);
             this.serversPanel.TabIndex = 3;
+            // 
+            // configServersPanel
+            // 
+            this.configServersPanel.BackColor = System.Drawing.Color.White;
+            this.configServersPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.configServersPanel.Controls.Add(this.cancelAction);
+            this.configServersPanel.Controls.Add(this.makeAction);
+            this.configServersPanel.Controls.Add(this.serverType);
+            this.configServersPanel.Controls.Add(this.port);
+            this.configServersPanel.Controls.Add(this.label8);
+            this.configServersPanel.Controls.Add(this.label7);
+            this.configServersPanel.Controls.Add(this.label11);
+            this.configServersPanel.Controls.Add(this.label10);
+            this.configServersPanel.Controls.Add(this.username);
+            this.configServersPanel.Controls.Add(this.domainName);
+            this.configServersPanel.Controls.Add(this.actionTitle);
+            this.configServersPanel.Location = new System.Drawing.Point(274, 41);
+            this.configServersPanel.Name = "configServersPanel";
+            this.configServersPanel.Size = new System.Drawing.Size(247, 340);
+            this.configServersPanel.TabIndex = 8;
+            this.configServersPanel.Visible = false;
+            // 
+            // cancelAction
+            // 
+            this.cancelAction.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.cancelAction.Location = new System.Drawing.Point(14, 304);
+            this.cancelAction.Name = "cancelAction";
+            this.cancelAction.Size = new System.Drawing.Size(75, 23);
+            this.cancelAction.TabIndex = 10;
+            this.cancelAction.Text = "Cancel";
+            this.cancelAction.UseVisualStyleBackColor = true;
+            this.cancelAction.Click += new System.EventHandler(this.cancelAction_Click);
+            // 
+            // makeAction
+            // 
+            this.makeAction.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.makeAction.Location = new System.Drawing.Point(162, 304);
+            this.makeAction.Name = "makeAction";
+            this.makeAction.Size = new System.Drawing.Size(75, 23);
+            this.makeAction.TabIndex = 9;
+            this.makeAction.Text = "Action";
+            this.makeAction.UseVisualStyleBackColor = true;
+            this.makeAction.Click += new System.EventHandler(this.makeAction_Click);
+            // 
+            // serverType
+            // 
+            this.serverType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.serverType.FormattingEnabled = true;
+            this.serverType.Items.AddRange(new object[] {
+            "SFTP",
+            "FTP"});
+            this.serverType.Location = new System.Drawing.Point(14, 73);
+            this.serverType.Name = "serverType";
+            this.serverType.Size = new System.Drawing.Size(106, 21);
+            this.serverType.TabIndex = 8;
+            // 
+            // port
+            // 
+            this.port.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.port.Location = new System.Drawing.Point(14, 207);
+            this.port.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
+            this.port.Name = "port";
+            this.port.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.port.Size = new System.Drawing.Size(75, 24);
+            this.port.TabIndex = 7;
+            this.port.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label8.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label8.Location = new System.Drawing.Point(10, 46);
+            this.label8.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(50, 19);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Server";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label7.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label7.Location = new System.Drawing.Point(10, 107);
+            this.label7.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(108, 19);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "Domain name";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label11.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label11.Location = new System.Drawing.Point(10, 239);
+            this.label11.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 19);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "Username";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label10.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label10.Location = new System.Drawing.Point(10, 180);
+            this.label10.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(35, 19);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Port";
+            // 
+            // username
+            // 
+            this.username.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.username.Location = new System.Drawing.Point(14, 273);
+            this.username.Margin = new System.Windows.Forms.Padding(10);
+            this.username.Name = "username";
+            this.username.Size = new System.Drawing.Size(223, 24);
+            this.username.TabIndex = 5;
+            // 
+            // domainName
+            // 
+            this.domainName.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.domainName.Location = new System.Drawing.Point(14, 141);
+            this.domainName.Margin = new System.Windows.Forms.Padding(10);
+            this.domainName.Name = "domainName";
+            this.domainName.Size = new System.Drawing.Size(223, 24);
+            this.domainName.TabIndex = 5;
+            // 
+            // actionTitle
+            // 
+            this.actionTitle.AutoSize = true;
+            this.actionTitle.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.actionTitle.Location = new System.Drawing.Point(10, 10);
+            this.actionTitle.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.actionTitle.Name = "actionTitle";
+            this.actionTitle.Size = new System.Drawing.Size(65, 21);
+            this.actionTitle.TabIndex = 4;
+            this.actionTitle.Text = "Action";
+            // 
+            // deleteFtpServer
+            // 
+            this.deleteFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.deleteFtpServer.Location = new System.Drawing.Point(16, 272);
+            this.deleteFtpServer.Name = "deleteFtpServer";
+            this.deleteFtpServer.Size = new System.Drawing.Size(75, 23);
+            this.deleteFtpServer.TabIndex = 7;
+            this.deleteFtpServer.Text = "Delete";
+            this.deleteFtpServer.UseVisualStyleBackColor = true;
+            // 
+            // editFtpServer
+            // 
+            this.editFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.editFtpServer.Location = new System.Drawing.Point(111, 273);
+            this.editFtpServer.Name = "editFtpServer";
+            this.editFtpServer.Size = new System.Drawing.Size(75, 23);
+            this.editFtpServer.TabIndex = 6;
+            this.editFtpServer.Text = "Edit";
+            this.editFtpServer.UseVisualStyleBackColor = true;
+            this.editFtpServer.Click += new System.EventHandler(this.editFtpServer_Click);
+            // 
+            // newFtpServer
+            // 
+            this.newFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.newFtpServer.Location = new System.Drawing.Point(192, 273);
+            this.newFtpServer.Name = "newFtpServer";
+            this.newFtpServer.Size = new System.Drawing.Size(75, 23);
+            this.newFtpServer.TabIndex = 5;
+            this.newFtpServer.Text = "New";
+            this.newFtpServer.UseVisualStyleBackColor = true;
+            this.newFtpServer.Click += new System.EventHandler(this.newFtpServer_Click);
+            // 
+            // serversListBox
+            // 
+            this.serversListBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.serversListBox.FormattingEnabled = true;
+            this.serversListBox.ItemHeight = 19;
+            this.serversListBox.Location = new System.Drawing.Point(16, 41);
+            this.serversListBox.Name = "serversListBox";
+            this.serversListBox.Size = new System.Drawing.Size(251, 213);
+            this.serversListBox.TabIndex = 4;
             // 
             // label6
             // 
@@ -370,46 +574,6 @@
             this.label6.TabIndex = 3;
             this.label6.Text = "FTP servers";
             // 
-            // serversListBox
-            // 
-            this.serversListBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.serversListBox.FormattingEnabled = true;
-            this.serversListBox.ItemHeight = 19;
-            this.serversListBox.Location = new System.Drawing.Point(16, 41);
-            this.serversListBox.Name = "serversListBox";
-            this.serversListBox.Size = new System.Drawing.Size(333, 213);
-            this.serversListBox.TabIndex = 4;
-            // 
-            // newFtpServer
-            // 
-            this.newFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.newFtpServer.Location = new System.Drawing.Point(274, 272);
-            this.newFtpServer.Name = "newFtpServer";
-            this.newFtpServer.Size = new System.Drawing.Size(75, 23);
-            this.newFtpServer.TabIndex = 5;
-            this.newFtpServer.Text = "New";
-            this.newFtpServer.UseVisualStyleBackColor = true;
-            // 
-            // editFtpServer
-            // 
-            this.editFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.editFtpServer.Location = new System.Drawing.Point(193, 272);
-            this.editFtpServer.Name = "editFtpServer";
-            this.editFtpServer.Size = new System.Drawing.Size(75, 23);
-            this.editFtpServer.TabIndex = 6;
-            this.editFtpServer.Text = "Edit";
-            this.editFtpServer.UseVisualStyleBackColor = true;
-            // 
-            // deleteFtpServer
-            // 
-            this.deleteFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.deleteFtpServer.Location = new System.Drawing.Point(16, 272);
-            this.deleteFtpServer.Name = "deleteFtpServer";
-            this.deleteFtpServer.Size = new System.Drawing.Size(75, 23);
-            this.deleteFtpServer.TabIndex = 7;
-            this.deleteFtpServer.Text = "Delete";
-            this.deleteFtpServer.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -418,8 +582,8 @@
             this.ClientSize = new System.Drawing.Size(787, 533);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.databasePanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -432,6 +596,9 @@
             this.databasePanel.PerformLayout();
             this.serversPanel.ResumeLayout(false);
             this.serversPanel.PerformLayout();
+            this.configServersPanel.ResumeLayout(false);
+            this.configServersPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.port)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -467,6 +634,18 @@
         private System.Windows.Forms.Button newFtpServer;
         private System.Windows.Forms.ListBox serversListBox;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Panel configServersPanel;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox domainName;
+        private System.Windows.Forms.Label actionTitle;
+        private System.Windows.Forms.NumericUpDown port;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox serverType;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button cancelAction;
+        private System.Windows.Forms.Button makeAction;
+        private System.Windows.Forms.TextBox username;
     }
 }
 

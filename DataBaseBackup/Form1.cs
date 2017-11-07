@@ -15,6 +15,7 @@ namespace DataBaseBackup
     {
         private Panel[] panels;
         private Panel currentPanel;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace DataBaseBackup
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
             panels = new Panel[] {databasePanel, serversPanel};//krata ola ta panel gia na mporeis na ta allazeis 
             currentPanel = databasePanel;//einai to arxiko
+            serverType.SelectedIndex = 0;
         }
 
         private void MenuClick(object sender, EventArgs e)
@@ -45,6 +47,41 @@ namespace DataBaseBackup
             currentPanel = panels[index];
 
             pageTitle.Text = title;
+        }
+
+        private void newFtpServer_Click(object sender, EventArgs e)
+        {
+            actionTitle.Text = "New server";
+            makeAction.Text = "Save";
+
+            configServersPanel.Visible = true;
+        }
+
+        private void editFtpServer_Click(object sender, EventArgs e)
+        {
+            actionTitle.Text = "Edit server";
+            makeAction.Text = "Apply";
+
+            configServersPanel.Visible = true;
+        }
+
+        private void makeAction_Click(object sender, EventArgs e)
+        {
+            ResetServerActionValues();
+        }
+
+        private void cancelAction_Click(object sender, EventArgs e)
+        {
+            configServersPanel.Visible = false;
+            ResetServerActionValues();
+        }
+
+        private void ResetServerActionValues()
+        {
+            serverType.SelectedIndex = 0;
+            domainName.Clear();
+            port.ResetText();
+            username.Clear();
         }
     }
 }
