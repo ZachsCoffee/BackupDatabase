@@ -21,7 +21,7 @@ namespace DataBaseBackup
             InitializeComponent();
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
-            panels = new Panel[] {databasePanel, serversPanel};//krata ola ta panel gia na mporeis na ta allazeis 
+            panels = new Panel[] {databasePanel, serversPanel,logPanel };//krata ola ta panel gia na mporeis na ta allazeis 
             currentPanel = databasePanel;//einai to arxiko
             serverType.SelectedIndex = 0;
         }
@@ -35,6 +35,9 @@ namespace DataBaseBackup
                     break;
                 case "serversButton":
                     SwitchPanels(1, "Servers");
+                    break;
+                case "logButton":
+                    SwitchPanels(2, "Log");
                     break;
             }
         }
@@ -82,6 +85,21 @@ namespace DataBaseBackup
             domainName.Clear();
             port.ResetText();
             username.Clear();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.InitialDirectory = "C:\\";
+            openFileDialog1.Filter = "Text|*.txt|All|*.*"; ;
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (DialogResult.OK == openFileDialog1.ShowDialog())
+            {
+
+            }
         }
     }
 }
