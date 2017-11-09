@@ -57,7 +57,7 @@
             this.serversPanel = new System.Windows.Forms.Panel();
             this.configServersPanel = new System.Windows.Forms.Panel();
             this.cancelAction = new System.Windows.Forms.Button();
-            this.makeAction = new System.Windows.Forms.Button();
+            this.testConnection = new System.Windows.Forms.Button();
             this.serverType = new System.Windows.Forms.ComboBox();
             this.port = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
@@ -91,6 +91,7 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.saveServer = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -419,8 +420,9 @@
             // 
             this.configServersPanel.BackColor = System.Drawing.Color.White;
             this.configServersPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.configServersPanel.Controls.Add(this.saveServer);
             this.configServersPanel.Controls.Add(this.cancelAction);
-            this.configServersPanel.Controls.Add(this.makeAction);
+            this.configServersPanel.Controls.Add(this.testConnection);
             this.configServersPanel.Controls.Add(this.serverType);
             this.configServersPanel.Controls.Add(this.port);
             this.configServersPanel.Controls.Add(this.label8);
@@ -432,9 +434,9 @@
             this.configServersPanel.Controls.Add(this.domainName);
             this.configServersPanel.Controls.Add(this.connectionStatusLabel);
             this.configServersPanel.Controls.Add(this.actionTitle);
-            this.configServersPanel.Location = new System.Drawing.Point(274, 41);
+            this.configServersPanel.Location = new System.Drawing.Point(274, 3);
             this.configServersPanel.Name = "configServersPanel";
-            this.configServersPanel.Size = new System.Drawing.Size(247, 372);
+            this.configServersPanel.Size = new System.Drawing.Size(247, 410);
             this.configServersPanel.TabIndex = 8;
             this.configServersPanel.Visible = false;
             // 
@@ -449,16 +451,16 @@
             this.cancelAction.UseVisualStyleBackColor = true;
             this.cancelAction.Click += new System.EventHandler(this.cancelAction_Click);
             // 
-            // makeAction
+            // testConnection
             // 
-            this.makeAction.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.makeAction.Location = new System.Drawing.Point(107, 304);
-            this.makeAction.Name = "makeAction";
-            this.makeAction.Size = new System.Drawing.Size(130, 23);
-            this.makeAction.TabIndex = 9;
-            this.makeAction.Text = "Test connection";
-            this.makeAction.UseVisualStyleBackColor = true;
-            this.makeAction.Click += new System.EventHandler(this.makeAction_Click);
+            this.testConnection.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.testConnection.Location = new System.Drawing.Point(107, 343);
+            this.testConnection.Name = "testConnection";
+            this.testConnection.Size = new System.Drawing.Size(130, 23);
+            this.testConnection.TabIndex = 9;
+            this.testConnection.Text = "Test connection";
+            this.testConnection.UseVisualStyleBackColor = true;
+            this.testConnection.Click += new System.EventHandler(this.makeAction_Click);
             // 
             // serverType
             // 
@@ -677,7 +679,7 @@
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label14.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label14.Location = new System.Drawing.Point(10, 341);
+            this.label14.Location = new System.Drawing.Point(10, 379);
             this.label14.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(138, 19);
@@ -689,7 +691,7 @@
             this.connectionStatusLabel.AutoSize = true;
             this.connectionStatusLabel.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
             this.connectionStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.connectionStatusLabel.Location = new System.Drawing.Point(150, 342);
+            this.connectionStatusLabel.Location = new System.Drawing.Point(150, 380);
             this.connectionStatusLabel.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
             this.connectionStatusLabel.Name = "connectionStatusLabel";
             this.connectionStatusLabel.Size = new System.Drawing.Size(76, 17);
@@ -815,15 +817,26 @@
             this.manualBackupTooltip.ReshowDelay = 100;
             this.manualBackupTooltip.ToolTipTitle = "Manual backup";
             // 
+            // saveServer
+            // 
+            this.saveServer.Enabled = false;
+            this.saveServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.saveServer.Location = new System.Drawing.Point(162, 304);
+            this.saveServer.Name = "saveServer";
+            this.saveServer.Size = new System.Drawing.Size(75, 23);
+            this.saveServer.TabIndex = 11;
+            this.saveServer.Text = "Save";
+            this.saveServer.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.databasePanel);
-            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.logPanel);
@@ -893,7 +906,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button cancelAction;
-        private System.Windows.Forms.Button makeAction;
+        private System.Windows.Forms.Button testConnection;
         private System.Windows.Forms.TextBox username;
         private System.Windows.Forms.Panel logPanel;
         private System.Windows.Forms.Button button2;
@@ -915,6 +928,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ComboBox ftpServers;
         private System.Windows.Forms.ToolTip manualBackupTooltip;
+        private System.Windows.Forms.Button saveServer;
     }
 }
 

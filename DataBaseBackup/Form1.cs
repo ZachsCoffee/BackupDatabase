@@ -15,7 +15,7 @@ namespace DataBaseBackup
     {
         enum ConnectionStatus//einai 3 katastaseis gia to label connectionStatusLabel, (method SetConnectionStatus)
         {
-            NotTested, OK, Failed
+            NotTested, OK, Failed, Testing
         }
 
         private Panel[] panels;
@@ -76,7 +76,7 @@ namespace DataBaseBackup
             domainName.Clear();
             port.ResetText();
             username.Clear();
-            makeAction.Text = "Test connection";
+            SetConnectionStatus(ConnectionStatus.NotTested);
         }
 
         private void SetConnectionStatus(ConnectionStatus status)
@@ -92,6 +92,9 @@ namespace DataBaseBackup
                 case ConnectionStatus.Failed:
                     connectionStatusLabel.Text = "FAILED";
                     break;
+                case ConnectionStatus.Testing:
+                    connectionStatusLabel.Text = "Testing...";
+                    break;
             }
         }
         //END CUSTOM METHODS
@@ -100,7 +103,6 @@ namespace DataBaseBackup
         private void newFtpServer_Click(object sender, EventArgs e)
         {
             actionTitle.Text = "New server";
-            makeAction.Text = "Save";
 
             configServersPanel.Visible = true;
         }
@@ -108,7 +110,6 @@ namespace DataBaseBackup
         private void editFtpServer_Click(object sender, EventArgs e)
         {
             actionTitle.Text = "Edit server";
-            makeAction.Text = "Save";
 
             configServersPanel.Visible = true;
         }
