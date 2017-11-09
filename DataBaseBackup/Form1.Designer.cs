@@ -39,6 +39,7 @@
             this.serversButton = new System.Windows.Forms.Button();
             this.databaseButton = new System.Windows.Forms.Button();
             this.databasePanel = new System.Windows.Forms.Panel();
+            this.backupPanel = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.databaseName = new System.Windows.Forms.ComboBox();
@@ -68,14 +69,16 @@
             this.deleteFtpServer = new System.Windows.Forms.Button();
             this.editFtpServer = new System.Windows.Forms.Button();
             this.newFtpServer = new System.Windows.Forms.Button();
-            this.serversListBox = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.serversListBox = new System.Windows.Forms.ListBox();
             this.logPanel = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.label14 = new System.Windows.Forms.Label();
+            this.connectionStatusLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -224,6 +227,15 @@
             this.databasePanel.Name = "databasePanel";
             this.databasePanel.Size = new System.Drawing.Size(526, 418);
             this.databasePanel.TabIndex = 2;
+            this.databasePanel.Visible = false;
+            // 
+            // backupPanel
+            // 
+            this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.backupPanel.Location = new System.Drawing.Point(249, 103);
+            this.backupPanel.Name = "backupPanel";
+            this.backupPanel.Size = new System.Drawing.Size(526, 418);
+            this.backupPanel.TabIndex = 4;
             // 
             // button1
             // 
@@ -391,15 +403,17 @@
             this.configServersPanel.Controls.Add(this.serverType);
             this.configServersPanel.Controls.Add(this.port);
             this.configServersPanel.Controls.Add(this.label8);
+            this.configServersPanel.Controls.Add(this.label14);
             this.configServersPanel.Controls.Add(this.label7);
             this.configServersPanel.Controls.Add(this.label11);
             this.configServersPanel.Controls.Add(this.label10);
             this.configServersPanel.Controls.Add(this.username);
             this.configServersPanel.Controls.Add(this.domainName);
+            this.configServersPanel.Controls.Add(this.connectionStatusLabel);
             this.configServersPanel.Controls.Add(this.actionTitle);
             this.configServersPanel.Location = new System.Drawing.Point(274, 41);
             this.configServersPanel.Name = "configServersPanel";
-            this.configServersPanel.Size = new System.Drawing.Size(247, 340);
+            this.configServersPanel.Size = new System.Drawing.Size(247, 372);
             this.configServersPanel.TabIndex = 8;
             this.configServersPanel.Visible = false;
             // 
@@ -417,11 +431,11 @@
             // makeAction
             // 
             this.makeAction.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.makeAction.Location = new System.Drawing.Point(162, 304);
+            this.makeAction.Location = new System.Drawing.Point(107, 304);
             this.makeAction.Name = "makeAction";
-            this.makeAction.Size = new System.Drawing.Size(75, 23);
+            this.makeAction.Size = new System.Drawing.Size(130, 23);
             this.makeAction.TabIndex = 9;
-            this.makeAction.Text = "Action";
+            this.makeAction.Text = "Test connection";
             this.makeAction.UseVisualStyleBackColor = true;
             this.makeAction.Click += new System.EventHandler(this.makeAction_Click);
             // 
@@ -562,16 +576,6 @@
             this.newFtpServer.UseVisualStyleBackColor = true;
             this.newFtpServer.Click += new System.EventHandler(this.newFtpServer_Click);
             // 
-            // serversListBox
-            // 
-            this.serversListBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.serversListBox.FormattingEnabled = true;
-            this.serversListBox.ItemHeight = 19;
-            this.serversListBox.Location = new System.Drawing.Point(16, 41);
-            this.serversListBox.Name = "serversListBox";
-            this.serversListBox.Size = new System.Drawing.Size(251, 194);
-            this.serversListBox.TabIndex = 4;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -582,6 +586,16 @@
             this.label6.Size = new System.Drawing.Size(98, 21);
             this.label6.TabIndex = 3;
             this.label6.Text = "FTP servers";
+            // 
+            // serversListBox
+            // 
+            this.serversListBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.serversListBox.FormattingEnabled = true;
+            this.serversListBox.ItemHeight = 19;
+            this.serversListBox.Location = new System.Drawing.Point(16, 41);
+            this.serversListBox.Name = "serversListBox";
+            this.serversListBox.Size = new System.Drawing.Size(251, 194);
+            this.serversListBox.TabIndex = 4;
             // 
             // logPanel
             // 
@@ -637,17 +651,42 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label14.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label14.Location = new System.Drawing.Point(10, 341);
+            this.label14.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(138, 19);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "Connection status:";
+            // 
+            // connectionStatusLabel
+            // 
+            this.connectionStatusLabel.AutoSize = true;
+            this.connectionStatusLabel.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
+            this.connectionStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.connectionStatusLabel.Location = new System.Drawing.Point(150, 342);
+            this.connectionStatusLabel.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.connectionStatusLabel.Name = "connectionStatusLabel";
+            this.connectionStatusLabel.Size = new System.Drawing.Size(76, 17);
+            this.connectionStatusLabel.TabIndex = 4;
+            this.connectionStatusLabel.Text = "Not tested";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.logPanel);
-            this.Controls.Add(this.serversPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -718,6 +757,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Panel backupPanel;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label connectionStatusLabel;
     }
 }
 

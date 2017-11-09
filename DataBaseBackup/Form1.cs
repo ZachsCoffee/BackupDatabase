@@ -13,6 +13,11 @@ namespace DataBaseBackup
 {
     public partial class Form1 : Form
     {
+        enum ConnectionStatus//einai 3 katastaseis gia to label connectionStatusLabel, (method SetConnectionStatus)
+        {
+            NotTested, OK, Failed
+        }
+
         private Panel[] panels;
         private Panel currentPanel;
 
@@ -21,11 +26,21 @@ namespace DataBaseBackup
             InitializeComponent();
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
-            panels = new Panel[] {databasePanel, serversPanel,logPanel };//krata ola ta panel gia na mporeis na ta allazeis 
+            panels = new Panel[] {databasePanel, serversPanel, backupPanel, logPanel} ;//krata ola ta panel gia na mporeis na ta allazeis 
             currentPanel = databasePanel;//einai to arxiko
+
+            //declare gia ta panels
+            for (int i=1; i<panels.Length; i++)
+            {
+                panels[i].Visible = false;
+            }
+            currentPanel.Visible = true;
+            //end panels
+
             serverType.SelectedIndex = 0;
         }
 
+        //CUSTOM METHODS
         private void MenuClick(object sender, EventArgs e)
         {
             switch ((sender as Button).Name)
@@ -36,22 +51,52 @@ namespace DataBaseBackup
                 case "serversButton":
                     SwitchPanels(1, "Servers");
                     break;
+                case "backupButton":
+                    SwitchPanels(2, "Backup");
+                    break;
                 case "logButton":
-                    SwitchPanels(2, "Log");
+                    SwitchPanels(3, "Log");
                     break;
             }
         }
 
         private void SwitchPanels(int index, string title)
         {
-            currentPanel.SendToBack();
-            panels[index].BringToFront();
+            currentPanel.Visible = false;
+            panels[index].Visible = true;
 
             currentPanel = panels[index];
 
             pageTitle.Text = title;
         }
 
+        private void ResetServerActionValues()
+        {
+            serverType.SelectedIndex = 0;
+            domainName.Clear();
+            port.ResetText();
+            username.Clear();
+            makeAction.Text = "Test connection";
+        }
+
+        private void SetConnectionStatus(ConnectionStatus status)
+        {
+            switch (status)
+            {
+                case ConnectionStatus.NotTested:
+                    connectionStatusLabel.Text = "Not tested";
+                    break;
+                case ConnectionStatus.OK:
+                    connectionStatusLabel.Text = "OK";
+                    break;
+                case ConnectionStatus.Failed:
+                    connectionStatusLabel.Text = "FAILED";
+                    break;
+            }
+        }
+        //END CUSTOM METHODS
+
+        //EVENT METHODS
         private void newFtpServer_Click(object sender, EventArgs e)
         {
             actionTitle.Text = "New server";
@@ -63,7 +108,7 @@ namespace DataBaseBackup
         private void editFtpServer_Click(object sender, EventArgs e)
         {
             actionTitle.Text = "Edit server";
-            makeAction.Text = "Apply";
+            makeAction.Text = "Save";
 
             configServersPanel.Visible = true;
         }
@@ -79,13 +124,7 @@ namespace DataBaseBackup
             ResetServerActionValues();
         }
 
-        private void ResetServerActionValues()
-        {
-            serverType.SelectedIndex = 0;
-            domainName.Clear();
-            port.ResetText();
-            username.Clear();
-        }
+        
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -101,5 +140,6 @@ namespace DataBaseBackup
 
             }
         }
+        //END EVENT METHODS
     }
 }
