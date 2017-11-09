@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pageTitle = new System.Windows.Forms.Label();
@@ -79,14 +80,27 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.label14 = new System.Windows.Forms.Label();
             this.connectionStatusLabel = new System.Windows.Forms.Label();
+            this.ftpServers = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.compressCheckBox = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.backupMethodPanel = new System.Windows.Forms.Panel();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
+            this.backupPanel.SuspendLayout();
             this.serversPanel.SuspendLayout();
             this.configServersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.port)).BeginInit();
             this.logPanel.SuspendLayout();
+            this.backupMethodPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -232,6 +246,13 @@
             // backupPanel
             // 
             this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.backupPanel.Controls.Add(this.backupMethodPanel);
+            this.backupPanel.Controls.Add(this.compressCheckBox);
+            this.backupPanel.Controls.Add(this.label17);
+            this.backupPanel.Controls.Add(this.label13);
+            this.backupPanel.Controls.Add(this.label16);
+            this.backupPanel.Controls.Add(this.label15);
+            this.backupPanel.Controls.Add(this.ftpServers);
             this.backupPanel.Location = new System.Drawing.Point(249, 103);
             this.backupPanel.Name = "backupPanel";
             this.backupPanel.Size = new System.Drawing.Size(526, 418);
@@ -675,17 +696,136 @@
             this.connectionStatusLabel.TabIndex = 4;
             this.connectionStatusLabel.Text = "Not tested";
             // 
+            // ftpServers
+            // 
+            this.ftpServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ftpServers.Font = new System.Drawing.Font("Century Gothic", 8.25F);
+            this.ftpServers.FormattingEnabled = true;
+            this.ftpServers.Location = new System.Drawing.Point(14, 73);
+            this.ftpServers.Name = "ftpServers";
+            this.ftpServers.Size = new System.Drawing.Size(171, 24);
+            this.ftpServers.TabIndex = 5;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label15.Location = new System.Drawing.Point(12, 10);
+            this.label15.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(107, 21);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Preferences";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label16.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label16.Location = new System.Drawing.Point(12, 41);
+            this.label16.Margin = new System.Windows.Forms.Padding(10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 19);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "Choose FTP server";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label13.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label13.Location = new System.Drawing.Point(12, 110);
+            this.label13.Margin = new System.Windows.Forms.Padding(10);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 19);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Compress";
+            // 
+            // compressCheckBox
+            // 
+            this.compressCheckBox.AutoSize = true;
+            this.compressCheckBox.Checked = true;
+            this.compressCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.compressCheckBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.compressCheckBox.Location = new System.Drawing.Point(15, 142);
+            this.compressCheckBox.Name = "compressCheckBox";
+            this.compressCheckBox.Size = new System.Drawing.Size(180, 23);
+            this.compressCheckBox.TabIndex = 8;
+            this.compressCheckBox.Text = "Compress before send";
+            this.compressCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label17.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label17.Location = new System.Drawing.Point(10, 178);
+            this.label17.Margin = new System.Windows.Forms.Padding(10);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(121, 19);
+            this.label17.TabIndex = 7;
+            this.label17.Text = "Backup method";
+            // 
+            // backupMethodPanel
+            // 
+            this.backupMethodPanel.Controls.Add(this.radioButton2);
+            this.backupMethodPanel.Controls.Add(this.radioButton1);
+            this.backupMethodPanel.Location = new System.Drawing.Point(-1, 210);
+            this.backupMethodPanel.Name = "backupMethodPanel";
+            this.backupMethodPanel.Size = new System.Drawing.Size(160, 57);
+            this.backupMethodPanel.TabIndex = 9;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.radioButton1.Location = new System.Drawing.Point(15, 2);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(126, 23);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Full automatic";
+            this.fullAutomaticTooltip.SetToolTip(this.radioButton1, "Automatic export database and send.");
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.radioButton2.Location = new System.Drawing.Point(15, 31);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(81, 23);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "Manual";
+            this.manualBackupTooltip.SetToolTip(this.radioButton2, "Manual browse database and send.");
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // fullAutomaticTooltip
+            // 
+            this.fullAutomaticTooltip.AutoPopDelay = 8000;
+            this.fullAutomaticTooltip.InitialDelay = 500;
+            this.fullAutomaticTooltip.ReshowDelay = 100;
+            this.fullAutomaticTooltip.ToolTipTitle = "Automatic backup";
+            // 
+            // manualBackupTooltip
+            // 
+            this.manualBackupTooltip.AutoPopDelay = 8000;
+            this.manualBackupTooltip.InitialDelay = 500;
+            this.manualBackupTooltip.ReshowDelay = 100;
+            this.manualBackupTooltip.ToolTipTitle = "Manual backup";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.backupPanel);
+            this.Controls.Add(this.databasePanel);
+            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.logPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -697,6 +837,8 @@
             this.panel2.ResumeLayout(false);
             this.databasePanel.ResumeLayout(false);
             this.databasePanel.PerformLayout();
+            this.backupPanel.ResumeLayout(false);
+            this.backupPanel.PerformLayout();
             this.serversPanel.ResumeLayout(false);
             this.serversPanel.PerformLayout();
             this.configServersPanel.ResumeLayout(false);
@@ -704,6 +846,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.port)).EndInit();
             this.logPanel.ResumeLayout(false);
             this.logPanel.PerformLayout();
+            this.backupMethodPanel.ResumeLayout(false);
+            this.backupMethodPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -760,6 +904,17 @@
         private System.Windows.Forms.Panel backupPanel;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label connectionStatusLabel;
+        private System.Windows.Forms.Panel backupMethodPanel;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.ToolTip fullAutomaticTooltip;
+        private System.Windows.Forms.CheckBox compressCheckBox;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ComboBox ftpServers;
+        private System.Windows.Forms.ToolTip manualBackupTooltip;
     }
 }
 
