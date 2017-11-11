@@ -40,7 +40,6 @@
             this.serversButton = new System.Windows.Forms.Button();
             this.databaseButton = new System.Windows.Forms.Button();
             this.databasePanel = new System.Windows.Forms.Panel();
-            this.backupPanel = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.databaseName = new System.Windows.Forms.ComboBox();
@@ -54,18 +53,33 @@
             this.dbNameExport = new System.Windows.Forms.TextBox();
             this.importDatabasePath = new System.Windows.Forms.TextBox();
             this.binFolderPath = new System.Windows.Forms.TextBox();
+            this.backupPanel = new System.Windows.Forms.Panel();
+            this.backupMethodPanel = new System.Windows.Forms.Panel();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.compressCheckBox = new System.Windows.Forms.CheckBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.ftpServers = new System.Windows.Forms.ComboBox();
             this.serversPanel = new System.Windows.Forms.Panel();
             this.configServersPanel = new System.Windows.Forms.Panel();
+            this.saveServer = new System.Windows.Forms.Button();
             this.cancelAction = new System.Windows.Forms.Button();
             this.testConnection = new System.Windows.Forms.Button();
             this.serverType = new System.Windows.Forms.ComboBox();
             this.port = new System.Windows.Forms.NumericUpDown();
             this.label8 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.password = new System.Windows.Forms.TextBox();
             this.username = new System.Windows.Forms.TextBox();
             this.domainName = new System.Windows.Forms.TextBox();
+            this.connectionStatusLabel = new System.Windows.Forms.Label();
             this.actionTitle = new System.Windows.Forms.Label();
             this.deleteFtpServer = new System.Windows.Forms.Button();
             this.editFtpServer = new System.Windows.Forms.Button();
@@ -78,30 +92,18 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.label14 = new System.Windows.Forms.Label();
-            this.connectionStatusLabel = new System.Windows.Forms.Label();
-            this.ftpServers = new System.Windows.Forms.ComboBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.compressCheckBox = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.backupMethodPanel = new System.Windows.Forms.Panel();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.saveServer = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
             this.backupPanel.SuspendLayout();
+            this.backupMethodPanel.SuspendLayout();
             this.serversPanel.SuspendLayout();
             this.configServersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.port)).BeginInit();
             this.logPanel.SuspendLayout();
-            this.backupMethodPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -243,21 +245,6 @@
             this.databasePanel.Size = new System.Drawing.Size(526, 418);
             this.databasePanel.TabIndex = 2;
             this.databasePanel.Visible = false;
-            // 
-            // backupPanel
-            // 
-            this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.backupPanel.Controls.Add(this.backupMethodPanel);
-            this.backupPanel.Controls.Add(this.compressCheckBox);
-            this.backupPanel.Controls.Add(this.label17);
-            this.backupPanel.Controls.Add(this.label13);
-            this.backupPanel.Controls.Add(this.label16);
-            this.backupPanel.Controls.Add(this.label15);
-            this.backupPanel.Controls.Add(this.ftpServers);
-            this.backupPanel.Location = new System.Drawing.Point(249, 103);
-            this.backupPanel.Name = "backupPanel";
-            this.backupPanel.Size = new System.Drawing.Size(526, 418);
-            this.backupPanel.TabIndex = 4;
             // 
             // button1
             // 
@@ -402,6 +389,126 @@
             this.binFolderPath.TabIndex = 0;
             this.binFolderPath.Text = "C:\\Program Files\\MySQL\\MySQL Server x.x\\bin";
             // 
+            // backupPanel
+            // 
+            this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.backupPanel.Controls.Add(this.backupMethodPanel);
+            this.backupPanel.Controls.Add(this.compressCheckBox);
+            this.backupPanel.Controls.Add(this.label17);
+            this.backupPanel.Controls.Add(this.label13);
+            this.backupPanel.Controls.Add(this.label16);
+            this.backupPanel.Controls.Add(this.label15);
+            this.backupPanel.Controls.Add(this.ftpServers);
+            this.backupPanel.Location = new System.Drawing.Point(249, 103);
+            this.backupPanel.Name = "backupPanel";
+            this.backupPanel.Size = new System.Drawing.Size(526, 418);
+            this.backupPanel.TabIndex = 4;
+            // 
+            // backupMethodPanel
+            // 
+            this.backupMethodPanel.Controls.Add(this.radioButton2);
+            this.backupMethodPanel.Controls.Add(this.radioButton1);
+            this.backupMethodPanel.Location = new System.Drawing.Point(-1, 210);
+            this.backupMethodPanel.Name = "backupMethodPanel";
+            this.backupMethodPanel.Size = new System.Drawing.Size(160, 57);
+            this.backupMethodPanel.TabIndex = 9;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.radioButton2.Location = new System.Drawing.Point(15, 31);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(81, 23);
+            this.radioButton2.TabIndex = 1;
+            this.radioButton2.Text = "Manual";
+            this.manualBackupTooltip.SetToolTip(this.radioButton2, "Manual browse database and send.");
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.radioButton1.Location = new System.Drawing.Point(15, 2);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(126, 23);
+            this.radioButton1.TabIndex = 0;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Full automatic";
+            this.fullAutomaticTooltip.SetToolTip(this.radioButton1, "Automatic export database and send.");
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // compressCheckBox
+            // 
+            this.compressCheckBox.AutoSize = true;
+            this.compressCheckBox.Checked = true;
+            this.compressCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.compressCheckBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.compressCheckBox.Location = new System.Drawing.Point(15, 142);
+            this.compressCheckBox.Name = "compressCheckBox";
+            this.compressCheckBox.Size = new System.Drawing.Size(180, 23);
+            this.compressCheckBox.TabIndex = 8;
+            this.compressCheckBox.Text = "Compress before send";
+            this.compressCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label17.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label17.Location = new System.Drawing.Point(10, 178);
+            this.label17.Margin = new System.Windows.Forms.Padding(10);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(121, 19);
+            this.label17.TabIndex = 7;
+            this.label17.Text = "Backup method";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label13.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label13.Location = new System.Drawing.Point(12, 110);
+            this.label13.Margin = new System.Windows.Forms.Padding(10);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 19);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Compress";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label16.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label16.Location = new System.Drawing.Point(12, 41);
+            this.label16.Margin = new System.Windows.Forms.Padding(10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 19);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "Choose FTP server";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label15.Location = new System.Drawing.Point(12, 10);
+            this.label15.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(107, 21);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Preferences";
+            // 
+            // ftpServers
+            // 
+            this.ftpServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ftpServers.Font = new System.Drawing.Font("Century Gothic", 8.25F);
+            this.ftpServers.FormattingEnabled = true;
+            this.ftpServers.Location = new System.Drawing.Point(14, 73);
+            this.ftpServers.Name = "ftpServers";
+            this.ftpServers.Size = new System.Drawing.Size(171, 24);
+            this.ftpServers.TabIndex = 5;
+            // 
             // serversPanel
             // 
             this.serversPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -428,8 +535,10 @@
             this.configServersPanel.Controls.Add(this.label8);
             this.configServersPanel.Controls.Add(this.label14);
             this.configServersPanel.Controls.Add(this.label7);
+            this.configServersPanel.Controls.Add(this.label18);
             this.configServersPanel.Controls.Add(this.label11);
             this.configServersPanel.Controls.Add(this.label10);
+            this.configServersPanel.Controls.Add(this.password);
             this.configServersPanel.Controls.Add(this.username);
             this.configServersPanel.Controls.Add(this.domainName);
             this.configServersPanel.Controls.Add(this.connectionStatusLabel);
@@ -440,10 +549,21 @@
             this.configServersPanel.TabIndex = 8;
             this.configServersPanel.Visible = false;
             // 
+            // saveServer
+            // 
+            this.saveServer.Enabled = false;
+            this.saveServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.saveServer.Location = new System.Drawing.Point(164, 328);
+            this.saveServer.Name = "saveServer";
+            this.saveServer.Size = new System.Drawing.Size(75, 23);
+            this.saveServer.TabIndex = 11;
+            this.saveServer.Text = "Save";
+            this.saveServer.UseVisualStyleBackColor = true;
+            // 
             // cancelAction
             // 
             this.cancelAction.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.cancelAction.Location = new System.Drawing.Point(14, 304);
+            this.cancelAction.Location = new System.Drawing.Point(14, 328);
             this.cancelAction.Name = "cancelAction";
             this.cancelAction.Size = new System.Drawing.Size(75, 23);
             this.cancelAction.TabIndex = 10;
@@ -454,7 +574,7 @@
             // testConnection
             // 
             this.testConnection.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.testConnection.Location = new System.Drawing.Point(107, 343);
+            this.testConnection.Location = new System.Drawing.Point(109, 357);
             this.testConnection.Name = "testConnection";
             this.testConnection.Size = new System.Drawing.Size(130, 23);
             this.testConnection.TabIndex = 9;
@@ -470,7 +590,7 @@
             this.serverType.Items.AddRange(new object[] {
             "SFTP",
             "FTP"});
-            this.serverType.Location = new System.Drawing.Point(14, 73);
+            this.serverType.Location = new System.Drawing.Point(14, 64);
             this.serverType.Name = "serverType";
             this.serverType.Size = new System.Drawing.Size(106, 24);
             this.serverType.TabIndex = 8;
@@ -478,7 +598,7 @@
             // port
             // 
             this.port.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.port.Location = new System.Drawing.Point(14, 207);
+            this.port.Location = new System.Drawing.Point(14, 182);
             this.port.Maximum = new decimal(new int[] {
             65535,
             0,
@@ -495,31 +615,55 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label8.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label8.Location = new System.Drawing.Point(10, 46);
-            this.label8.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label8.Location = new System.Drawing.Point(10, 37);
+            this.label8.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(50, 19);
             this.label8.TabIndex = 6;
             this.label8.Text = "Server";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label14.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label14.Location = new System.Drawing.Point(10, 384);
+            this.label14.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(138, 19);
+            this.label14.TabIndex = 6;
+            this.label14.Text = "Connection status:";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label7.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label7.Location = new System.Drawing.Point(10, 107);
-            this.label7.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label7.Location = new System.Drawing.Point(10, 98);
+            this.label7.Margin = new System.Windows.Forms.Padding(10, 10, 10, 2);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(108, 19);
             this.label7.TabIndex = 6;
             this.label7.Text = "Domain name";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label18.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label18.Location = new System.Drawing.Point(12, 273);
+            this.label18.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(72, 19);
+            this.label18.TabIndex = 6;
+            this.label18.Text = "Password";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label11.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label11.Location = new System.Drawing.Point(10, 239);
+            this.label11.Location = new System.Drawing.Point(10, 214);
             this.label11.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(77, 19);
@@ -531,18 +675,27 @@
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label10.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label10.Location = new System.Drawing.Point(10, 180);
+            this.label10.Location = new System.Drawing.Point(10, 155);
             this.label10.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 19);
             this.label10.TabIndex = 6;
             this.label10.Text = "Port";
             // 
+            // password
+            // 
+            this.password.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.password.Location = new System.Drawing.Point(16, 296);
+            this.password.Margin = new System.Windows.Forms.Padding(5, 10, 10, 5);
+            this.password.Name = "password";
+            this.password.Size = new System.Drawing.Size(223, 24);
+            this.password.TabIndex = 5;
+            // 
             // username
             // 
             this.username.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.username.Location = new System.Drawing.Point(14, 273);
-            this.username.Margin = new System.Windows.Forms.Padding(10);
+            this.username.Location = new System.Drawing.Point(14, 239);
+            this.username.Margin = new System.Windows.Forms.Padding(5, 10, 10, 5);
             this.username.Name = "username";
             this.username.Size = new System.Drawing.Size(223, 24);
             this.username.TabIndex = 5;
@@ -550,11 +703,23 @@
             // domainName
             // 
             this.domainName.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.domainName.Location = new System.Drawing.Point(14, 141);
-            this.domainName.Margin = new System.Windows.Forms.Padding(10);
+            this.domainName.Location = new System.Drawing.Point(14, 121);
+            this.domainName.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
             this.domainName.Name = "domainName";
             this.domainName.Size = new System.Drawing.Size(223, 24);
             this.domainName.TabIndex = 5;
+            // 
+            // connectionStatusLabel
+            // 
+            this.connectionStatusLabel.AutoSize = true;
+            this.connectionStatusLabel.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
+            this.connectionStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.connectionStatusLabel.Location = new System.Drawing.Point(149, 385);
+            this.connectionStatusLabel.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.connectionStatusLabel.Name = "connectionStatusLabel";
+            this.connectionStatusLabel.Size = new System.Drawing.Size(76, 17);
+            this.connectionStatusLabel.TabIndex = 4;
+            this.connectionStatusLabel.Text = "Not tested";
             // 
             // actionTitle
             // 
@@ -674,135 +839,6 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label14.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label14.Location = new System.Drawing.Point(10, 379);
-            this.label14.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(138, 19);
-            this.label14.TabIndex = 6;
-            this.label14.Text = "Connection status:";
-            // 
-            // connectionStatusLabel
-            // 
-            this.connectionStatusLabel.AutoSize = true;
-            this.connectionStatusLabel.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
-            this.connectionStatusLabel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.connectionStatusLabel.Location = new System.Drawing.Point(150, 380);
-            this.connectionStatusLabel.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.connectionStatusLabel.Name = "connectionStatusLabel";
-            this.connectionStatusLabel.Size = new System.Drawing.Size(76, 17);
-            this.connectionStatusLabel.TabIndex = 4;
-            this.connectionStatusLabel.Text = "Not tested";
-            // 
-            // ftpServers
-            // 
-            this.ftpServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ftpServers.Font = new System.Drawing.Font("Century Gothic", 8.25F);
-            this.ftpServers.FormattingEnabled = true;
-            this.ftpServers.Location = new System.Drawing.Point(14, 73);
-            this.ftpServers.Name = "ftpServers";
-            this.ftpServers.Size = new System.Drawing.Size(171, 24);
-            this.ftpServers.TabIndex = 5;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label15.Location = new System.Drawing.Point(12, 10);
-            this.label15.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(107, 21);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "Preferences";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label16.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label16.Location = new System.Drawing.Point(12, 41);
-            this.label16.Margin = new System.Windows.Forms.Padding(10);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(128, 19);
-            this.label16.TabIndex = 7;
-            this.label16.Text = "Choose FTP server";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label13.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label13.Location = new System.Drawing.Point(12, 110);
-            this.label13.Margin = new System.Windows.Forms.Padding(10);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 19);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Compress";
-            // 
-            // compressCheckBox
-            // 
-            this.compressCheckBox.AutoSize = true;
-            this.compressCheckBox.Checked = true;
-            this.compressCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.compressCheckBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.compressCheckBox.Location = new System.Drawing.Point(15, 142);
-            this.compressCheckBox.Name = "compressCheckBox";
-            this.compressCheckBox.Size = new System.Drawing.Size(180, 23);
-            this.compressCheckBox.TabIndex = 8;
-            this.compressCheckBox.Text = "Compress before send";
-            this.compressCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label17.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label17.Location = new System.Drawing.Point(10, 178);
-            this.label17.Margin = new System.Windows.Forms.Padding(10);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(121, 19);
-            this.label17.TabIndex = 7;
-            this.label17.Text = "Backup method";
-            // 
-            // backupMethodPanel
-            // 
-            this.backupMethodPanel.Controls.Add(this.radioButton2);
-            this.backupMethodPanel.Controls.Add(this.radioButton1);
-            this.backupMethodPanel.Location = new System.Drawing.Point(-1, 210);
-            this.backupMethodPanel.Name = "backupMethodPanel";
-            this.backupMethodPanel.Size = new System.Drawing.Size(160, 57);
-            this.backupMethodPanel.TabIndex = 9;
-            // 
-            // radioButton1
-            // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton1.Location = new System.Drawing.Point(15, 2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(126, 23);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Full automatic";
-            this.fullAutomaticTooltip.SetToolTip(this.radioButton1, "Automatic export database and send.");
-            this.radioButton1.UseVisualStyleBackColor = true;
-            // 
-            // radioButton2
-            // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton2.Location = new System.Drawing.Point(15, 31);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(81, 23);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "Manual";
-            this.manualBackupTooltip.SetToolTip(this.radioButton2, "Manual browse database and send.");
-            this.radioButton2.UseVisualStyleBackColor = true;
-            // 
             // fullAutomaticTooltip
             // 
             this.fullAutomaticTooltip.AutoPopDelay = 8000;
@@ -816,17 +852,6 @@
             this.manualBackupTooltip.InitialDelay = 500;
             this.manualBackupTooltip.ReshowDelay = 100;
             this.manualBackupTooltip.ToolTipTitle = "Manual backup";
-            // 
-            // saveServer
-            // 
-            this.saveServer.Enabled = false;
-            this.saveServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.saveServer.Location = new System.Drawing.Point(162, 304);
-            this.saveServer.Name = "saveServer";
-            this.saveServer.Size = new System.Drawing.Size(75, 23);
-            this.saveServer.TabIndex = 11;
-            this.saveServer.Text = "Save";
-            this.saveServer.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -852,6 +877,8 @@
             this.databasePanel.PerformLayout();
             this.backupPanel.ResumeLayout(false);
             this.backupPanel.PerformLayout();
+            this.backupMethodPanel.ResumeLayout(false);
+            this.backupMethodPanel.PerformLayout();
             this.serversPanel.ResumeLayout(false);
             this.serversPanel.PerformLayout();
             this.configServersPanel.ResumeLayout(false);
@@ -859,8 +886,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.port)).EndInit();
             this.logPanel.ResumeLayout(false);
             this.logPanel.PerformLayout();
-            this.backupMethodPanel.ResumeLayout(false);
-            this.backupMethodPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -929,6 +954,8 @@
         private System.Windows.Forms.ComboBox ftpServers;
         private System.Windows.Forms.ToolTip manualBackupTooltip;
         private System.Windows.Forms.Button saveServer;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox password;
     }
 }
 
