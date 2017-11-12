@@ -559,6 +559,7 @@
             this.saveServer.TabIndex = 11;
             this.saveServer.Text = "Save";
             this.saveServer.UseVisualStyleBackColor = true;
+            this.saveServer.Click += new System.EventHandler(this.saveServer_Click);
             // 
             // cancelAction
             // 
@@ -594,6 +595,7 @@
             this.serverType.Name = "serverType";
             this.serverType.Size = new System.Drawing.Size(106, 24);
             this.serverType.TabIndex = 8;
+            this.serverType.SelectedIndexChanged += new System.EventHandler(this.serverType_SelectedIndexChanged);
             // 
             // port
             // 
@@ -690,6 +692,7 @@
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(223, 24);
             this.password.TabIndex = 5;
+            this.password.UseSystemPasswordChar = true;
             // 
             // username
             // 
@@ -741,6 +744,7 @@
             this.deleteFtpServer.TabIndex = 7;
             this.deleteFtpServer.Text = "Delete";
             this.deleteFtpServer.UseVisualStyleBackColor = true;
+            this.deleteFtpServer.Click += new System.EventHandler(this.deleteFtpServer_Click);
             // 
             // editFtpServer
             // 
