@@ -160,10 +160,6 @@ namespace DataBaseBackup
         
         private void testConnectionSFTP()
         {
-            
-            
-            
-            
             using (SftpClient sftp = new SftpClient(domainName.Text, (int)port.Value,username.Text,password.Text)) // dimiourgia antikeimenou gia sindeso sftp
             {
                 
