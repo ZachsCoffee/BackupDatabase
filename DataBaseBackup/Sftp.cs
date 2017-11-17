@@ -37,7 +37,10 @@ namespace DataBaseBackup
         public void setUsername(string username) { this.username = username; }
         public string getUsername() { return username; }
 
-        public void toString() { Console.Write("serverType:" + serverType + " domainName:" + domainName + " port:" + port + "username:" + username); }
+        
+        public override string ToString() {
+            return serverType + "," + domainName + "," + port + "," + username;
+        }
        
     }
 }

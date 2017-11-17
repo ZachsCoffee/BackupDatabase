@@ -54,7 +54,7 @@ namespace DataBaseBackup.Class
 
         private void Write(bool append, object[] objects)
         {
-            using (var streamWriter = new StreamWriter(filePath, false, Encoding.UTF8))
+            using (var streamWriter = new StreamWriter(filePath, append, Encoding.UTF8))
             {
                 foreach (object obj in objects)
                 {
