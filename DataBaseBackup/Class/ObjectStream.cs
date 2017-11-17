@@ -44,7 +44,7 @@ namespace DataBaseBackup.Class
                 list.RemoveAt(lines[i]);
             }
 
-            Write(false, list);
+            Write(false, list.ToArray());
         }
 
         public void ClearFile()
@@ -52,7 +52,7 @@ namespace DataBaseBackup.Class
             File.WriteAllText(filePath, string.Empty);
         }
 
-        private void Write(bool append, params object[] objects)
+        private void Write(bool append, object[] objects)
         {
             using (var streamWriter = new StreamWriter(filePath, false, Encoding.UTF8))
             {
