@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Renci.SshNet;
 using System.IO;
+using DataBaseBackup.Class;
 
 namespace DataBaseBackup
 {
@@ -204,7 +205,17 @@ namespace DataBaseBackup
                 port.Value = 21;
             }
         }
-      
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            LogFile log1 = new LogFile();
+        }
+
         //END EVENT METHODS
     }
 
