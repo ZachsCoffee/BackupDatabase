@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Renci.SshNet;
 using System.IO;
 using DataBaseBackup.Class;
+using System.Collections;
 
 namespace DataBaseBackup
 {
@@ -206,15 +207,30 @@ namespace DataBaseBackup
             }
         }
 
-        private void label9_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            LogFile log1 = new LogFile();
+            
+            string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
+
+            //Add to list all files from LogFiles folder
+            foreach (string s in Directory.GetFiles(startupPath, "*.txt").Select(Path.GetFileName))
+                listBox1.Items.Add(s);
+
+            
         }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LogFile log1 = new LogFile();
+            ArrayList list = log1.print();
+
+            foreach (Object obj in list)
+                label19.Text = obj.ToString();
+            Console.WriteLine();
+        }
+
+
 
         //END EVENT METHODS
     }

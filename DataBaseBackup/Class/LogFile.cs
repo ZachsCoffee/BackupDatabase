@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,20 @@ namespace DataBaseBackup.Class
         private String type="";
         private String desc="";
 
+        private string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
+        private ObjectStream ObjStr;
+
         public LogFile()
         {
-            //ObjectStream ObjStr = new ObjectStream(@"c:\test\test.txt");
-            //ObjStr.ClearFile();
-            //ObjStr.WriteLines("sdfsdf");
+            ObjStr = new ObjectStream(startupPath);         
         }
 
+
+        public ArrayList print()
+        {
+            ArrayList list = ObjStr.ReadLines();
+            return list;
+        }
        
     }
 }
