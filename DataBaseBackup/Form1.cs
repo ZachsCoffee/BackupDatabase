@@ -214,24 +214,33 @@ namespace DataBaseBackup
         private void button2_Click_1(object sender, EventArgs e)
         {
             
-            string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
+            //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
 
-            //Add to list all files from LogFiles folder
-            foreach (string s in Directory.GetFiles(startupPath, "*.txt").Select(Path.GetFileName))
-                listBox1.Items.Add(s);
-
-            
-        }
-
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
             LogFile log1 = new LogFile();
             ArrayList list = log1.print();
 
+
+
+            int i = 0;
+            int rows = 0;
+            DataGridViewRow row = dataGridView1.Rows[0];
+                
             foreach (Object obj in list)
-                label19.Text = obj.ToString();
-            Console.WriteLine();
+            {
+                row.Cells[i].Value = obj.ToString();                  
+                if (i == 3)
+                {
+                    dataGridView1.Rows.Add();                 
+                    row = dataGridView1.Rows[rows++];
+                    i = -1;
+                }
+            i++;
+            }
+
+            
+
         }
+
 
         private void saveServer_Click(object sender, EventArgs e)
         {
@@ -274,6 +283,14 @@ namespace DataBaseBackup
             serversListBox.Items.RemoveAt(index);
 
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            dataGridView1.Rows.Clear();
+            
+        }
+
+
 
 
 

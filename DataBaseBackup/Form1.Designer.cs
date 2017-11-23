@@ -87,19 +87,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.serversListBox = new System.Windows.Forms.ListBox();
             this.logPanel = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label9 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -799,21 +798,30 @@
             // logPanel
             // 
             this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logPanel.Controls.Add(this.button3);
             this.logPanel.Controls.Add(this.label19);
             this.logPanel.Controls.Add(this.button2);
-            this.logPanel.Controls.Add(this.listBox1);
             this.logPanel.Controls.Add(this.dataGridView1);
-            this.logPanel.Controls.Add(this.label9);
             this.logPanel.Controls.Add(this.label12);
             this.logPanel.Location = new System.Drawing.Point(249, 103);
             this.logPanel.Name = "logPanel";
             this.logPanel.Size = new System.Drawing.Size(526, 418);
             this.logPanel.TabIndex = 10;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(418, 328);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(96, 27);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Clear";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(3, 152);
+            this.label19.Location = new System.Drawing.Point(46, 388);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(41, 13);
             this.label19.TabIndex = 5;
@@ -821,22 +829,13 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(217, 72);
+            this.button2.Location = new System.Drawing.Point(145, 361);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(16, 61);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(124, 43);
-            this.listBox1.TabIndex = 3;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // dataGridView1
             // 
@@ -846,10 +845,38 @@
             this.type,
             this.time,
             this.desc});
-            this.dataGridView1.Location = new System.Drawing.Point(14, 193);
+            this.dataGridView1.Location = new System.Drawing.Point(14, 39);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(500, 213);
+            this.dataGridView1.Size = new System.Drawing.Size(500, 284);
             this.dataGridView1.TabIndex = 2;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label12.Location = new System.Drawing.Point(10, 10);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(70, 21);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Log File";
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
+            // fullAutomaticTooltip
+            // 
+            this.fullAutomaticTooltip.AutoPopDelay = 8000;
+            this.fullAutomaticTooltip.InitialDelay = 500;
+            this.fullAutomaticTooltip.ReshowDelay = 100;
+            this.fullAutomaticTooltip.ToolTipTitle = "Automatic backup";
+            // 
+            // manualBackupTooltip
+            // 
+            this.manualBackupTooltip.AutoPopDelay = 8000;
+            this.manualBackupTooltip.InitialDelay = 500;
+            this.manualBackupTooltip.ReshowDelay = 100;
+            this.manualBackupTooltip.ToolTipTitle = "Manual backup";
             // 
             // id
             // 
@@ -870,44 +897,7 @@
             // 
             this.desc.HeaderText = "Description";
             this.desc.Name = "desc";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 8.25F);
-            this.label9.Location = new System.Drawing.Point(12, 41);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(85, 16);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Select Log File:";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label12.Location = new System.Drawing.Point(10, 10);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 21);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Log Files";
-            // 
-            // openFileDialog1
-            // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // fullAutomaticTooltip
-            // 
-            this.fullAutomaticTooltip.AutoPopDelay = 8000;
-            this.fullAutomaticTooltip.InitialDelay = 500;
-            this.fullAutomaticTooltip.ReshowDelay = 100;
-            this.fullAutomaticTooltip.ToolTipTitle = "Automatic backup";
-            // 
-            // manualBackupTooltip
-            // 
-            this.manualBackupTooltip.AutoPopDelay = 8000;
-            this.manualBackupTooltip.InitialDelay = 500;
-            this.manualBackupTooltip.ReshowDelay = 100;
-            this.manualBackupTooltip.ToolTipTitle = "Manual backup";
+            this.desc.Width = 155;
             // 
             // Form1
             // 
@@ -915,12 +905,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.logPanel);
             this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.logPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -991,7 +981,6 @@
         private System.Windows.Forms.Button testConnection;
         private System.Windows.Forms.TextBox username;
         private System.Windows.Forms.Panel logPanel;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel backupPanel;
@@ -1011,14 +1000,14 @@
         private System.Windows.Forms.Button saveServer;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox password;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn time;
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label19;
     }
 }
 
