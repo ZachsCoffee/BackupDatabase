@@ -566,6 +566,7 @@
             this.saveServer.TabIndex = 11;
             this.saveServer.Text = "Save";
             this.saveServer.UseVisualStyleBackColor = true;
+            this.saveServer.Click += new System.EventHandler(this.saveServer_Click);
             // 
             // cancelAction
             // 
@@ -750,6 +751,7 @@
             this.deleteFtpServer.TabIndex = 7;
             this.deleteFtpServer.Text = "Delete";
             this.deleteFtpServer.UseVisualStyleBackColor = true;
+            this.deleteFtpServer.Click += new System.EventHandler(this.deleteFtpServer_Click);
             // 
             // editFtpServer
             // 

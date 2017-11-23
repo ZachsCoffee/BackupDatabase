@@ -24,7 +24,9 @@ namespace DataBaseBackup
 
         private Panel[] panels;
         private Panel currentPanel;
- 
+        SftpClient sftpclient;
+        Sftp sftp=null;
+        ObjectStream stream = new ObjectStream("saveServer");
 
 
         public Form1()
@@ -44,7 +46,8 @@ namespace DataBaseBackup
             //end panels
 
             serverType.SelectedIndex = 0;
-
+            
+            
             
        
 
@@ -124,8 +127,8 @@ namespace DataBaseBackup
         private void editFtpServer_Click(object sender, EventArgs e)
         {
             actionTitle.Text = "Edit server";
-
             configServersPanel.Visible = true;
+
         }
 
         private void makeAction_Click(object sender, EventArgs e)
@@ -162,12 +165,12 @@ namespace DataBaseBackup
         
         private void testConnectionSFTP()
         {
-            using (SftpClient sftp = new SftpClient(domainName.Text, (int)port.Value,username.Text,password.Text)) // dimiourgia antikeimenou gia sindeso sftp
+            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value,username.Text,password.Text)) // dimiourgia antikeimenou gia sindeso sftp
             {
                 
                 try
                 {
-                    sftp.Connect();
+                    sftpclient.Connect();
                 }
                 catch (Renci.SshNet.Common.SshAuthenticationException AuthEx)
                 {
@@ -179,7 +182,7 @@ namespace DataBaseBackup
                 }
 
 
-                if (sftp.IsConnected) //elenxos gia to connection
+                if (sftpclient.IsConnected) //elenxos gia to connection
                 {
                     SetConnectionStatus(ConnectionStatus.OK);
                     saveServer.Enabled = true;
@@ -188,8 +191,8 @@ namespace DataBaseBackup
                 {
                     SetConnectionStatus(ConnectionStatus.Failed);
                 }
-                sftp.Disconnect();
-                sftp.Dispose();
+                sftpclient.Disconnect();
+                sftpclient.Dispose();
 
 
             }
@@ -207,7 +210,7 @@ namespace DataBaseBackup
             }
         }
 
-
+ 
         private void button2_Click_1(object sender, EventArgs e)
         {
             
@@ -228,6 +231,48 @@ namespace DataBaseBackup
             foreach (Object obj in list)
                 label19.Text = obj.ToString();
             Console.WriteLine();
+        }
+
+        private void saveServer_Click(object sender, EventArgs e)
+        {
+            if (actionTitle.Text.Equals("Edit server"))
+            {
+                int index = serversListBox.SelectedIndex;
+                if (index < 0)
+                {
+                    return;
+                }
+                
+                sftp.setServerType(serverType.Text);
+                sftp.setDomainName(domainName.Text);
+                sftp.setPort(port.Value.ToString());
+                sftp.setUsername(username.Text);
+                stream.DeleteLines(index);
+                stream.WriteLines(sftp.ToString());
+                serversListBox.Items.Clear();
+                ArrayList list = stream.ReadLines();
+                foreach (Object obj in list)
+                    serversListBox.Items.Add(obj);
+                
+
+
+            }
+            else
+            {
+                sftp = new Sftp(serverType.Text, domainName.Text, port.Value.ToString(), username.Text);
+                //MessageBox.Show(sftp.ToString(), "Test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                stream.WriteLines(sftp.ToString());
+                serversListBox.Items.Add(sftp.ToString());
+            }
+
+        }
+
+        private void deleteFtpServer_Click(object sender, EventArgs e)
+        {
+            int index = serversListBox.SelectedIndex;
+            stream.DeleteLines(index);
+            serversListBox.Items.RemoveAt(index);
+
         }
 
 
