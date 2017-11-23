@@ -87,13 +87,18 @@
             this.label6 = new System.Windows.Forms.Label();
             this.serversListBox = new System.Windows.Forms.ListBox();
             this.logPanel = new System.Windows.Forms.Panel();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.label12 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -104,6 +109,7 @@
             this.configServersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.port)).BeginInit();
             this.logPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -559,7 +565,7 @@
             this.saveServer.TabIndex = 11;
             this.saveServer.Text = "Save";
             this.saveServer.UseVisualStyleBackColor = true;
-            
+            this.saveServer.Click += new System.EventHandler(this.saveServer_Click);
             // 
             // cancelAction
             // 
@@ -744,7 +750,7 @@
             this.deleteFtpServer.TabIndex = 7;
             this.deleteFtpServer.Text = "Delete";
             this.deleteFtpServer.UseVisualStyleBackColor = true;
-            
+            this.deleteFtpServer.Click += new System.EventHandler(this.deleteFtpServer_Click);
             // 
             // editFtpServer
             // 
@@ -792,42 +798,57 @@
             // logPanel
             // 
             this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logPanel.Controls.Add(this.button3);
+            this.logPanel.Controls.Add(this.label19);
             this.logPanel.Controls.Add(this.button2);
-            this.logPanel.Controls.Add(this.textBox1);
-            this.logPanel.Controls.Add(this.label9);
+            this.logPanel.Controls.Add(this.dataGridView1);
             this.logPanel.Controls.Add(this.label12);
             this.logPanel.Location = new System.Drawing.Point(249, 103);
             this.logPanel.Name = "logPanel";
             this.logPanel.Size = new System.Drawing.Size(526, 418);
             this.logPanel.TabIndex = 10;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(418, 328);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(96, 27);
+            this.button3.TabIndex = 6;
+            this.button3.Text = "Clear";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(46, 388);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(41, 13);
+            this.label19.TabIndex = 5;
+            this.label19.Text = "label19";
+            // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Century Gothic", 8.25F);
-            this.button2.Location = new System.Drawing.Point(404, 87);
+            this.button2.Location = new System.Drawing.Point(145, 361);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Browse";
+            this.button2.TabIndex = 4;
+            this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
-            // textBox1
+            // dataGridView1
             // 
-            this.textBox1.Location = new System.Drawing.Point(16, 88);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(370, 20);
-            this.textBox1.TabIndex = 2;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Century Gothic", 8.25F);
-            this.label9.Location = new System.Drawing.Point(13, 59);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(84, 16);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Open Log File:";
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.id,
+            this.type,
+            this.time,
+            this.desc});
+            this.dataGridView1.Location = new System.Drawing.Point(14, 39);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(500, 284);
+            this.dataGridView1.TabIndex = 2;
             // 
             // label12
             // 
@@ -835,9 +856,9 @@
             this.label12.Font = new System.Drawing.Font("Century Gothic", 12.25F);
             this.label12.Location = new System.Drawing.Point(10, 10);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(77, 21);
+            this.label12.Size = new System.Drawing.Size(70, 21);
             this.label12.TabIndex = 0;
-            this.label12.Text = "Log Files";
+            this.label12.Text = "Log File";
             // 
             // openFileDialog1
             // 
@@ -857,18 +878,39 @@
             this.manualBackupTooltip.ReshowDelay = 100;
             this.manualBackupTooltip.ToolTipTitle = "Manual backup";
             // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            // 
+            // type
+            // 
+            this.type.HeaderText = "Type";
+            this.type.Name = "type";
+            // 
+            // time
+            // 
+            this.time.HeaderText = "Date";
+            this.time.Name = "time";
+            // 
+            // desc
+            // 
+            this.desc.HeaderText = "Description";
+            this.desc.Name = "desc";
+            this.desc.Width = 155;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.logPanel);
             this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.logPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
@@ -890,6 +932,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.port)).EndInit();
             this.logPanel.ResumeLayout(false);
             this.logPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -938,9 +981,6 @@
         private System.Windows.Forms.Button testConnection;
         private System.Windows.Forms.TextBox username;
         private System.Windows.Forms.Panel logPanel;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Panel backupPanel;
@@ -960,6 +1000,14 @@
         private System.Windows.Forms.Button saveServer;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox password;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn desc;
     }
 }
 
