@@ -237,6 +237,8 @@ namespace DataBaseBackup
             i++;
             }
 
+            log1.sendMail();
+
             
 
         }
