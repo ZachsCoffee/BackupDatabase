@@ -12,6 +12,7 @@ using Renci.SshNet;
 using System.IO;
 using DataBaseBackup.Class;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace DataBaseBackup
 {
@@ -202,36 +203,9 @@ namespace DataBaseBackup
             }
         }
 
- 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            
-            //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
 
-            LogFile log1 = new LogFile();
-            ArrayList list = log1.print();
-
-
-
-            int i = 0;
-            int rows = 0;
-            DataGridViewRow row = dataGridView1.Rows[0];
-                
-            foreach (Object obj in list)
-            {
-                row.Cells[i].Value = obj.ToString();                  
-                if (i == 3)
-                {
-                    dataGridView1.Rows.Add();                 
-                    row = dataGridView1.Rows[rows++];
-                    i = -1;
-                }
-            i++;
-            }
-
-            
-
-        }
+        
+        
 
         private void saveServer_Click(object sender, EventArgs e)
         {
@@ -302,6 +276,52 @@ namespace DataBaseBackup
         {
             dateTimeWhen.Enabled = true;
         }
+
+        LogFile log1 = new LogFile();
+        String email = "";
+        bool errorLogs = true;
+        bool successLogs = false;
+        bool infoLogs = false;
+        //Test button
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            
+            log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
+
+            //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
+        }
+
+
+        //Email Validation Method
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            Regex regEmail = new Regex(@"^(([^<>()[\]\\.,;:\s@\""]+"
+                            + @"(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@"
+                            + @"((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+                            + @"\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+"
+                            + @"[a-zA-Z]{2,}))$",
+                            RegexOptions.Compiled);
+
+            if (!regEmail.IsMatch(textBox2.Text))
+            {
+                errorProvider1.SetError(textBox2, "Please enter a Valid Email Address.");
+            }
+            else
+            {
+                errorProvider1.SetError(textBox2, "");
+            }
+        }
+
+        
+        //Apply email changes
+        private void button4_Click(object sender, EventArgs e)
+        {
+            email = textBox2.Text;
+            if (checkBox1.Checked) errorLogs = true; else errorLogs = false;
+            if (checkBox3.Checked) successLogs = true; else successLogs = false;
+            if (checkBox2.Checked) infoLogs = true; else infoLogs = false;
+        }
+
 
         //END EVENT METHODS
     }      
