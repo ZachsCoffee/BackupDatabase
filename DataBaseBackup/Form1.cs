@@ -45,12 +45,8 @@ namespace DataBaseBackup
             currentPanel.Visible = true;
             //end panels
 
+            dateTimeWhen.CustomFormat = "dd/MM/yyyy hh:mm:ss";
             serverType.SelectedIndex = 0;
-            
-            
-            
-       
-
         }
 
         //CUSTOM METHODS
@@ -144,7 +140,6 @@ namespace DataBaseBackup
         }
 
         
-
         private void button2_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -159,9 +154,6 @@ namespace DataBaseBackup
 
             }
         }
-
-
-     
         
         private void testConnectionSFTP()
         {
@@ -241,7 +233,6 @@ namespace DataBaseBackup
 
         }
 
-
         private void saveServer_Click(object sender, EventArgs e)
         {
             if (actionTitle.Text.Equals("Edit server"))
@@ -290,12 +281,28 @@ namespace DataBaseBackup
             
         }
 
+        private void Full_Automatic_Click(object sender, EventArgs e)
+        {
+            manualPanel.Enabled = false;
+            compressCheckBox.Enabled = true;
+        }
 
+        private void Manual_Click(object sender, EventArgs e)
+        {
+            manualPanel.Enabled = true;
+            compressCheckBox.Enabled = false;
+        }
 
+        private void Now_Click(object sender, EventArgs e)
+        {
+            dateTimeWhen.Enabled = false;
+        }
 
+        private void Later_Click(object sender, EventArgs e)
+        {
+            dateTimeWhen.Enabled = true;
+        }
 
         //END EVENT METHODS
-    }
-
-      
-    }
+    }      
+}
