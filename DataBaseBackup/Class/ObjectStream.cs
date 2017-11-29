@@ -60,6 +60,29 @@ namespace DataBaseBackup.Class
             Write(false, list.ToArray());
         }
 
+        /// <summary>
+        /// Uses a delegate in order to decied, which lines will be overwriten with the new ones.
+        /// </summary>
+        /// <param name="where">Delegate method, when it is match return true and a new line overwrite the old.</param>
+        /// <param name="newLines">The new lines.</param>
+        /// <returns>True if at least one line is match, with the delegate method, overwise false.</returns>
+        public bool EditLines(Where where, params object[] newLines)
+        {
+            bool flag = false;
+            int count = 0;
+            ArrayList list = ReadLines();
+            for (int i=0; i<list.Count; i++)
+            {
+                if (where(i, list[i]))
+                {
+                    flag = true;
+                    list.Insert(i, newLines[count++]);
+                }
+            }
+
+            return flag;
+        }
+
         public void DeleteLines(params int[] lines)
         {
             ArrayList list = ReadLines();
@@ -124,6 +147,8 @@ namespace DataBaseBackup.Class
         {
             File.WriteAllText(filePath, string.Empty);
         }
+
+        public delegate bool Where(int pos, object line);
 
         private void Write(bool append, object[] objects)
         {

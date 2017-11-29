@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Class\LogFile.cs" />
     <Compile Include="Class\ObjectStream.cs" />
+    <Compile Include="Class\VariableStorage.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

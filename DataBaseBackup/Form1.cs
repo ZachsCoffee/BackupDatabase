@@ -46,11 +46,6 @@ namespace DataBaseBackup
             //end panels
 
             serverType.SelectedIndex = 0;
-            
-            
-            
-       
-
         }
 
         //CUSTOM METHODS
