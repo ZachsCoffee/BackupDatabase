@@ -47,6 +47,7 @@ namespace DataBaseBackup
             //end panels
 
             dateTimeWhen.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
         }
 
@@ -111,6 +112,41 @@ namespace DataBaseBackup
                     break;
             }
         }
+
+        private void testConnectionSFTP()
+        {
+            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value, username.Text, password.Text)) // dimiourgia antikeimenou gia sindeso sftp
+            {
+
+                try
+                {
+                    sftpclient.Connect();
+                }
+                catch (Renci.SshNet.Common.SshAuthenticationException AuthEx)
+                {
+                    MessageBox.Show(AuthEx.Message, "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (System.Net.Sockets.SocketException sochEx)
+                {
+                    MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+                if (sftpclient.IsConnected) //elenxos gia to connection
+                {
+                    SetConnectionStatus(ConnectionStatus.OK);
+                    saveServer.Enabled = true;
+                }
+                else
+                {
+                    SetConnectionStatus(ConnectionStatus.Failed);
+                }
+                sftpclient.Disconnect();
+                sftpclient.Dispose();
+
+
+            }
+        }
         //END CUSTOM METHODS
 
         //EVENT METHODS
@@ -155,41 +191,6 @@ namespace DataBaseBackup
 
             }
         }
-        
-        private void testConnectionSFTP()
-        {
-            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value,username.Text,password.Text)) // dimiourgia antikeimenou gia sindeso sftp
-            {
-                
-                try
-                {
-                    sftpclient.Connect();
-                }
-                catch (Renci.SshNet.Common.SshAuthenticationException AuthEx)
-                {
-                    MessageBox.Show(AuthEx.Message, "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch(System.Net.Sockets.SocketException sochEx)
-                {
-                    MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-
-                if (sftpclient.IsConnected) //elenxos gia to connection
-                {
-                    SetConnectionStatus(ConnectionStatus.OK);
-                    saveServer.Enabled = true;
-                }
-                else
-                {
-                    SetConnectionStatus(ConnectionStatus.Failed);
-                }
-                sftpclient.Disconnect();
-                sftpclient.Dispose();
-
-
-            }
-        }
 
         private void serverType_SelectedIndexChanged(object sender, EventArgs e)//me to pou dialegei protocolo sftp i ftp ginetai automata allagei port
         {
@@ -202,10 +203,6 @@ namespace DataBaseBackup
                 port.Value = 21;
             }
         }
-
-
-        
-        
 
         private void saveServer_Click(object sender, EventArgs e)
         {
@@ -270,6 +267,7 @@ namespace DataBaseBackup
         private void Now_Click(object sender, EventArgs e)
         {
             dateTimeWhen.Enabled = false;
+            repeatPanel.Enabled = false;
         }
 
         private void Later_Click(object sender, EventArgs e)
@@ -320,6 +318,75 @@ namespace DataBaseBackup
             if (checkBox1.Checked) errorLogs = true; else errorLogs = false;
             if (checkBox3.Checked) successLogs = true; else successLogs = false;
             if (checkBox2.Checked) infoLogs = true; else infoLogs = false;
+        }
+
+        private void Show_Schedules(object sender, EventArgs e)
+        {
+            new BackupSchedules().Show();
+        }
+
+        private void Once_Click(object sender, EventArgs e)
+        {
+            repeatPanel.Enabled = false;
+            dateTimeWhen.Enabled = true;
+        }
+
+        private void Repeat_Click(object sender, EventArgs e)
+        {
+            repeatPanel.Enabled = true;
+            dateTimeWhen.Enabled = false;
+        }
+
+        private void ApplySchedule(object sender, EventArgs e)
+        {
+            //validation
+            if (this.ValidateChildren())//ama petuxan ola ta validation tote kanonika ginete to schedule
+            {
+
+            }
+            else//DEN prepei na ginei to shedule
+            {
+
+            }
+            //end validation
+        }
+
+        private void ValidateDayPicker(object sender, CancelEventArgs e)
+        {
+            if (dateTimeWhen.Enabled)
+            {
+                if (dateTimeWhen.Value.CompareTo(DateTime.Now) < 0)//ama h wra pou ebale einai poio palia apo twra
+                {
+                    errorProvider1.SetError(dateTimeWhen, "The date/time can't be before the current time.");
+                    e.Cancel = true;
+                }
+                else
+                {
+                    errorProvider1.SetError(dateTimeWhen, "");
+                }
+            }
+        }
+
+        private void ValidateDatabaseFile(object sender, CancelEventArgs e)
+        {
+            if (manualPanel.Enabled)//ama einai sto manual
+            {
+                
+                if (!File.Exists(databaseFilePath.Text))//ama DEN uparxei to arxeio pou exei dialeksei
+                {
+                    errorProvider1.SetError(databaseFilePath, "The file not exist");
+                    e.Cancel = true;
+                }
+            }
+        }
+
+        private void ValidateFTPServer(object sender, CancelEventArgs e)
+        {
+            if (ftpServers.SelectedIndex < 0)
+            {
+                errorProvider1.SetError(ftpServers, "You must select a SFTP/FTP server.");
+                e.Cancel = true;
+            }
         }
 
 

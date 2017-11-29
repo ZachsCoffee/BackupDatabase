@@ -54,39 +54,36 @@
             this.importDatabasePath = new System.Windows.Forms.TextBox();
             this.binFolderPath = new System.Windows.Forms.TextBox();
             this.backupPanel = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
             this.repeatPanel = new System.Windows.Forms.Panel();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.hourCheckbox = new System.Windows.Forms.CheckBox();
-            this.yearCheckbox = new System.Windows.Forms.CheckBox();
-            this.monthCheckbox = new System.Windows.Forms.CheckBox();
-            this.dayCheckbox = new System.Windows.Forms.CheckBox();
-            this.minuteCheckbox = new System.Windows.Forms.CheckBox();
+            this.hoursNumber = new System.Windows.Forms.NumericUpDown();
+            this.minutesNumber = new System.Windows.Forms.NumericUpDown();
+            this.daysNumber = new System.Windows.Forms.NumericUpDown();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.applySchedule = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.dateTimeWhen = new System.Windows.Forms.DateTimePicker();
             this.repeatRadioPanel = new System.Windows.Forms.Panel();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.repeatRadio = new System.Windows.Forms.RadioButton();
+            this.onceRadio = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.laterSchedule = new System.Windows.Forms.RadioButton();
             this.nowSchedule = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.applySchedule = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.manualPanel = new System.Windows.Forms.Panel();
             this.browseDatabase = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.databaseFilePath = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.backupMethodPanel = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.manualRadio = new System.Windows.Forms.RadioButton();
+            this.fullAutomaticRadio = new System.Windows.Forms.RadioButton();
             this.ftpServers = new System.Windows.Forms.ComboBox();
             this.compressCheckBox = new System.Windows.Forms.CheckBox();
             this.label16 = new System.Windows.Forms.Label();
@@ -142,13 +139,11 @@
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
             this.backupPanel.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.repeatPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutesNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumber)).BeginInit();
+            this.panel4.SuspendLayout();
             this.repeatRadioPanel.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -449,6 +444,7 @@
             // backupPanel
             // 
             this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.backupPanel.Controls.Add(this.repeatPanel);
             this.backupPanel.Controls.Add(this.panel4);
             this.backupPanel.Controls.Add(this.panel3);
             this.backupPanel.Location = new System.Drawing.Point(249, 103);
@@ -456,14 +452,128 @@
             this.backupPanel.Size = new System.Drawing.Size(526, 418);
             this.backupPanel.TabIndex = 4;
             // 
+            // repeatPanel
+            // 
+            this.repeatPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.repeatPanel.Controls.Add(this.hoursNumber);
+            this.repeatPanel.Controls.Add(this.minutesNumber);
+            this.repeatPanel.Controls.Add(this.daysNumber);
+            this.repeatPanel.Controls.Add(this.label28);
+            this.repeatPanel.Controls.Add(this.label27);
+            this.repeatPanel.Controls.Add(this.label26);
+            this.repeatPanel.Controls.Add(this.label20);
+            this.repeatPanel.Enabled = false;
+            this.repeatPanel.Location = new System.Drawing.Point(269, 190);
+            this.repeatPanel.Name = "repeatPanel";
+            this.repeatPanel.Size = new System.Drawing.Size(256, 104);
+            this.repeatPanel.TabIndex = 12;
+            // 
+            // hoursNumber
+            // 
+            this.hoursNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hoursNumber.Location = new System.Drawing.Point(201, 29);
+            this.hoursNumber.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.hoursNumber.Name = "hoursNumber";
+            this.hoursNumber.Size = new System.Drawing.Size(47, 26);
+            this.hoursNumber.TabIndex = 11;
+            // 
+            // minutesNumber
+            // 
+            this.minutesNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minutesNumber.Location = new System.Drawing.Point(201, 69);
+            this.minutesNumber.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.minutesNumber.Name = "minutesNumber";
+            this.minutesNumber.Size = new System.Drawing.Size(47, 26);
+            this.minutesNumber.TabIndex = 11;
+            // 
+            // daysNumber
+            // 
+            this.daysNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.daysNumber.Location = new System.Drawing.Point(15, 29);
+            this.daysNumber.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.daysNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.daysNumber.Name = "daysNumber";
+            this.daysNumber.Size = new System.Drawing.Size(58, 26);
+            this.daysNumber.TabIndex = 11;
+            this.daysNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label28.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label28.Location = new System.Drawing.Point(133, 72);
+            this.label28.Margin = new System.Windows.Forms.Padding(10);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(62, 19);
+            this.label28.TabIndex = 7;
+            this.label28.Text = "Minutes";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label27.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label27.Location = new System.Drawing.Point(149, 33);
+            this.label27.Margin = new System.Windows.Forms.Padding(10);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(46, 19);
+            this.label27.TabIndex = 7;
+            this.label27.Text = "Hours";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label26.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label26.Location = new System.Drawing.Point(81, 32);
+            this.label26.Margin = new System.Windows.Forms.Padding(10);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(42, 19);
+            this.label26.TabIndex = 7;
+            this.label26.Text = "Days";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label20.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label20.Location = new System.Drawing.Point(7, 0);
+            this.label20.Margin = new System.Windows.Forms.Padding(10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(107, 19);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "Repeat every ";
+            // 
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.repeatPanel);
             this.panel4.Controls.Add(this.dateTimeWhen);
             this.panel4.Controls.Add(this.repeatRadioPanel);
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Controls.Add(this.label9);
+            this.panel4.Controls.Add(this.button5);
+            this.panel4.Controls.Add(this.applySchedule);
             this.panel4.Controls.Add(this.label23);
             this.panel4.Controls.Add(this.label22);
             this.panel4.Location = new System.Drawing.Point(269, -1);
@@ -472,200 +582,6 @@
             this.panel4.Size = new System.Drawing.Size(256, 418);
             this.panel4.TabIndex = 12;
             // 
-            // repeatPanel
-            // 
-            this.repeatPanel.Controls.Add(this.numericUpDown3);
-            this.repeatPanel.Controls.Add(this.numericUpDown2);
-            this.repeatPanel.Controls.Add(this.numericUpDown5);
-            this.repeatPanel.Controls.Add(this.numericUpDown4);
-            this.repeatPanel.Controls.Add(this.numericUpDown1);
-            this.repeatPanel.Controls.Add(this.hourCheckbox);
-            this.repeatPanel.Controls.Add(this.yearCheckbox);
-            this.repeatPanel.Controls.Add(this.monthCheckbox);
-            this.repeatPanel.Controls.Add(this.dayCheckbox);
-            this.repeatPanel.Controls.Add(this.minuteCheckbox);
-            this.repeatPanel.Controls.Add(this.label20);
-            this.repeatPanel.Controls.Add(this.applySchedule);
-            this.repeatPanel.Enabled = false;
-            this.repeatPanel.Location = new System.Drawing.Point(-1, 283);
-            this.repeatPanel.Name = "repeatPanel";
-            this.repeatPanel.Size = new System.Drawing.Size(256, 134);
-            this.repeatPanel.TabIndex = 12;
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown3.Location = new System.Drawing.Point(201, 22);
-            this.numericUpDown3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(37, 26);
-            this.numericUpDown3.TabIndex = 11;
-            this.numericUpDown3.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown2.Location = new System.Drawing.Point(74, 93);
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(37, 26);
-            this.numericUpDown2.TabIndex = 11;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown5.Location = new System.Drawing.Point(201, 59);
-            this.numericUpDown5.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(37, 26);
-            this.numericUpDown5.TabIndex = 11;
-            this.numericUpDown5.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown4.Location = new System.Drawing.Point(74, 21);
-            this.numericUpDown4.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(37, 26);
-            this.numericUpDown4.TabIndex = 11;
-            this.numericUpDown4.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.numericUpDown1.Location = new System.Drawing.Point(74, 56);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(37, 26);
-            this.numericUpDown1.TabIndex = 11;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // hourCheckbox
-            // 
-            this.hourCheckbox.AutoSize = true;
-            this.hourCheckbox.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.hourCheckbox.Location = new System.Drawing.Point(127, 26);
-            this.hourCheckbox.Name = "hourCheckbox";
-            this.hourCheckbox.Size = new System.Drawing.Size(68, 21);
-            this.hourCheckbox.TabIndex = 10;
-            this.hourCheckbox.Text = "Minute";
-            this.hourCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // yearCheckbox
-            // 
-            this.yearCheckbox.AutoSize = true;
-            this.yearCheckbox.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.yearCheckbox.Location = new System.Drawing.Point(11, 94);
-            this.yearCheckbox.Margin = new System.Windows.Forms.Padding(10);
-            this.yearCheckbox.Name = "yearCheckbox";
-            this.yearCheckbox.Size = new System.Drawing.Size(54, 21);
-            this.yearCheckbox.TabIndex = 10;
-            this.yearCheckbox.Text = "Year";
-            this.yearCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // monthCheckbox
-            // 
-            this.monthCheckbox.AutoSize = true;
-            this.monthCheckbox.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthCheckbox.Location = new System.Drawing.Point(11, 60);
-            this.monthCheckbox.Margin = new System.Windows.Forms.Padding(10);
-            this.monthCheckbox.Name = "monthCheckbox";
-            this.monthCheckbox.Size = new System.Drawing.Size(65, 21);
-            this.monthCheckbox.TabIndex = 10;
-            this.monthCheckbox.Text = "Month";
-            this.monthCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // dayCheckbox
-            // 
-            this.dayCheckbox.AutoSize = true;
-            this.dayCheckbox.Checked = true;
-            this.dayCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.dayCheckbox.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dayCheckbox.Location = new System.Drawing.Point(11, 26);
-            this.dayCheckbox.Margin = new System.Windows.Forms.Padding(10);
-            this.dayCheckbox.Name = "dayCheckbox";
-            this.dayCheckbox.Size = new System.Drawing.Size(50, 21);
-            this.dayCheckbox.TabIndex = 10;
-            this.dayCheckbox.Text = "Day";
-            this.dayCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // minuteCheckbox
-            // 
-            this.minuteCheckbox.AutoSize = true;
-            this.minuteCheckbox.Font = new System.Drawing.Font("Century Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.minuteCheckbox.Location = new System.Drawing.Point(127, 60);
-            this.minuteCheckbox.Name = "minuteCheckbox";
-            this.minuteCheckbox.Size = new System.Drawing.Size(68, 21);
-            this.minuteCheckbox.TabIndex = 10;
-            this.minuteCheckbox.Text = "Minute";
-            this.minuteCheckbox.UseVisualStyleBackColor = true;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label20.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label20.Location = new System.Drawing.Point(16, 0);
-            this.label20.Margin = new System.Windows.Forms.Padding(10);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(50, 19);
-            this.label20.TabIndex = 7;
-            this.label20.Text = "Every ";
-            // 
-            // applySchedule
-            // 
-            this.applySchedule.Enabled = false;
-            this.applySchedule.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.applySchedule.Location = new System.Drawing.Point(174, 103);
-            this.applySchedule.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
-            this.applySchedule.Name = "applySchedule";
-            this.applySchedule.Size = new System.Drawing.Size(75, 24);
-            this.applySchedule.TabIndex = 9;
-            this.applySchedule.Text = "Apply";
-            this.applySchedule.UseVisualStyleBackColor = true;
-            // 
             // dateTimeWhen
             // 
             this.dateTimeWhen.Enabled = false;
@@ -673,44 +589,46 @@
             this.dateTimeWhen.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeWhen.Location = new System.Drawing.Point(10, 151);
             this.dateTimeWhen.Margin = new System.Windows.Forms.Padding(10);
+            this.dateTimeWhen.MinDate = new System.DateTime(2017, 11, 29, 0, 0, 0, 0);
             this.dateTimeWhen.Name = "dateTimeWhen";
             this.dateTimeWhen.Size = new System.Drawing.Size(232, 26);
             this.dateTimeWhen.TabIndex = 11;
+            this.dateTimeWhen.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDayPicker);
             // 
             // repeatRadioPanel
             // 
-            this.repeatRadioPanel.Controls.Add(this.radioButton4);
-            this.repeatRadioPanel.Controls.Add(this.radioButton3);
-            this.repeatRadioPanel.Location = new System.Drawing.Point(-1, 212);
+            this.repeatRadioPanel.Controls.Add(this.repeatRadio);
+            this.repeatRadioPanel.Controls.Add(this.onceRadio);
+            this.repeatRadioPanel.Location = new System.Drawing.Point(136, 78);
             this.repeatRadioPanel.Name = "repeatRadioPanel";
-            this.repeatRadioPanel.Size = new System.Drawing.Size(256, 75);
+            this.repeatRadioPanel.Size = new System.Drawing.Size(119, 60);
             this.repeatRadioPanel.TabIndex = 10;
             // 
-            // radioButton4
+            // repeatRadio
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton4.Location = new System.Drawing.Point(15, 35);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(79, 23);
-            this.radioButton4.TabIndex = 1;
-            this.radioButton4.Text = "Repeat";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.Click += new System.EventHandler(this.Later_Click);
+            this.repeatRadio.AutoSize = true;
+            this.repeatRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.repeatRadio.Location = new System.Drawing.Point(11, 30);
+            this.repeatRadio.Name = "repeatRadio";
+            this.repeatRadio.Size = new System.Drawing.Size(79, 23);
+            this.repeatRadio.TabIndex = 1;
+            this.repeatRadio.Text = "Repeat";
+            this.repeatRadio.UseVisualStyleBackColor = true;
+            this.repeatRadio.Click += new System.EventHandler(this.Repeat_Click);
             // 
-            // radioButton3
+            // onceRadio
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Checked = true;
-            this.radioButton3.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton3.Location = new System.Drawing.Point(15, 6);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(66, 23);
-            this.radioButton3.TabIndex = 0;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Once";
-            this.radioButton3.UseVisualStyleBackColor = true;
-            this.radioButton3.Click += new System.EventHandler(this.Now_Click);
+            this.onceRadio.AutoSize = true;
+            this.onceRadio.Checked = true;
+            this.onceRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.onceRadio.Location = new System.Drawing.Point(11, 1);
+            this.onceRadio.Name = "onceRadio";
+            this.onceRadio.Size = new System.Drawing.Size(66, 23);
+            this.onceRadio.TabIndex = 0;
+            this.onceRadio.TabStop = true;
+            this.onceRadio.Text = "Once";
+            this.onceRadio.UseVisualStyleBackColor = true;
+            this.onceRadio.Click += new System.EventHandler(this.Once_Click);
             // 
             // panel5
             // 
@@ -718,7 +636,7 @@
             this.panel5.Controls.Add(this.nowSchedule);
             this.panel5.Location = new System.Drawing.Point(-1, 78);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(256, 60);
+            this.panel5.Size = new System.Drawing.Size(124, 60);
             this.panel5.TabIndex = 8;
             // 
             // laterSchedule
@@ -758,12 +676,36 @@
             this.label9.TabIndex = 6;
             this.label9.Text = "Schedule";
             // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button5.Location = new System.Drawing.Point(10, 377);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(124, 24);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "Show schedules";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Show_Schedules);
+            // 
+            // applySchedule
+            // 
+            this.applySchedule.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.applySchedule.Location = new System.Drawing.Point(169, 377);
+            this.applySchedule.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.applySchedule.Name = "applySchedule";
+            this.applySchedule.Size = new System.Drawing.Size(75, 24);
+            this.applySchedule.TabIndex = 9;
+            this.applySchedule.Text = "Apply";
+            this.applySchedule.UseVisualStyleBackColor = true;
+            this.applySchedule.Click += new System.EventHandler(this.ApplySchedule);
+            // 
             // label23
             // 
             this.label23.AutoSize = true;
             this.label23.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label23.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label23.Location = new System.Drawing.Point(10, 188);
+            this.label23.Location = new System.Drawing.Point(143, 47);
             this.label23.Margin = new System.Windows.Forms.Padding(10);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(61, 19);
@@ -803,12 +745,12 @@
             // 
             this.manualPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.manualPanel.Controls.Add(this.browseDatabase);
-            this.manualPanel.Controls.Add(this.textBox1);
+            this.manualPanel.Controls.Add(this.databaseFilePath);
             this.manualPanel.Controls.Add(this.label21);
             this.manualPanel.Enabled = false;
-            this.manualPanel.Location = new System.Drawing.Point(-1, 292);
+            this.manualPanel.Location = new System.Drawing.Point(-1, 293);
             this.manualPanel.Name = "manualPanel";
-            this.manualPanel.Size = new System.Drawing.Size(268, 125);
+            this.manualPanel.Size = new System.Drawing.Size(268, 124);
             this.manualPanel.TabIndex = 10;
             // 
             // browseDatabase
@@ -822,15 +764,16 @@
             this.browseDatabase.Text = "Browse";
             this.browseDatabase.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // databaseFilePath
             // 
-            this.textBox1.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.textBox1.Location = new System.Drawing.Point(14, 49);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(10);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(242, 24);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "C:\\";
+            this.databaseFilePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.databaseFilePath.Location = new System.Drawing.Point(14, 49);
+            this.databaseFilePath.Margin = new System.Windows.Forms.Padding(10);
+            this.databaseFilePath.Name = "databaseFilePath";
+            this.databaseFilePath.Size = new System.Drawing.Size(242, 24);
+            this.databaseFilePath.TabIndex = 1;
+            this.databaseFilePath.Text = "C:\\";
+            this.databaseFilePath.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
             // 
             // label21
             // 
@@ -857,40 +800,40 @@
             // 
             // backupMethodPanel
             // 
-            this.backupMethodPanel.Controls.Add(this.radioButton2);
-            this.backupMethodPanel.Controls.Add(this.radioButton1);
+            this.backupMethodPanel.Controls.Add(this.manualRadio);
+            this.backupMethodPanel.Controls.Add(this.fullAutomaticRadio);
             this.backupMethodPanel.Location = new System.Drawing.Point(-1, 142);
             this.backupMethodPanel.Name = "backupMethodPanel";
             this.backupMethodPanel.Size = new System.Drawing.Size(160, 57);
             this.backupMethodPanel.TabIndex = 9;
             // 
-            // radioButton2
+            // manualRadio
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton2.Location = new System.Drawing.Point(15, 31);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(81, 23);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "Manual";
-            this.manualBackupTooltip.SetToolTip(this.radioButton2, "Manual browse database and send.");
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.Click += new System.EventHandler(this.Manual_Click);
+            this.manualRadio.AutoSize = true;
+            this.manualRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.manualRadio.Location = new System.Drawing.Point(15, 31);
+            this.manualRadio.Name = "manualRadio";
+            this.manualRadio.Size = new System.Drawing.Size(81, 23);
+            this.manualRadio.TabIndex = 1;
+            this.manualRadio.Text = "Manual";
+            this.manualBackupTooltip.SetToolTip(this.manualRadio, "Manual browse database and send.");
+            this.manualRadio.UseVisualStyleBackColor = true;
+            this.manualRadio.Click += new System.EventHandler(this.Manual_Click);
             // 
-            // radioButton1
+            // fullAutomaticRadio
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton1.Location = new System.Drawing.Point(15, 2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(126, 23);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Full automatic";
-            this.fullAutomaticTooltip.SetToolTip(this.radioButton1, "Automatic export database and send.");
-            this.radioButton1.UseVisualStyleBackColor = true;
-            this.radioButton1.Click += new System.EventHandler(this.Full_Automatic_Click);
+            this.fullAutomaticRadio.AutoSize = true;
+            this.fullAutomaticRadio.Checked = true;
+            this.fullAutomaticRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.fullAutomaticRadio.Location = new System.Drawing.Point(15, 2);
+            this.fullAutomaticRadio.Name = "fullAutomaticRadio";
+            this.fullAutomaticRadio.Size = new System.Drawing.Size(126, 23);
+            this.fullAutomaticRadio.TabIndex = 0;
+            this.fullAutomaticRadio.TabStop = true;
+            this.fullAutomaticRadio.Text = "Full automatic";
+            this.fullAutomaticTooltip.SetToolTip(this.fullAutomaticRadio, "Automatic export database and send.");
+            this.fullAutomaticRadio.UseVisualStyleBackColor = true;
+            this.fullAutomaticRadio.Click += new System.EventHandler(this.Full_Automatic_Click);
             // 
             // ftpServers
             // 
@@ -901,6 +844,7 @@
             this.ftpServers.Name = "ftpServers";
             this.ftpServers.Size = new System.Drawing.Size(171, 27);
             this.ftpServers.TabIndex = 5;
+            this.ftpServers.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateFTPServer);
             // 
             // compressCheckBox
             // 
@@ -1439,7 +1383,7 @@
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.logPanel);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -1451,15 +1395,13 @@
             this.databasePanel.ResumeLayout(false);
             this.databasePanel.PerformLayout();
             this.backupPanel.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.repeatPanel.ResumeLayout(false);
             this.repeatPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutesNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumber)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.repeatRadioPanel.ResumeLayout(false);
             this.repeatRadioPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1535,8 +1477,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label connectionStatusLabel;
         private System.Windows.Forms.Panel backupMethodPanel;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton manualRadio;
+        private System.Windows.Forms.RadioButton fullAutomaticRadio;
         private System.Windows.Forms.ToolTip fullAutomaticTooltip;
         private System.Windows.Forms.CheckBox compressCheckBox;
         private System.Windows.Forms.Label label17;
@@ -1556,7 +1498,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel manualPanel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox databaseFilePath;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.DateTimePicker dateTimeWhen;
         private System.Windows.Forms.Panel repeatRadioPanel;
@@ -1567,19 +1509,12 @@
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button browseDatabase;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
+        private System.Windows.Forms.RadioButton repeatRadio;
+        private System.Windows.Forms.RadioButton onceRadio;
         private System.Windows.Forms.Panel repeatPanel;
-        private System.Windows.Forms.CheckBox hourCheckbox;
-        private System.Windows.Forms.CheckBox yearCheckbox;
-        private System.Windows.Forms.CheckBox monthCheckbox;
-        private System.Windows.Forms.CheckBox dayCheckbox;
-        private System.Windows.Forms.CheckBox minuteCheckbox;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown hoursNumber;
+        private System.Windows.Forms.NumericUpDown minutesNumber;
+        private System.Windows.Forms.NumericUpDown daysNumber;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ErrorProvider errorProvider1;
@@ -1594,6 +1529,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn time;
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button button5;
     }
 }
 
