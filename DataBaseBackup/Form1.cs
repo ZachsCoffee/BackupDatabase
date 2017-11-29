@@ -49,6 +49,9 @@ namespace DataBaseBackup
             dateTimeWhen.CustomFormat = "dd/MM/yyyy hh:mm:ss";
             dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
+
+            VariableStorage a = new VariableStorage("");
+            a.NewVariable("", "");
         }
 
         //CUSTOM METHODS
@@ -287,6 +290,7 @@ namespace DataBaseBackup
             log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
 
             //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
+            
         }
 
 
