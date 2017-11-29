@@ -53,7 +53,7 @@ namespace DataBaseBackup.Class
             }
 
             ArrayList list = ReadLines();
-            for (int i=0; i<linesForEdit.Length; i++)
+            for (int i = 0; i < linesForEdit.Length; i++)
             {
                 list.Insert(linesForEdit[i], newLines[i]);
             }
@@ -71,22 +71,31 @@ namespace DataBaseBackup.Class
             bool flag = false;
             int count = 0;
             ArrayList list = ReadLines();
-            for (int i=0; i<list.Count; i++)
+            for (int i = 0; i < list.Count; i++)
             {
+
                 if (where(i, list[i]))
                 {
+                    if (i == newLines.Length)
+                    {
+                        break;
+                    }
                     flag = true;
                     list.Insert(i, newLines[count++]);
                 }
             }
 
+            if (flag)
+            {
+                Write(false, list.ToArray());
+            }
             return flag;
         }
 
         public void DeleteLines(params int[] lines)
         {
             ArrayList list = ReadLines();
-            for (int i=0; i<lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 list.RemoveAt(lines[i]);
             }
