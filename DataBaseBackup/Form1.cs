@@ -358,7 +358,6 @@ namespace DataBaseBackup
                 if (dateTimeWhen.Value.CompareTo(DateTime.Now) < 0)//ama h wra pou ebale einai poio palia apo twra
                 {
                     errorProvider1.SetError(dateTimeWhen, "The date/time can't be before the current time.");
-                    e.Cancel = true;
                 }
                 else
                 {
@@ -375,7 +374,6 @@ namespace DataBaseBackup
                 if (!File.Exists(databaseFilePath.Text))//ama DEN uparxei to arxeio pou exei dialeksei
                 {
                     errorProvider1.SetError(databaseFilePath, "The file not exist");
-                    e.Cancel = true;
                 }
             }
         }
@@ -385,7 +383,6 @@ namespace DataBaseBackup
             if (ftpServers.SelectedIndex < 0)
             {
                 errorProvider1.SetError(ftpServers, "You must select a SFTP/FTP server.");
-                e.Cancel = true;
             }
         }
 
