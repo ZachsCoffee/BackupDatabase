@@ -12,6 +12,7 @@ using Renci.SshNet;
 using System.IO;
 using DataBaseBackup.Class;
 using System.Collections;
+using System.Text.RegularExpressions;
 
 namespace DataBaseBackup
 {
@@ -45,6 +46,8 @@ namespace DataBaseBackup
             currentPanel.Visible = true;
             //end panels
 
+            dateTimeWhen.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
         }
 
@@ -109,6 +112,41 @@ namespace DataBaseBackup
                     break;
             }
         }
+
+        private void testConnectionSFTP()
+        {
+            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value, username.Text, password.Text)) // dimiourgia antikeimenou gia sindeso sftp
+            {
+
+                try
+                {
+                    sftpclient.Connect();
+                }
+                catch (Renci.SshNet.Common.SshAuthenticationException AuthEx)
+                {
+                    MessageBox.Show(AuthEx.Message, "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (System.Net.Sockets.SocketException sochEx)
+                {
+                    MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+                if (sftpclient.IsConnected) //elenxos gia to connection
+                {
+                    SetConnectionStatus(ConnectionStatus.OK);
+                    saveServer.Enabled = true;
+                }
+                else
+                {
+                    SetConnectionStatus(ConnectionStatus.Failed);
+                }
+                sftpclient.Disconnect();
+                sftpclient.Dispose();
+
+
+            }
+        }
         //END CUSTOM METHODS
 
         //EVENT METHODS
@@ -139,7 +177,6 @@ namespace DataBaseBackup
         }
 
         
-
         private void button2_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -155,44 +192,6 @@ namespace DataBaseBackup
             }
         }
 
-
-     
-        
-        private void testConnectionSFTP()
-        {
-            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value,username.Text,password.Text)) // dimiourgia antikeimenou gia sindeso sftp
-            {
-                
-                try
-                {
-                    sftpclient.Connect();
-                }
-                catch (Renci.SshNet.Common.SshAuthenticationException AuthEx)
-                {
-                    MessageBox.Show(AuthEx.Message, "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch(System.Net.Sockets.SocketException sochEx)
-                {
-                    MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-
-                if (sftpclient.IsConnected) //elenxos gia to connection
-                {
-                    SetConnectionStatus(ConnectionStatus.OK);
-                    saveServer.Enabled = true;
-                }
-                else
-                {
-                    SetConnectionStatus(ConnectionStatus.Failed);
-                }
-                sftpclient.Disconnect();
-                sftpclient.Dispose();
-
-
-            }
-        }
-
         private void serverType_SelectedIndexChanged(object sender, EventArgs e)//me to pou dialegei protocolo sftp i ftp ginetai automata allagei port
         {
             if (serverType.SelectedItem.ToString().Equals("SFTP"))
@@ -204,40 +203,6 @@ namespace DataBaseBackup
                 port.Value = 21;
             }
         }
-
- 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            
-            //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
-
-            LogFile log1 = new LogFile();
-            ArrayList list = log1.print();
-
-
-
-            int i = 0;
-            int rows = 0;
-            DataGridViewRow row = dataGridView1.Rows[0];
-                
-            foreach (Object obj in list)
-            {
-                row.Cells[i].Value = obj.ToString();                  
-                if (i == 3)
-                {
-                    dataGridView1.Rows.Add();                 
-                    row = dataGridView1.Rows[rows++];
-                    i = -1;
-                }
-            i++;
-            }
-
-            log1.sendMail();
-
-            
-
-        }
-
 
         private void saveServer_Click(object sender, EventArgs e)
         {
@@ -287,12 +252,141 @@ namespace DataBaseBackup
             
         }
 
+        private void Full_Automatic_Click(object sender, EventArgs e)
+        {
+            manualPanel.Enabled = false;
+            compressCheckBox.Enabled = true;
+        }
+
+        private void Manual_Click(object sender, EventArgs e)
+        {
+            manualPanel.Enabled = true;
+            compressCheckBox.Enabled = false;
+        }
+
+        private void Now_Click(object sender, EventArgs e)
+        {
+            dateTimeWhen.Enabled = false;
+            repeatPanel.Enabled = false;
+        }
+
+        private void Later_Click(object sender, EventArgs e)
+        {
+            dateTimeWhen.Enabled = true;
+        }
+
+        LogFile log1 = new LogFile();
+        String email = "";
+        bool errorLogs = true;
+        bool successLogs = false;
+        bool infoLogs = false;
+        //Test button
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            
+            log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
+
+            //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
+        }
 
 
+        //Email Validation Method
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            Regex regEmail = new Regex(@"^(([^<>()[\]\\.,;:\s@\""]+"
+                            + @"(\.[^<>()[\]\\.,;:\s@\""]+)*)|(\"".+\""))@"
+                            + @"((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}"
+                            + @"\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+"
+                            + @"[a-zA-Z]{2,}))$",
+                            RegexOptions.Compiled);
+
+            if (!regEmail.IsMatch(textBox2.Text))
+            {
+                errorProvider1.SetError(textBox2, "Please enter a Valid Email Address.");
+            }
+            else
+            {
+                errorProvider1.SetError(textBox2, "");
+            }
+        }
+
+        
+        //Apply email changes
+        private void button4_Click(object sender, EventArgs e)
+        {
+            email = textBox2.Text;
+            if (checkBox1.Checked) errorLogs = true; else errorLogs = false;
+            if (checkBox3.Checked) successLogs = true; else successLogs = false;
+            if (checkBox2.Checked) infoLogs = true; else infoLogs = false;
+        }
+
+        private void Show_Schedules(object sender, EventArgs e)
+        {
+            new BackupSchedules().Show();
+        }
+
+        private void Once_Click(object sender, EventArgs e)
+        {
+            repeatPanel.Enabled = false;
+            dateTimeWhen.Enabled = true;
+        }
+
+        private void Repeat_Click(object sender, EventArgs e)
+        {
+            repeatPanel.Enabled = true;
+            dateTimeWhen.Enabled = false;
+        }
+
+        private void ApplySchedule(object sender, EventArgs e)
+        {
+            //validation
+            if (this.ValidateChildren())//ama petuxan ola ta validation tote kanonika ginete to schedule
+            {
+
+            }
+            else//DEN prepei na ginei to shedule
+            {
+
+            }
+            //end validation
+        }
+
+        private void ValidateDayPicker(object sender, CancelEventArgs e)
+        {
+            if (dateTimeWhen.Enabled)
+            {
+                if (dateTimeWhen.Value.CompareTo(DateTime.Now) < 0)//ama h wra pou ebale einai poio palia apo twra
+                {
+                    errorProvider1.SetError(dateTimeWhen, "The date/time can't be before the current time.");
+                }
+                else
+                {
+                    errorProvider1.SetError(dateTimeWhen, "");
+                }
+            }
+        }
+
+        private void ValidateDatabaseFile(object sender, CancelEventArgs e)
+        {
+            if (manualPanel.Enabled)//ama einai sto manual
+            {
+                
+                if (!File.Exists(databaseFilePath.Text))//ama DEN uparxei to arxeio pou exei dialeksei
+                {
+                    errorProvider1.SetError(databaseFilePath, "The file not exist");
+                }
+            }
+        }
+
+        private void ValidateFTPServer(object sender, CancelEventArgs e)
+        {
+            if (ftpServers.SelectedIndex < 0)
+            {
+                errorProvider1.SetError(ftpServers, "You must select a SFTP/FTP server.");
+            }
+        }
 
 
         //END EVENT METHODS
-    }
-
-      
-    }
+    }      
+}

@@ -2,27 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DataBaseBackup.Class
 {
     class LogFile
     {
-        private DateTime time;
-        private String type="";
-        private String desc="";
-
         private string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
         private ObjectStream ObjStr;
 
         public LogFile()
         {
-            ObjStr = new ObjectStream(startupPath);         
+            ObjStr = new ObjectStream(startupPath);
         }
-
 
         public ArrayList print()
         {
@@ -30,13 +26,12 @@ namespace DataBaseBackup.Class
             return list;
         }
 
-        public void sendMail()
+        public void sendMail(String body,String to)
         {
             var fromAddress = new MailAddress("databasebackupmail@gmail.com", "Database Backup");
-            var toAddress = new MailAddress("panos9409@gmail.com", "To Name");
+            var toAddress = new MailAddress(to, "To Name");
             const string fromPassword = "temp9409";
             const string subject = "Log File";
-            const string body = "Body";
 
             var smtp = new SmtpClient
             {
@@ -57,9 +52,26 @@ namespace DataBaseBackup.Class
             }
         }
 
+
+        public void UpdateLogFile(String Id,  String type, DateTime time, String desc, DataGridView d, bool errorLogs, bool successLogs, bool infoLogs,String email)
+        {
+            ObjStr.WriteLines(Id);
+            ObjStr.WriteLines(type);
+            ObjStr.WriteLines(time);
+            ObjStr.WriteLines(desc);
+            d.Rows.Add(Id, type, time, desc);//Fill datagridview with the current log row  
+
+            String body = "";
+            if (string.Equals(type,"error")&& errorLogs)
+            {
+                body += Id+ " "+type+" " +time+" " +desc;
+                sendMail(body, email);
+            }
+
+            
+        }
+
+
+
     }
-
-
-
-
 }

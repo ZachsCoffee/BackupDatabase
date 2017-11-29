@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pageTitle = new System.Windows.Forms.Label();
@@ -54,15 +55,41 @@
             this.importDatabasePath = new System.Windows.Forms.TextBox();
             this.binFolderPath = new System.Windows.Forms.TextBox();
             this.backupPanel = new System.Windows.Forms.Panel();
-            this.backupMethodPanel = new System.Windows.Forms.Panel();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.compressCheckBox = new System.Windows.Forms.CheckBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.repeatPanel = new System.Windows.Forms.Panel();
+            this.hoursNumber = new System.Windows.Forms.NumericUpDown();
+            this.minutesNumber = new System.Windows.Forms.NumericUpDown();
+            this.daysNumber = new System.Windows.Forms.NumericUpDown();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.dateTimeWhen = new System.Windows.Forms.DateTimePicker();
+            this.repeatRadioPanel = new System.Windows.Forms.Panel();
+            this.repeatRadio = new System.Windows.Forms.RadioButton();
+            this.onceRadio = new System.Windows.Forms.RadioButton();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.laterSchedule = new System.Windows.Forms.RadioButton();
+            this.nowSchedule = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.applySchedule = new System.Windows.Forms.Button();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.manualPanel = new System.Windows.Forms.Panel();
+            this.browseDatabase = new System.Windows.Forms.Button();
+            this.databaseFilePath = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.backupMethodPanel = new System.Windows.Forms.Panel();
+            this.manualRadio = new System.Windows.Forms.RadioButton();
+            this.fullAutomaticRadio = new System.Windows.Forms.RadioButton();
             this.ftpServers = new System.Windows.Forms.ComboBox();
+            this.compressCheckBox = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.serversPanel = new System.Windows.Forms.Panel();
             this.configServersPanel = new System.Windows.Forms.Panel();
             this.saveServer = new System.Windows.Forms.Button();
@@ -87,29 +114,48 @@
             this.label6 = new System.Windows.Forms.Label();
             this.serversListBox = new System.Windows.Forms.ListBox();
             this.logPanel = new System.Windows.Forms.Panel();
+            this.button4 = new System.Windows.Forms.Button();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.label19 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label12 = new System.Windows.Forms.Label();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label12 = new System.Windows.Forms.Label();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label29 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
             this.backupPanel.SuspendLayout();
+            this.repeatPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutesNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumber)).BeginInit();
+            this.panel4.SuspendLayout();
+            this.repeatRadioPanel.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.manualPanel.SuspendLayout();
             this.backupMethodPanel.SuspendLayout();
             this.serversPanel.SuspendLayout();
             this.configServersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.port)).BeginInit();
             this.logPanel.SuspendLayout();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -398,52 +444,407 @@
             // backupPanel
             // 
             this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.backupPanel.Controls.Add(this.backupMethodPanel);
-            this.backupPanel.Controls.Add(this.compressCheckBox);
-            this.backupPanel.Controls.Add(this.label17);
-            this.backupPanel.Controls.Add(this.label13);
-            this.backupPanel.Controls.Add(this.label16);
-            this.backupPanel.Controls.Add(this.label15);
-            this.backupPanel.Controls.Add(this.ftpServers);
+            this.backupPanel.Controls.Add(this.repeatPanel);
+            this.backupPanel.Controls.Add(this.panel4);
+            this.backupPanel.Controls.Add(this.panel3);
             this.backupPanel.Location = new System.Drawing.Point(249, 103);
             this.backupPanel.Name = "backupPanel";
             this.backupPanel.Size = new System.Drawing.Size(526, 418);
             this.backupPanel.TabIndex = 4;
             // 
+            // repeatPanel
+            // 
+            this.repeatPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.repeatPanel.Controls.Add(this.hoursNumber);
+            this.repeatPanel.Controls.Add(this.minutesNumber);
+            this.repeatPanel.Controls.Add(this.daysNumber);
+            this.repeatPanel.Controls.Add(this.label28);
+            this.repeatPanel.Controls.Add(this.label27);
+            this.repeatPanel.Controls.Add(this.label26);
+            this.repeatPanel.Controls.Add(this.label20);
+            this.repeatPanel.Enabled = false;
+            this.repeatPanel.Location = new System.Drawing.Point(269, 190);
+            this.repeatPanel.Name = "repeatPanel";
+            this.repeatPanel.Size = new System.Drawing.Size(256, 104);
+            this.repeatPanel.TabIndex = 12;
+            // 
+            // hoursNumber
+            // 
+            this.hoursNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.hoursNumber.Location = new System.Drawing.Point(201, 29);
+            this.hoursNumber.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.hoursNumber.Name = "hoursNumber";
+            this.hoursNumber.Size = new System.Drawing.Size(47, 26);
+            this.hoursNumber.TabIndex = 11;
+            // 
+            // minutesNumber
+            // 
+            this.minutesNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.minutesNumber.Location = new System.Drawing.Point(201, 69);
+            this.minutesNumber.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.minutesNumber.Name = "minutesNumber";
+            this.minutesNumber.Size = new System.Drawing.Size(47, 26);
+            this.minutesNumber.TabIndex = 11;
+            // 
+            // daysNumber
+            // 
+            this.daysNumber.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.daysNumber.Location = new System.Drawing.Point(15, 29);
+            this.daysNumber.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.daysNumber.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.daysNumber.Name = "daysNumber";
+            this.daysNumber.Size = new System.Drawing.Size(58, 26);
+            this.daysNumber.TabIndex = 11;
+            this.daysNumber.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label28.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label28.Location = new System.Drawing.Point(133, 72);
+            this.label28.Margin = new System.Windows.Forms.Padding(10);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(62, 19);
+            this.label28.TabIndex = 7;
+            this.label28.Text = "Minutes";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label27.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label27.Location = new System.Drawing.Point(149, 33);
+            this.label27.Margin = new System.Windows.Forms.Padding(10);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(46, 19);
+            this.label27.TabIndex = 7;
+            this.label27.Text = "Hours";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label26.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label26.Location = new System.Drawing.Point(81, 32);
+            this.label26.Margin = new System.Windows.Forms.Padding(10);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(42, 19);
+            this.label26.TabIndex = 7;
+            this.label26.Text = "Days";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label20.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label20.Location = new System.Drawing.Point(7, 0);
+            this.label20.Margin = new System.Windows.Forms.Padding(10);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(107, 19);
+            this.label20.TabIndex = 7;
+            this.label20.Text = "Repeat every ";
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.dateTimeWhen);
+            this.panel4.Controls.Add(this.repeatRadioPanel);
+            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.label9);
+            this.panel4.Controls.Add(this.button5);
+            this.panel4.Controls.Add(this.applySchedule);
+            this.panel4.Controls.Add(this.label23);
+            this.panel4.Controls.Add(this.label22);
+            this.panel4.Location = new System.Drawing.Point(269, -1);
+            this.panel4.Margin = new System.Windows.Forms.Padding(10);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(256, 418);
+            this.panel4.TabIndex = 12;
+            // 
+            // dateTimeWhen
+            // 
+            this.dateTimeWhen.Enabled = false;
+            this.dateTimeWhen.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimeWhen.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeWhen.Location = new System.Drawing.Point(10, 151);
+            this.dateTimeWhen.Margin = new System.Windows.Forms.Padding(10);
+            this.dateTimeWhen.MinDate = new System.DateTime(2017, 11, 29, 0, 0, 0, 0);
+            this.dateTimeWhen.Name = "dateTimeWhen";
+            this.dateTimeWhen.Size = new System.Drawing.Size(232, 26);
+            this.dateTimeWhen.TabIndex = 11;
+            this.dateTimeWhen.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDayPicker);
+            // 
+            // repeatRadioPanel
+            // 
+            this.repeatRadioPanel.Controls.Add(this.repeatRadio);
+            this.repeatRadioPanel.Controls.Add(this.onceRadio);
+            this.repeatRadioPanel.Location = new System.Drawing.Point(136, 78);
+            this.repeatRadioPanel.Name = "repeatRadioPanel";
+            this.repeatRadioPanel.Size = new System.Drawing.Size(119, 60);
+            this.repeatRadioPanel.TabIndex = 10;
+            // 
+            // repeatRadio
+            // 
+            this.repeatRadio.AutoSize = true;
+            this.repeatRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.repeatRadio.Location = new System.Drawing.Point(11, 30);
+            this.repeatRadio.Name = "repeatRadio";
+            this.repeatRadio.Size = new System.Drawing.Size(79, 23);
+            this.repeatRadio.TabIndex = 1;
+            this.repeatRadio.Text = "Repeat";
+            this.repeatRadio.UseVisualStyleBackColor = true;
+            this.repeatRadio.Click += new System.EventHandler(this.Repeat_Click);
+            // 
+            // onceRadio
+            // 
+            this.onceRadio.AutoSize = true;
+            this.onceRadio.Checked = true;
+            this.onceRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.onceRadio.Location = new System.Drawing.Point(11, 1);
+            this.onceRadio.Name = "onceRadio";
+            this.onceRadio.Size = new System.Drawing.Size(66, 23);
+            this.onceRadio.TabIndex = 0;
+            this.onceRadio.TabStop = true;
+            this.onceRadio.Text = "Once";
+            this.onceRadio.UseVisualStyleBackColor = true;
+            this.onceRadio.Click += new System.EventHandler(this.Once_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Controls.Add(this.laterSchedule);
+            this.panel5.Controls.Add(this.nowSchedule);
+            this.panel5.Location = new System.Drawing.Point(-1, 78);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(124, 60);
+            this.panel5.TabIndex = 8;
+            // 
+            // laterSchedule
+            // 
+            this.laterSchedule.AutoSize = true;
+            this.laterSchedule.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.laterSchedule.Location = new System.Drawing.Point(15, 30);
+            this.laterSchedule.Name = "laterSchedule";
+            this.laterSchedule.Size = new System.Drawing.Size(61, 23);
+            this.laterSchedule.TabIndex = 1;
+            this.laterSchedule.Text = "Later";
+            this.laterSchedule.UseVisualStyleBackColor = true;
+            this.laterSchedule.Click += new System.EventHandler(this.Later_Click);
+            // 
+            // nowSchedule
+            // 
+            this.nowSchedule.AutoSize = true;
+            this.nowSchedule.Checked = true;
+            this.nowSchedule.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.nowSchedule.Location = new System.Drawing.Point(15, 1);
+            this.nowSchedule.Name = "nowSchedule";
+            this.nowSchedule.Size = new System.Drawing.Size(58, 23);
+            this.nowSchedule.TabIndex = 0;
+            this.nowSchedule.TabStop = true;
+            this.nowSchedule.Text = "Now";
+            this.nowSchedule.UseVisualStyleBackColor = true;
+            this.nowSchedule.Click += new System.EventHandler(this.Now_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label9.Location = new System.Drawing.Point(10, 10);
+            this.label9.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(86, 21);
+            this.label9.TabIndex = 6;
+            this.label9.Text = "Schedule";
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button5.Location = new System.Drawing.Point(10, 377);
+            this.button5.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(124, 24);
+            this.button5.TabIndex = 9;
+            this.button5.Text = "Show schedules";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.Show_Schedules);
+            // 
+            // applySchedule
+            // 
+            this.applySchedule.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.applySchedule.Location = new System.Drawing.Point(169, 377);
+            this.applySchedule.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.applySchedule.Name = "applySchedule";
+            this.applySchedule.Size = new System.Drawing.Size(75, 24);
+            this.applySchedule.TabIndex = 9;
+            this.applySchedule.Text = "Apply";
+            this.applySchedule.UseVisualStyleBackColor = true;
+            this.applySchedule.Click += new System.EventHandler(this.ApplySchedule);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label23.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label23.Location = new System.Drawing.Point(143, 47);
+            this.label23.Margin = new System.Windows.Forms.Padding(10);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(61, 19);
+            this.label23.TabIndex = 7;
+            this.label23.Text = "Repeat";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label22.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label22.Location = new System.Drawing.Point(10, 46);
+            this.label22.Margin = new System.Windows.Forms.Padding(10);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(51, 19);
+            this.label22.TabIndex = 7;
+            this.label22.Text = "When";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.manualPanel);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.backupMethodPanel);
+            this.panel3.Controls.Add(this.ftpServers);
+            this.panel3.Controls.Add(this.compressCheckBox);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Location = new System.Drawing.Point(-1, -1);
+            this.panel3.Margin = new System.Windows.Forms.Padding(10);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(268, 418);
+            this.panel3.TabIndex = 11;
+            // 
+            // manualPanel
+            // 
+            this.manualPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.manualPanel.Controls.Add(this.browseDatabase);
+            this.manualPanel.Controls.Add(this.databaseFilePath);
+            this.manualPanel.Controls.Add(this.label21);
+            this.manualPanel.Enabled = false;
+            this.manualPanel.Location = new System.Drawing.Point(-1, 293);
+            this.manualPanel.Name = "manualPanel";
+            this.manualPanel.Size = new System.Drawing.Size(268, 124);
+            this.manualPanel.TabIndex = 10;
+            // 
+            // browseDatabase
+            // 
+            this.browseDatabase.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.browseDatabase.Location = new System.Drawing.Point(181, 84);
+            this.browseDatabase.Margin = new System.Windows.Forms.Padding(10);
+            this.browseDatabase.Name = "browseDatabase";
+            this.browseDatabase.Size = new System.Drawing.Size(75, 24);
+            this.browseDatabase.TabIndex = 9;
+            this.browseDatabase.Text = "Browse";
+            this.browseDatabase.UseVisualStyleBackColor = true;
+            // 
+            // databaseFilePath
+            // 
+            this.databaseFilePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.databaseFilePath.Location = new System.Drawing.Point(14, 49);
+            this.databaseFilePath.Margin = new System.Windows.Forms.Padding(10);
+            this.databaseFilePath.Name = "databaseFilePath";
+            this.databaseFilePath.Size = new System.Drawing.Size(242, 24);
+            this.databaseFilePath.TabIndex = 1;
+            this.databaseFilePath.Text = "C:\\";
+            this.databaseFilePath.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label21.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label21.Location = new System.Drawing.Point(10, 10);
+            this.label21.Margin = new System.Windows.Forms.Padding(10);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(101, 19);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Database file";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label15.Location = new System.Drawing.Point(10, 10);
+            this.label15.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(107, 21);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Preferences";
+            // 
             // backupMethodPanel
             // 
-            this.backupMethodPanel.Controls.Add(this.radioButton2);
-            this.backupMethodPanel.Controls.Add(this.radioButton1);
-            this.backupMethodPanel.Location = new System.Drawing.Point(-1, 210);
+            this.backupMethodPanel.Controls.Add(this.manualRadio);
+            this.backupMethodPanel.Controls.Add(this.fullAutomaticRadio);
+            this.backupMethodPanel.Location = new System.Drawing.Point(-1, 142);
             this.backupMethodPanel.Name = "backupMethodPanel";
             this.backupMethodPanel.Size = new System.Drawing.Size(160, 57);
             this.backupMethodPanel.TabIndex = 9;
             // 
-            // radioButton2
+            // manualRadio
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton2.Location = new System.Drawing.Point(15, 31);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(81, 23);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.Text = "Manual";
-            this.manualBackupTooltip.SetToolTip(this.radioButton2, "Manual browse database and send.");
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.manualRadio.AutoSize = true;
+            this.manualRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.manualRadio.Location = new System.Drawing.Point(15, 31);
+            this.manualRadio.Name = "manualRadio";
+            this.manualRadio.Size = new System.Drawing.Size(81, 23);
+            this.manualRadio.TabIndex = 1;
+            this.manualRadio.Text = "Manual";
+            this.manualBackupTooltip.SetToolTip(this.manualRadio, "Manual browse database and send.");
+            this.manualRadio.UseVisualStyleBackColor = true;
+            this.manualRadio.Click += new System.EventHandler(this.Manual_Click);
             // 
-            // radioButton1
+            // fullAutomaticRadio
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.radioButton1.Location = new System.Drawing.Point(15, 2);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(126, 23);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Full automatic";
-            this.fullAutomaticTooltip.SetToolTip(this.radioButton1, "Automatic export database and send.");
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.fullAutomaticRadio.AutoSize = true;
+            this.fullAutomaticRadio.Checked = true;
+            this.fullAutomaticRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.fullAutomaticRadio.Location = new System.Drawing.Point(15, 2);
+            this.fullAutomaticRadio.Name = "fullAutomaticRadio";
+            this.fullAutomaticRadio.Size = new System.Drawing.Size(126, 23);
+            this.fullAutomaticRadio.TabIndex = 0;
+            this.fullAutomaticRadio.TabStop = true;
+            this.fullAutomaticRadio.Text = "Full automatic";
+            this.fullAutomaticTooltip.SetToolTip(this.fullAutomaticRadio, "Automatic export database and send.");
+            this.fullAutomaticRadio.UseVisualStyleBackColor = true;
+            this.fullAutomaticRadio.Click += new System.EventHandler(this.Full_Automatic_Click);
+            // 
+            // ftpServers
+            // 
+            this.ftpServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ftpServers.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.ftpServers.FormattingEnabled = true;
+            this.ftpServers.Location = new System.Drawing.Point(12, 73);
+            this.ftpServers.Name = "ftpServers";
+            this.ftpServers.Size = new System.Drawing.Size(171, 27);
+            this.ftpServers.TabIndex = 5;
+            this.ftpServers.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateFTPServer);
             // 
             // compressCheckBox
             // 
@@ -451,69 +852,48 @@
             this.compressCheckBox.Checked = true;
             this.compressCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.compressCheckBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.compressCheckBox.Location = new System.Drawing.Point(15, 142);
+            this.compressCheckBox.Location = new System.Drawing.Point(13, 244);
             this.compressCheckBox.Name = "compressCheckBox";
             this.compressCheckBox.Size = new System.Drawing.Size(180, 23);
             this.compressCheckBox.TabIndex = 8;
             this.compressCheckBox.Text = "Compress before send";
             this.compressCheckBox.UseVisualStyleBackColor = true;
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label17.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label17.Location = new System.Drawing.Point(10, 178);
-            this.label17.Margin = new System.Windows.Forms.Padding(10);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(121, 19);
-            this.label17.TabIndex = 7;
-            this.label17.Text = "Backup method";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label13.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label13.Location = new System.Drawing.Point(12, 110);
-            this.label13.Margin = new System.Windows.Forms.Padding(10);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 19);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Compress";
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label16.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label16.Location = new System.Drawing.Point(12, 41);
+            this.label16.Location = new System.Drawing.Point(10, 41);
             this.label16.Margin = new System.Windows.Forms.Padding(10);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(128, 19);
             this.label16.TabIndex = 7;
             this.label16.Text = "Choose FTP server";
             // 
-            // label15
+            // label13
             // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label15.Location = new System.Drawing.Point(12, 10);
-            this.label15.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(107, 21);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "Preferences";
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label13.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label13.Location = new System.Drawing.Point(10, 212);
+            this.label13.Margin = new System.Windows.Forms.Padding(10);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 19);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Compress";
             // 
-            // ftpServers
+            // label17
             // 
-            this.ftpServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ftpServers.Font = new System.Drawing.Font("Century Gothic", 8.25F);
-            this.ftpServers.FormattingEnabled = true;
-            this.ftpServers.Location = new System.Drawing.Point(14, 73);
-            this.ftpServers.Name = "ftpServers";
-            this.ftpServers.Size = new System.Drawing.Size(171, 24);
-            this.ftpServers.TabIndex = 5;
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label17.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label17.Location = new System.Drawing.Point(10, 110);
+            this.label17.Margin = new System.Windows.Forms.Padding(10);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(121, 19);
+            this.label17.TabIndex = 7;
+            this.label17.Text = "Backup method";
             // 
             // serversPanel
             // 
@@ -659,7 +1039,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label18.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label18.Location = new System.Drawing.Point(12, 273);
+            this.label18.Location = new System.Drawing.Point(10, 273);
             this.label18.Margin = new System.Windows.Forms.Padding(10, 5, 10, 5);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(72, 19);
@@ -693,7 +1073,7 @@
             // password
             // 
             this.password.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.password.Location = new System.Drawing.Point(16, 296);
+            this.password.Location = new System.Drawing.Point(14, 296);
             this.password.Margin = new System.Windows.Forms.Padding(5, 10, 10, 5);
             this.password.Name = "password";
             this.password.Size = new System.Drawing.Size(223, 24);
@@ -798,9 +1178,12 @@
             // logPanel
             // 
             this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logPanel.Controls.Add(this.label29);
+            this.logPanel.Controls.Add(this.button4);
+            this.logPanel.Controls.Add(this.panel6);
+            this.logPanel.Controls.Add(this.label24);
+            this.logPanel.Controls.Add(this.textBox2);
             this.logPanel.Controls.Add(this.button3);
-            this.logPanel.Controls.Add(this.label19);
-            this.logPanel.Controls.Add(this.button2);
             this.logPanel.Controls.Add(this.dataGridView1);
             this.logPanel.Controls.Add(this.label12);
             this.logPanel.Location = new System.Drawing.Point(249, 103);
@@ -808,47 +1191,141 @@
             this.logPanel.Size = new System.Drawing.Size(526, 418);
             this.logPanel.TabIndex = 10;
             // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button4.Location = new System.Drawing.Point(409, 383);
+            this.button4.Margin = new System.Windows.Forms.Padding(10);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(105, 23);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "Apply Changes";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.label19);
+            this.panel6.Controls.Add(this.checkBox3);
+            this.panel6.Controls.Add(this.checkBox2);
+            this.panel6.Controls.Add(this.checkBox1);
+            this.panel6.Location = new System.Drawing.Point(285, 312);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(119, 105);
+            this.panel6.TabIndex = 11;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox3.Location = new System.Drawing.Point(6, 52);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(105, 21);
+            this.checkBox3.TabIndex = 12;
+            this.checkBox3.Text = "Success logs";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox2.Location = new System.Drawing.Point(6, 75);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(81, 21);
+            this.checkBox2.TabIndex = 11;
+            this.checkBox2.Text = "Info logs";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBox1.Location = new System.Drawing.Point(6, 32);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(85, 21);
+            this.checkBox1.TabIndex = 9;
+            this.checkBox1.Text = "Error logs";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label24.Location = new System.Drawing.Point(14, 293);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(338, 16);
+            this.label24.TabIndex = 8;
+            this.label24.Text = "Note: Enter email to send log file updates via email";
+            // 
+            // textBox2
+            // 
+            this.textBox2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.Location = new System.Drawing.Point(15, 347);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(10);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(229, 23);
+            this.textBox2.TabIndex = 7;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(418, 328);
+            this.button3.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button3.Location = new System.Drawing.Point(384, 7);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 27);
+            this.button3.Size = new System.Drawing.Size(134, 27);
             this.button3.TabIndex = 6;
-            this.button3.Text = "Clear";
+            this.button3.Text = "Clear log file";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(46, 388);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 13);
-            this.label19.TabIndex = 5;
-            this.label19.Text = "label19";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(145, 361);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click_1);
-            // 
             // dataGridView1
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Century Gothic", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.id,
             this.type,
             this.time,
             this.desc});
-            this.dataGridView1.Location = new System.Drawing.Point(14, 39);
+            this.dataGridView1.Location = new System.Drawing.Point(3, 39);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(500, 284);
+            this.dataGridView1.Size = new System.Drawing.Size(518, 242);
             this.dataGridView1.TabIndex = 2;
+            // 
+            // id
+            // 
+            this.id.HeaderText = "id";
+            this.id.Name = "id";
+            this.id.Width = 50;
+            // 
+            // type
+            // 
+            this.type.FillWeight = 80F;
+            this.type.HeaderText = "Type";
+            this.type.Name = "type";
+            this.type.Width = 80;
+            // 
+            // time
+            // 
+            this.time.HeaderText = "Date";
+            this.time.Name = "time";
+            this.time.Width = 150;
+            // 
+            // desc
+            // 
+            this.desc.HeaderText = "Description";
+            this.desc.Name = "desc";
+            this.desc.Width = 195;
             // 
             // label12
             // 
@@ -878,26 +1355,33 @@
             this.manualBackupTooltip.ReshowDelay = 100;
             this.manualBackupTooltip.ToolTipTitle = "Manual backup";
             // 
-            // id
+            // errorProvider1
             // 
-            this.id.HeaderText = "id";
-            this.id.Name = "id";
+            this.errorProvider1.ContainerControl = this;
             // 
-            // type
+            // label29
             // 
-            this.type.HeaderText = "Type";
-            this.type.Name = "type";
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label29.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label29.Location = new System.Drawing.Point(12, 318);
+            this.label29.Margin = new System.Windows.Forms.Padding(10);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(46, 19);
+            this.label29.TabIndex = 13;
+            this.label29.Text = "Email";
             // 
-            // time
+            // label19
             // 
-            this.time.HeaderText = "Date";
-            this.time.Name = "time";
-            // 
-            // desc
-            // 
-            this.desc.HeaderText = "Description";
-            this.desc.Name = "desc";
-            this.desc.Width = 155;
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label19.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label19.Location = new System.Drawing.Point(2, 6);
+            this.label19.Margin = new System.Windows.Forms.Padding(10);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(116, 19);
+            this.label19.TabIndex = 13;
+            this.label19.Text = "Send emails for:";
             // 
             // Form1
             // 
@@ -906,13 +1390,14 @@
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
             this.Controls.Add(this.logPanel);
-            this.Controls.Add(this.serversPanel);
-            this.Controls.Add(this.backupPanel);
-            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Controls.Add(this.databasePanel);
+            this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.backupPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Database Backup";
             this.panel1.ResumeLayout(false);
@@ -922,7 +1407,21 @@
             this.databasePanel.ResumeLayout(false);
             this.databasePanel.PerformLayout();
             this.backupPanel.ResumeLayout(false);
-            this.backupPanel.PerformLayout();
+            this.repeatPanel.ResumeLayout(false);
+            this.repeatPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.minutesNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.daysNumber)).EndInit();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            this.repeatRadioPanel.ResumeLayout(false);
+            this.repeatRadioPanel.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.manualPanel.ResumeLayout(false);
+            this.manualPanel.PerformLayout();
             this.backupMethodPanel.ResumeLayout(false);
             this.backupMethodPanel.PerformLayout();
             this.serversPanel.ResumeLayout(false);
@@ -932,7 +1431,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.port)).EndInit();
             this.logPanel.ResumeLayout(false);
             this.logPanel.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -987,8 +1489,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label connectionStatusLabel;
         private System.Windows.Forms.Panel backupMethodPanel;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton manualRadio;
+        private System.Windows.Forms.RadioButton fullAutomaticRadio;
         private System.Windows.Forms.ToolTip fullAutomaticTooltip;
         private System.Windows.Forms.CheckBox compressCheckBox;
         private System.Windows.Forms.Label label17;
@@ -1001,13 +1503,47 @@
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox password;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel manualPanel;
+        private System.Windows.Forms.TextBox databaseFilePath;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.DateTimePicker dateTimeWhen;
+        private System.Windows.Forms.Panel repeatRadioPanel;
+        private System.Windows.Forms.Button applySchedule;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.RadioButton laterSchedule;
+        private System.Windows.Forms.RadioButton nowSchedule;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Button browseDatabase;
+        private System.Windows.Forms.RadioButton repeatRadio;
+        private System.Windows.Forms.RadioButton onceRadio;
+        private System.Windows.Forms.Panel repeatPanel;
+        private System.Windows.Forms.NumericUpDown hoursNumber;
+        private System.Windows.Forms.NumericUpDown minutesNumber;
+        private System.Windows.Forms.NumericUpDown daysNumber;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridViewTextBoxColumn id;
         private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.DataGridViewTextBoxColumn time;
         private System.Windows.Forms.DataGridViewTextBoxColumn desc;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label19;
     }
 }
 
