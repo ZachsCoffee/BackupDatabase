@@ -328,7 +328,11 @@ namespace DataBaseBackup
         private void Once_Click(object sender, EventArgs e)
         {
             repeatPanel.Enabled = false;
-            dateTimeWhen.Enabled = true;
+            if (laterRadio.Checked)
+            {
+                dateTimeWhen.Enabled = true;
+            }
+            
         }
 
         private void Repeat_Click(object sender, EventArgs e)

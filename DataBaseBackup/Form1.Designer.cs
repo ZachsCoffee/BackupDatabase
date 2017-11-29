@@ -69,8 +69,8 @@
             this.repeatRadio = new System.Windows.Forms.RadioButton();
             this.onceRadio = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.laterSchedule = new System.Windows.Forms.RadioButton();
-            this.nowSchedule = new System.Windows.Forms.RadioButton();
+            this.laterRadio = new System.Windows.Forms.RadioButton();
+            this.nowRadio = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.applySchedule = new System.Windows.Forms.Button();
@@ -114,8 +114,10 @@
             this.label6 = new System.Windows.Forms.Label();
             this.serversListBox = new System.Windows.Forms.ListBox();
             this.logPanel = new System.Windows.Forms.Panel();
+            this.label29 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -132,8 +134,6 @@
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label29 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -632,38 +632,38 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.laterSchedule);
-            this.panel5.Controls.Add(this.nowSchedule);
+            this.panel5.Controls.Add(this.laterRadio);
+            this.panel5.Controls.Add(this.nowRadio);
             this.panel5.Location = new System.Drawing.Point(-1, 78);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(124, 60);
             this.panel5.TabIndex = 8;
             // 
-            // laterSchedule
+            // laterRadio
             // 
-            this.laterSchedule.AutoSize = true;
-            this.laterSchedule.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.laterSchedule.Location = new System.Drawing.Point(15, 30);
-            this.laterSchedule.Name = "laterSchedule";
-            this.laterSchedule.Size = new System.Drawing.Size(61, 23);
-            this.laterSchedule.TabIndex = 1;
-            this.laterSchedule.Text = "Later";
-            this.laterSchedule.UseVisualStyleBackColor = true;
-            this.laterSchedule.Click += new System.EventHandler(this.Later_Click);
+            this.laterRadio.AutoSize = true;
+            this.laterRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.laterRadio.Location = new System.Drawing.Point(15, 30);
+            this.laterRadio.Name = "laterRadio";
+            this.laterRadio.Size = new System.Drawing.Size(61, 23);
+            this.laterRadio.TabIndex = 1;
+            this.laterRadio.Text = "Later";
+            this.laterRadio.UseVisualStyleBackColor = true;
+            this.laterRadio.Click += new System.EventHandler(this.Later_Click);
             // 
-            // nowSchedule
+            // nowRadio
             // 
-            this.nowSchedule.AutoSize = true;
-            this.nowSchedule.Checked = true;
-            this.nowSchedule.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.nowSchedule.Location = new System.Drawing.Point(15, 1);
-            this.nowSchedule.Name = "nowSchedule";
-            this.nowSchedule.Size = new System.Drawing.Size(58, 23);
-            this.nowSchedule.TabIndex = 0;
-            this.nowSchedule.TabStop = true;
-            this.nowSchedule.Text = "Now";
-            this.nowSchedule.UseVisualStyleBackColor = true;
-            this.nowSchedule.Click += new System.EventHandler(this.Now_Click);
+            this.nowRadio.AutoSize = true;
+            this.nowRadio.Checked = true;
+            this.nowRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.nowRadio.Location = new System.Drawing.Point(15, 1);
+            this.nowRadio.Name = "nowRadio";
+            this.nowRadio.Size = new System.Drawing.Size(58, 23);
+            this.nowRadio.TabIndex = 0;
+            this.nowRadio.TabStop = true;
+            this.nowRadio.Text = "Now";
+            this.nowRadio.UseVisualStyleBackColor = true;
+            this.nowRadio.Click += new System.EventHandler(this.Now_Click);
             // 
             // label9
             // 
@@ -1191,6 +1191,18 @@
             this.logPanel.Size = new System.Drawing.Size(526, 418);
             this.logPanel.TabIndex = 10;
             // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label29.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label29.Location = new System.Drawing.Point(12, 318);
+            this.label29.Margin = new System.Windows.Forms.Padding(10);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(46, 19);
+            this.label29.TabIndex = 13;
+            this.label29.Text = "Email";
+            // 
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Century Gothic", 9.25F);
@@ -1213,6 +1225,18 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(119, 105);
             this.panel6.TabIndex = 11;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label19.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label19.Location = new System.Drawing.Point(2, 6);
+            this.label19.Margin = new System.Windows.Forms.Padding(10);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(116, 19);
+            this.label19.TabIndex = 13;
+            this.label19.Text = "Send emails for:";
             // 
             // checkBox3
             // 
@@ -1359,42 +1383,18 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label29.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label29.Location = new System.Drawing.Point(12, 318);
-            this.label29.Margin = new System.Windows.Forms.Padding(10);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(46, 19);
-            this.label29.TabIndex = 13;
-            this.label29.Text = "Email";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label19.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label19.Location = new System.Drawing.Point(2, 6);
-            this.label19.Margin = new System.Windows.Forms.Padding(10);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(116, 19);
-            this.label19.TabIndex = 13;
-            this.label19.Text = "Send emails for:";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.logPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.serversPanel);
-            this.Controls.Add(this.backupPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1514,8 +1514,8 @@
         private System.Windows.Forms.Panel repeatRadioPanel;
         private System.Windows.Forms.Button applySchedule;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.RadioButton laterSchedule;
-        private System.Windows.Forms.RadioButton nowSchedule;
+        private System.Windows.Forms.RadioButton laterRadio;
+        private System.Windows.Forms.RadioButton nowRadio;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button browseDatabase;
