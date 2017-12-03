@@ -134,6 +134,7 @@
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -1178,6 +1179,7 @@
             // logPanel
             // 
             this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logPanel.Controls.Add(this.button2);
             this.logPanel.Controls.Add(this.label29);
             this.logPanel.Controls.Add(this.button4);
             this.logPanel.Controls.Add(this.panel6);
@@ -1213,7 +1215,6 @@
             this.button4.TabIndex = 12;
             this.button4.Text = "Apply Changes";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // panel6
             // 
@@ -1383,6 +1384,16 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(417, 318);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 14;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1544,6 +1555,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button button2;
     }
 }
 

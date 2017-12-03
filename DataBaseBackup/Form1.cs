@@ -29,6 +29,11 @@ namespace DataBaseBackup
         Sftp sftp=null;
         ObjectStream stream = new ObjectStream("saveServer");
 
+        //Initiation of logFile variables
+        private LogFile log1 = new LogFile();
+        private VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
+        
+        
 
         public Form1()
         {
@@ -50,10 +55,10 @@ namespace DataBaseBackup
             dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
 
-            VariableStorage a = new VariableStorage("");
-            a.NewVariable("", "");
-        }
+            
 
+        }
+        
         //CUSTOM METHODS
         private void MenuClick(object sender, EventArgs e)
         {
@@ -278,19 +283,21 @@ namespace DataBaseBackup
             dateTimeWhen.Enabled = true;
         }
 
-        LogFile log1 = new LogFile();
-        String email = "";
-        bool errorLogs = true;
-        bool successLogs = false;
-        bool infoLogs = false;
+
+        
         //Test button
-        private void button2_Click_1(object sender, EventArgs e)
+        public void button2_Click_1(object sender, EventArgs e)          
         {
+            VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
+            logVariables.PutVariable("email", textBox2.Text);
+
+            label24.Text = logVariables.GetVariable("email").ToString(); 
+
             
-            log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
+            //log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
 
             //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
-            
+
         }
 
 
@@ -313,16 +320,18 @@ namespace DataBaseBackup
                 errorProvider1.SetError(textBox2, "");
             }
         }
-
         
+        /*
         //Apply email changes
         private void button4_Click(object sender, EventArgs e)
         {
+            
             email = textBox2.Text;
             if (checkBox1.Checked) errorLogs = true; else errorLogs = false;
             if (checkBox3.Checked) successLogs = true; else successLogs = false;
             if (checkBox2.Checked) infoLogs = true; else infoLogs = false;
         }
+        */
 
         private void Show_Schedules(object sender, EventArgs e)
         {
