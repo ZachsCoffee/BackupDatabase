@@ -39,12 +39,12 @@ namespace DataBaseBackup.Class
         /// <param name="value">The value of the variable.</param>
         public void PutVariable(string varName, object value)
         {
-            bool ok = fileStream.EditLines(delegate(int pos, object line)
+            bool ok = fileStream.EditLines(delegate (int pos, object line)
             {
-                string[] splitedLine = ((string) line).Split(',');
+                string[] splitedLine = ((string)line).Split(',');
 
                 return splitedLine[0].Equals(varName);
-            }, varName+","+value);
+            }, varName + "," + value);
 
             if (!ok)
             {
@@ -70,11 +70,13 @@ namespace DataBaseBackup.Class
                     splitedLine = ((string)lines[i]).Split(',');
                     if (splitedLine[0].Equals(varName))
                     {
+                        fileStream.EndReading();
                         return splitedLine[1];
                     }
                 }
                 i = -1;
             }
+            fileStream.EndReading();
             return null;
         }
     }
