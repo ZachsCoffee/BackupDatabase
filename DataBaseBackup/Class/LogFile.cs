@@ -53,36 +53,80 @@ namespace DataBaseBackup.Class
         }
 
 
-        public void UpdateLogFile(String Id,  String type, DateTime time, String desc, DataGridView d, bool errorLogs, bool successLogs, bool infoLogs,String email)
+        public void UpdateLogFile(String Id,  String type, DateTime time, String desc)
         {
             ObjStr.WriteLines(Id);
             ObjStr.WriteLines(type);
             ObjStr.WriteLines(time);
             ObjStr.WriteLines(desc);
-            //d.Rows.Add(Id, type, time, desc);//Fill datagridview with the current log row  
+        }
 
+        public void updateMail(String email)
+        {
+            /*
             String body = "";
-            if (string.Equals(type,"error")&& errorLogs)
+            if (string.Equals(type, "error") && errorLogs)
             {
-                body += Id+ " "+type+" " +time+" " +desc;
+                body += Id + " " + type + " " + time + " " + desc;
                 //sendMail(body, email);
             }
-
-            
+            */
         }
 
         public void updateGridView(DataGridView d)
         {
-            ArrayList list = this.print();
+            ArrayList list = ObjStr.ReadLines();
+            String Id="";
+            String type = "";
+            String time = "";
+            String desc = "";
             var i = 0;
             foreach(var item in list)
             {
-                ObjStr.ReadLines();
-
+                if (i == 0) Id = item.ToString();
+                else if (i == 1) type = item.ToString();
+                else if (i == 2) time = item.ToString();
+                else if (i == 3)
+                {
+                    desc = item.ToString();
+                    d.Rows.Add(Id, type, time, desc);//Fill datagridview with the current log row  
+                    i = 0;
+                    continue;
+                }
+                i++;
             }
         }
 
-
-
+        public ArrayList returnSpecificLogs(String typeOfLogs)
+        {
+            ArrayList allErrorLogs = new ArrayList(); 
+            String Id = "";
+            String type = "";
+            String time = "";
+            String desc = "";
+            ArrayList list = ObjStr.ReadLines();
+            var i = 0;
+            foreach (var item in list)
+            {
+                if (i == 0) Id = item.ToString();
+                else if (i == 1) type = item.ToString();
+                else if (i == 2) time = item.ToString();
+                else if (i == 3)
+                {
+                    desc = item.ToString();
+                    if (type == typeOfLogs)
+                    {
+                        allErrorLogs.Add(Id);
+                        allErrorLogs.Add(type);
+                        allErrorLogs.Add(time);
+                        allErrorLogs.Add(desc);
+                    }
+                    i = 0;
+                    continue;
+                }
+                i++; 
+            }
+            return allErrorLogs;
+        }
     }
 }
