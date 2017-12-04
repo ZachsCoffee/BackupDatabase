@@ -78,13 +78,12 @@ namespace DataBaseBackup.Class
             ArrayList list = ReadLines();
             for (int i = 0; i < list.Count; i++)
             {
-
+                if (count >= newLines.Length)
+                {
+                    break;
+                }
                 if (where(i, list[i]))
                 {
-                    if (i >= newLines.Length)
-                    {
-                        break;
-                    }
                     flag = true;
                     list[i] = newLines[count++];
                 }
