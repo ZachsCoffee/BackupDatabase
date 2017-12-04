@@ -55,9 +55,10 @@ namespace DataBaseBackup
             dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
 
-            
 
-        }
+
+            VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
+    }
         
         //CUSTOM METHODS
         private void MenuClick(object sender, EventArgs e)
@@ -288,12 +289,11 @@ namespace DataBaseBackup
         //Test button
         public void button2_Click_1(object sender, EventArgs e)          
         {
-            VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
-            logVariables.PutVariable("email", textBox2.Text);
+            //logVariables.PutVariable("email", "123");
+            //logVariables.NewVariable("errorLogs", "true");
+            //logVariables.NewVariable("errorLogs", "false");
+            label24.Text = logVariables.GetVariable("email").ToString();
 
-            label24.Text = logVariables.GetVariable("email").ToString(); 
-
-            
             //log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
 
             //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
@@ -321,17 +321,17 @@ namespace DataBaseBackup
             }
         }
         
-        /*
+        
         //Apply email changes
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
-            
-            email = textBox2.Text;
-            if (checkBox1.Checked) errorLogs = true; else errorLogs = false;
-            if (checkBox3.Checked) successLogs = true; else successLogs = false;
-            if (checkBox2.Checked) infoLogs = true; else infoLogs = false;
+            logVariables.PutVariable("email", textBox2.Text);
+            if (checkBox1.Checked) logVariables.PutVariable("errorLogs", "false");
+            else logVariables.PutVariable("errorLogs", "false");
+            //if (checkBox3.Checked) logVariables.PutVariable("successLogs", "true"); logVariables.PutVariable("successLogs", "false");
+            // if (checkBox2.Checked) logVariables.PutVariable("infoLogs", "true");
+            //else logVariables.PutVariable("infoLogs", "false");
         }
-        */
 
         private void Show_Schedules(object sender, EventArgs e)
         {
@@ -402,6 +402,8 @@ namespace DataBaseBackup
                 errorProvider1.SetError(ftpServers, "You must select a SFTP/FTP server.");
             }
         }
+
+        
 
 
         //END EVENT METHODS

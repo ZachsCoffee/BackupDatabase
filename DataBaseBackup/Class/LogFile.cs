@@ -59,16 +59,27 @@ namespace DataBaseBackup.Class
             ObjStr.WriteLines(type);
             ObjStr.WriteLines(time);
             ObjStr.WriteLines(desc);
-            d.Rows.Add(Id, type, time, desc);//Fill datagridview with the current log row  
+            //d.Rows.Add(Id, type, time, desc);//Fill datagridview with the current log row  
 
             String body = "";
             if (string.Equals(type,"error")&& errorLogs)
             {
                 body += Id+ " "+type+" " +time+" " +desc;
-                sendMail(body, email);
+                //sendMail(body, email);
             }
 
             
+        }
+
+        public void updateGridView(DataGridView d)
+        {
+            ArrayList list = this.print();
+            var i = 0;
+            foreach(var item in list)
+            {
+                ObjStr.ReadLines();
+
+            }
         }
 
 
