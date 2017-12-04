@@ -70,11 +70,13 @@ namespace DataBaseBackup.Class
                     splitedLine = ((string)lines[i]).Split(',');
                     if (splitedLine[0].Equals(varName))
                     {
+                        fileStream.EndReading();
                         return splitedLine[1];
                     }
                 }
                 i = -1;
             }
+            fileStream.EndReading();
             return null;
         }
     }
