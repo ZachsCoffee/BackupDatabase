@@ -17,6 +17,11 @@ namespace DataBaseBackup.Class
         public ObjectStream(string filePath)
         {
             this.filePath = filePath ?? throw new ArgumentNullException("Argument at pos: 1, not null.");
+            using (var streamReader = new StreamWriter(filePath, true))
+            {
+
+            }
+
         }
 
         public void WriteLines(params object[] objects)
@@ -41,7 +46,7 @@ namespace DataBaseBackup.Class
         public void EditLine(int lineForEdit, object newLine)
         {
             ArrayList list = ReadLines();
-            list.Insert(lineForEdit, newLine);
+            list[lineForEdit] = newLine;
             Write(false, list.ToArray());
         }
 
@@ -55,7 +60,7 @@ namespace DataBaseBackup.Class
             ArrayList list = ReadLines();
             for (int i = 0; i < linesForEdit.Length; i++)
             {
-                list.Insert(linesForEdit[i], newLines[i]);
+                list[linesForEdit[i]] = newLines[i];
             }
             Write(false, list.ToArray());
         }
@@ -76,12 +81,12 @@ namespace DataBaseBackup.Class
 
                 if (where(i, list[i]))
                 {
-                    if (i == newLines.Length)
+                    if (i >= newLines.Length)
                     {
                         break;
                     }
                     flag = true;
-                    list.Insert(i, newLines[count++]);
+                    list[i] = newLines[count++];
                 }
             }
 
