@@ -293,6 +293,7 @@ namespace DataBaseBackup
             //logVariables.NewVariable("errorLogs", "true");
             //logVariables.NewVariable("errorLogs", "false");
             label24.Text = logVariables.GetVariable("email").ToString();
+            log1.updateGridView(dataGridView1);
 
             //log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
 
