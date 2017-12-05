@@ -61,16 +61,36 @@ namespace DataBaseBackup.Class
             ObjStr.WriteLines(desc);
         }
 
-        public void updateMail(String email)
+        public void updateMail(String email,String errorLogs,String successLogs,String infoLogs)
         {
             /*
-            String body = "";
+            
             if (string.Equals(type, "error") && errorLogs)
             {
                 body += Id + " " + type + " " + time + " " + desc;
                 //sendMail(body, email);
             }
             */
+            string body = "";
+
+            if (errorLogs == "true")
+            {
+                ArrayList allErrorLogs = returnSpecificLogs("error");  
+                body += string.Join(" ", allErrorLogs.ToArray());
+                body += "\n";
+            }
+            if (successLogs == "true")
+            {
+                ArrayList allSuccessLogs = returnSpecificLogs("success");
+                body += string.Join(" ", allSuccessLogs.ToArray());
+            }
+            if (infoLogs == "true")
+            {
+                ArrayList allInfoLogs = returnSpecificLogs("info");
+                body += string.Join(" ", allInfoLogs.ToArray());
+            }
+
+            sendMail(body, email);
         }
 
         public void updateGridView(DataGridView d)
@@ -99,7 +119,7 @@ namespace DataBaseBackup.Class
 
         public ArrayList returnSpecificLogs(String typeOfLogs)
         {
-            ArrayList allErrorLogs = new ArrayList(); 
+            ArrayList allLogs = new ArrayList(); 
             String Id = "";
             String type = "";
             String time = "";
@@ -116,17 +136,17 @@ namespace DataBaseBackup.Class
                     desc = item.ToString();
                     if (type == typeOfLogs)
                     {
-                        allErrorLogs.Add(Id);
-                        allErrorLogs.Add(type);
-                        allErrorLogs.Add(time);
-                        allErrorLogs.Add(desc);
+                        allLogs.Add(Id);
+                        allLogs.Add(type);
+                        allLogs.Add(time);
+                        allLogs.Add(desc);
                     }
                     i = 0;
                     continue;
                 }
                 i++; 
             }
-            return allErrorLogs;
+            return allLogs;
         }
     }
 }

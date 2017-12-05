@@ -58,7 +58,11 @@ namespace DataBaseBackup
 
 
             VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
-    }
+            logVariables.NewVariable("email", "test");
+            logVariables.NewVariable("errorLogs", "true");
+            logVariables.NewVariable("successLogs", "false");
+            logVariables.NewVariable("infoLogs", "false");
+        }
         
         //CUSTOM METHODS
         private void MenuClick(object sender, EventArgs e)
@@ -185,22 +189,6 @@ namespace DataBaseBackup
             ResetServerActionValues();
         }
 
-        
-        private void button2_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = "C:\\";
-            openFileDialog1.Filter = "Text|*.txt|All|*.*"; ;
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (DialogResult.OK == openFileDialog1.ShowDialog())
-            {
-
-            }
-        }
-
         private void serverType_SelectedIndexChanged(object sender, EventArgs e)//me to pou dialegei protocolo sftp i ftp ginetai automata allagei port
         {
             if (serverType.SelectedItem.ToString().Equals("SFTP"))
@@ -285,20 +273,14 @@ namespace DataBaseBackup
         }
 
 
-        
         //Test button
         public void button2_Click_1(object sender, EventArgs e)          
         {
-            //logVariables.PutVariable("email", "123");
-            //logVariables.NewVariable("errorLogs", "true");
-            //logVariables.NewVariable("errorLogs", "false");
-            label24.Text = logVariables.GetVariable("email").ToString();
+            label24.Text = logVariables.GetVariable("successLogs").ToString();
             log1.updateGridView(dataGridView1);
-
-            //log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
-
+            log1.updateMail(logVariables.GetVariable("email").ToString(), logVariables.GetVariable("errorLogs").ToString(), logVariables.GetVariable("successLogs").ToString(), logVariables.GetVariable("infoLogs").ToString());
+            //log1.UpdateLogFile("01", "error", DateTime.Now, "desc");
             //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
-
         }
 
 
@@ -327,11 +309,9 @@ namespace DataBaseBackup
         private void button4_Click_1(object sender, EventArgs e)
         {
             logVariables.PutVariable("email", textBox2.Text);
-            if (checkBox1.Checked) logVariables.PutVariable("errorLogs", "false");
-            else logVariables.PutVariable("errorLogs", "false");
-            //if (checkBox3.Checked) logVariables.PutVariable("successLogs", "true"); logVariables.PutVariable("successLogs", "false");
-            // if (checkBox2.Checked) logVariables.PutVariable("infoLogs", "true");
-            //else logVariables.PutVariable("infoLogs", "false");
+            if (checkBox1.Checked) logVariables.PutVariable("errorLogs", "true"); else logVariables.PutVariable("errorLogs", "false");
+            if (checkBox3.Checked) logVariables.PutVariable("successLogs", "true"); else logVariables.PutVariable("successLogs", "false");
+            if (checkBox2.Checked) logVariables.PutVariable("infoLogs", "true"); else logVariables.PutVariable("infoLogs", "false");
         }
 
         private void Show_Schedules(object sender, EventArgs e)
