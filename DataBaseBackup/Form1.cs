@@ -13,6 +13,7 @@ using System.IO;
 using DataBaseBackup.Class;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace DataBaseBackup
 {
@@ -26,14 +27,16 @@ namespace DataBaseBackup
         private Panel[] panels;
         private Panel currentPanel;
         SftpClient sftpclient;
-        Sftp sftp=null;
+        Sftp sftp;
+        Ftp ftp;
         ObjectStream stream = new ObjectStream("saveServer");
 
 
         public Form1()
         {
             InitializeComponent();
-
+            stream.ClearFile();
+            
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
             panels = new Panel[] {databasePanel, serversPanel, backupPanel, logPanel} ;//krata ola ta panel gia na mporeis na ta allazeis 
             currentPanel = databasePanel;//einai to arxiko
@@ -147,6 +150,34 @@ namespace DataBaseBackup
 
             }
         }
+
+        private void testConnectionFTP()
+        {
+            //an mporw na kanw listing tote exw sinthethi kanonika :P
+            string uri = "ftp://" + domainName.Text + ":" + port.Value.ToString();
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(uri));
+            request.UsePassive = false;
+            request.Method = WebRequestMethods.Ftp.ListDirectory;
+            request.Credentials = new NetworkCredential(username.Text,password.Text);
+            request.KeepAlive = true;
+
+            try
+            {
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                SetConnectionStatus(ConnectionStatus.OK);
+                saveServer.Enabled = true;
+                
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetConnectionStatus(ConnectionStatus.Failed);
+            }
+           
+
+
+        }
         //END CUSTOM METHODS
 
         //EVENT METHODS
@@ -167,7 +198,15 @@ namespace DataBaseBackup
         private void makeAction_Click(object sender, EventArgs e)
         {
             //ResetServerActionValues();
-            testConnectionSFTP();
+            if (serverType.Text.Equals("SFTP"))
+            {
+                testConnectionSFTP();
+            }
+            else
+            {
+                testConnectionFTP();
+            }
+            
         }
 
         private void cancelAction_Click(object sender, EventArgs e)
@@ -211,29 +250,56 @@ namespace DataBaseBackup
                 int index = serversListBox.SelectedIndex;
                 if (index < 0)
                 {
+                    MessageBox.Show("The Listbox is empty", "!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                if (serverType.Text.Equals("SFTP"))
+                {
+                    sftp = new Sftp("", "", "", "");
+                    sftp.setServerType(serverType.Text);
+                    sftp.setDomainName(domainName.Text);
+                    sftp.setPort(port.Value.ToString());
+                    sftp.setUsername(username.Text);
+                    stream.DeleteLines(index);
+                    serversListBox.Items.RemoveAt(index);
+                    stream.WriteLines(sftp.ToString());
+                }
+                else
+                {
+                    ftp = new Ftp("", "", "", "");
+                    ftp.setServerType(serverType.Text);
+                    ftp.setDomainName(domainName.Text);
+                    ftp.setPort(port.Value.ToString());   
+                    ftp.setUsername(username.Text);
+                    stream.DeleteLines(index);
+                    serversListBox.Items.RemoveAt(index);
+                    stream.WriteLines(ftp.ToString());
+
+                }
                 
-                sftp.setServerType(serverType.Text);
-                sftp.setDomainName(domainName.Text);
-                sftp.setPort(port.Value.ToString());
-                sftp.setUsername(username.Text);
-                stream.DeleteLines(index);
-                stream.WriteLines(sftp.ToString());
                 serversListBox.Items.Clear();
+                
                 ArrayList list = stream.ReadLines();
                 foreach (Object obj in list)
                     serversListBox.Items.Add(obj);
-                
-
 
             }
             else
             {
-                sftp = new Sftp(serverType.Text, domainName.Text, port.Value.ToString(), username.Text);
-                //MessageBox.Show(sftp.ToString(), "Test", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                stream.WriteLines(sftp.ToString());
-                serversListBox.Items.Add(sftp.ToString());
+                if (serverType.Text.Equals("SFTP"))
+                {
+                    sftp = new Sftp(serverType.Text, domainName.Text, port.Value.ToString(), username.Text);
+                    //MessageBox.Show(sftp.ToString(), "Test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    stream.WriteLines(sftp.ToString());
+                    serversListBox.Items.Add(sftp.ToString());
+                }
+                else
+                {
+                    ftp = new Ftp(serverType.Text, domainName.Text, port.Value.ToString(), username.Text);
+                    stream.WriteLines(ftp.ToString());
+                    serversListBox.Items.Add(ftp.ToString());
+                }
+                
             }
 
         }
