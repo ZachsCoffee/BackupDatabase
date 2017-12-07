@@ -271,9 +271,7 @@ namespace DataBaseBackup
             dateTimeWhen.Enabled = true;
         }
 
-
-        //Test button
-        public void button2_Click_1(object sender, EventArgs e)          
+        public void button2_Click_1(object sender, EventArgs e)//Send email          
         {
             log1.updateMail(logVariables.GetVariable("email").ToString(), logVariables.GetVariable("errorLogs").ToString(), logVariables.GetVariable("successLogs").ToString(), logVariables.GetVariable("infoLogs").ToString());
             //log1.UpdateLogFile("01", "error", DateTime.Now, "desc");
