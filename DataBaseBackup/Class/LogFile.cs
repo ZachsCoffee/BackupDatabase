@@ -31,7 +31,7 @@ namespace DataBaseBackup.Class
             var fromAddress = new MailAddress("databasebackupmail@gmail.com", "Database Backup");
             var toAddress = new MailAddress(to, "To Name");
             const string fromPassword = "temp9409";
-            const string subject = "Log File";
+            const string subject = "DB Logs";
 
             var smtp = new SmtpClient
             {
@@ -63,33 +63,55 @@ namespace DataBaseBackup.Class
 
         public void updateMail(String email,String errorLogs,String successLogs,String infoLogs)
         {
-            /*
-            
-            if (string.Equals(type, "error") && errorLogs)
-            {
-                body += Id + " " + type + " " + time + " " + desc;
-                //sendMail(body, email);
-            }
-            */
-            string body = "";
-
+            string body = "The following logs have been created to your database backup:\n";
             if (errorLogs == "true")
             {
-                ArrayList allErrorLogs = returnSpecificLogs("error");  
-                body += string.Join(" ", allErrorLogs.ToArray());
-                body += "\n";
+                ArrayList allErrorLogs = returnSpecificLogs("error");
+                var i = 0;
+                body += "Error Logs:\n";
+                foreach (var item in allErrorLogs)
+                {
+                    body += item+" ";
+                    if (i == 3)
+                    {
+                        body += "\n";
+                        i = -1;
+                    }
+                    i++;
+                }
             }
             if (successLogs == "true")
             {
                 ArrayList allSuccessLogs = returnSpecificLogs("success");
-                body += string.Join(" ", allSuccessLogs.ToArray());
+                var i = 0;
+                body += "Success Logs:\n";
+                foreach (var item in allSuccessLogs)
+                {
+                    body += item + " ";
+                    if (i == 3)
+                    {
+                        body += "\n";
+                        i = -1;
+                    }
+                    i++;
+                }
             }
             if (infoLogs == "true")
             {
                 ArrayList allInfoLogs = returnSpecificLogs("info");
-                body += string.Join(" ", allInfoLogs.ToArray());
+                var i = 0;
+                body += "Info Logs:\n";
+                foreach (var item in allInfoLogs)
+                {
+                    body += item + " ";
+                    if (i == 3)
+                    {
+                        body += "\n";
+                        i = -1;
+                    }
+                    i++;
+                }
             }
-
             sendMail(body, email);
         }
 

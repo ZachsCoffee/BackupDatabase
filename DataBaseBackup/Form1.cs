@@ -55,13 +55,7 @@ namespace DataBaseBackup
             dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
 
-
-
             VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
-            logVariables.NewVariable("email", "test");
-            logVariables.NewVariable("errorLogs", "true");
-            logVariables.NewVariable("successLogs", "false");
-            logVariables.NewVariable("infoLogs", "false");
         }
         
         //CUSTOM METHODS
@@ -80,6 +74,11 @@ namespace DataBaseBackup
                     break;
                 case "logButton":
                     SwitchPanels(3, "Log");
+                    log1.updateGridView(dataGridView1);
+                    textBox2.Text = logVariables.GetVariable("email").ToString();
+                    if (logVariables.GetVariable("errorLogs").ToString() == "true") checkBox1.Checked = true; else checkBox1.Checked = false;
+                    if (logVariables.GetVariable("successLogs").ToString() == "true") checkBox3.Checked = true; else checkBox3.Checked = false;
+                    if (logVariables.GetVariable("infoLogs").ToString() == "true") checkBox2.Checked = true; else checkBox2.Checked = false;
                     break;
             }
         }
@@ -276,11 +275,8 @@ namespace DataBaseBackup
         //Test button
         public void button2_Click_1(object sender, EventArgs e)          
         {
-            label24.Text = logVariables.GetVariable("successLogs").ToString();
-            log1.updateGridView(dataGridView1);
             log1.updateMail(logVariables.GetVariable("email").ToString(), logVariables.GetVariable("errorLogs").ToString(), logVariables.GetVariable("successLogs").ToString(), logVariables.GetVariable("infoLogs").ToString());
             //log1.UpdateLogFile("01", "error", DateTime.Now, "desc");
-            //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
         }
 
 
@@ -384,7 +380,19 @@ namespace DataBaseBackup
             }
         }
 
-        
+        private void button6_Click(object sender, EventArgs e)//Clear log file button
+        {
+            
+            DialogResult dialogResult = MessageBox.Show("This will clear the entire log file.\n Are you sure?", "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                System.IO.File.WriteAllText(@"..\..\LogFiles\test1.txt", string.Empty);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
+        }
 
 
         //END EVENT METHODS
