@@ -28,8 +28,8 @@ namespace DataBaseBackup.Server
             stream.WriteByte((byte)MessageCode.Add);//stelnw to code
             new BinaryFormatter().Serialize(stream, schedule);//stelnw to schedule
 
-            //stream.Close();
-            //client.Close();
+            stream.Close();
+            client.Close();
         }
 
         /// <summary>
@@ -43,8 +43,8 @@ namespace DataBaseBackup.Server
             stream.WriteByte((byte)MessageCode.GetInfo);
 
             List<Schedule> list = (List<Schedule>)new BinaryFormatter().Deserialize(stream);
-            //stream.Close();
-            //client.Close();
+            stream.Close();
+            client.Close();
 
             return list;
         }
@@ -67,8 +67,8 @@ namespace DataBaseBackup.Server
             byte[] buffer = BitConverter.GetBytes(scheduleID);
             stream.Write(buffer, 0, buffer.Length);
 
-            //stream.Close();
-            //client.Close();
+            stream.Close();
+            client.Close();
         }
 
         private static NetworkStream Connect(out TcpClient tcpClient)
