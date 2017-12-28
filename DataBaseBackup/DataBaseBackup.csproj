@@ -68,6 +68,8 @@
     <Compile Include="ScheduleService.Designer.cs">
       <DependentUpon>ScheduleService.cs</DependentUpon>
     </Compile>
+    <Compile Include="Server\ScheduleServer.cs" />
+    <Compile Include="Server\ScheduleClient.cs" />
     <Compile Include="ShowSchedules.cs">
       <SubType>Form</SubType>
     </Compile>
