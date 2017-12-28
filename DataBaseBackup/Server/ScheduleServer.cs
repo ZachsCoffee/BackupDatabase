@@ -20,9 +20,17 @@ namespace DataBaseBackup.Server
         }
 
         public const int DEFAULT_PORT = 51100;
+        public OnAddSchedule onAddSchedule { get; set; }
+        public OnRemoveSchedule onRemoveSchedule { get; set; }
+        public OnError onError { get; set; }
+
         private bool isStoped = true;
         private List<Schedule> schedules;
         private TcpListener server;
+
+        public delegate void OnAddSchedule(Schedule addedSchedule);
+        public delegate void OnRemoveSchedule(Schedule removedSchedule);
+        public delegate void OnError(Exception ex);
 
         public ScheduleServer()
         {
@@ -67,6 +75,7 @@ namespace DataBaseBackup.Server
             catch (Exception ex)
             {
                 isStoped = true;
+                onError?.Invoke(ex);
             }
             
         }
@@ -85,6 +94,8 @@ namespace DataBaseBackup.Server
             Schedule schedule = (Schedule) new BinaryFormatter().Deserialize(stream);//diabazw apo to stream to object
             schedule.ID = schedules.Count;//bazw to ID tou
             schedules.Add(schedule);//to bazw sthn list
+
+            onAddSchedule?.Invoke(schedule);
         }
 
         private void RemoveSchedule(NetworkStream stream)
@@ -99,7 +110,10 @@ namespace DataBaseBackup.Server
                 {
                     if (schedules[i].ID == id)
                     {
+                        Schedule temp = schedules[i];
                         schedules.RemoveAt(i);
+
+                        onRemoveSchedule?.Invoke(temp);
                         break;
                     }
                 }
