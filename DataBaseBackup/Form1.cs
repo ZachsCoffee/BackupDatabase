@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using DataBaseBackup.Server;
+using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ using DataBaseBackup.Class;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Net;
+using System.Threading;
 
 namespace DataBaseBackup
 {
@@ -30,7 +32,6 @@ namespace DataBaseBackup
         Sftp sftp;
         Ftp ftp;
         ObjectStream stream = new ObjectStream("saveServer");
-
 
         public Form1()
         {
@@ -52,6 +53,31 @@ namespace DataBaseBackup
             dateTimeWhen.CustomFormat = "dd/MM/yyyy hh:mm:ss";
             dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
+
+            /*new Thread(() =>
+            {
+                //server
+                ScheduleServer server = new ScheduleServer();
+                server.StartServer();
+
+            }).Start();
+
+            new Thread(() =>
+            {
+                //Thread.Sleep(1000);
+                ScheduleClient.AddSchedule(new Schedule(new DateTime(), "a", "b"));
+                ScheduleClient.AddSchedule(new Schedule(new DateTime(), "a1", "b1"));
+                ScheduleClient.AddSchedule(new Schedule(new DateTime(), "a2", "b2"));
+
+                List<Schedule> list = ScheduleClient.GetInfo();
+                Debug.Print(list[0].ToString());
+
+                ScheduleClient.DeleteSchedule(0);
+                ScheduleClient.DeleteSchedule(2);
+                list = ScheduleClient.GetInfo();
+                Debug.Print(list.Count+"");
+                Debug.Print(list[0].ToString());
+            }).Start();*/
         }
 
         //CUSTOM METHODS
