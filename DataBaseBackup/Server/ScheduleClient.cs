@@ -12,7 +12,7 @@ namespace DataBaseBackup.Server
 {
     public class ScheduleClient
     {
-        public enum MessageCode
+        private enum MessageCode
         {
             GetInfo, Delete, Add
         }

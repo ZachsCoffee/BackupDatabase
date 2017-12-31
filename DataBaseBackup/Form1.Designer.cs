@@ -55,20 +55,6 @@
             this.importDatabasePath = new System.Windows.Forms.TextBox();
             this.binFolderPath = new System.Windows.Forms.TextBox();
             this.backupPanel = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.manualPanel = new System.Windows.Forms.Panel();
-            this.browseDatabase = new System.Windows.Forms.Button();
-            this.databaseFilePath = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.backupMethodPanel = new System.Windows.Forms.Panel();
-            this.manualRadio = new System.Windows.Forms.RadioButton();
-            this.fullAutomaticRadio = new System.Windows.Forms.RadioButton();
-            this.ftpServers = new System.Windows.Forms.ComboBox();
-            this.compressCheckBox = new System.Windows.Forms.CheckBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
             this.repeatPanel = new System.Windows.Forms.Panel();
             this.hoursNumber = new System.Windows.Forms.NumericUpDown();
             this.minutesNumber = new System.Windows.Forms.NumericUpDown();
@@ -83,13 +69,27 @@
             this.repeatRadio = new System.Windows.Forms.RadioButton();
             this.onceRadio = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.laterSchedule = new System.Windows.Forms.RadioButton();
-            this.nowSchedule = new System.Windows.Forms.RadioButton();
+            this.laterRadio = new System.Windows.Forms.RadioButton();
+            this.nowRadio = new System.Windows.Forms.RadioButton();
             this.label9 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.applySchedule = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.manualPanel = new System.Windows.Forms.Panel();
+            this.browseDatabase = new System.Windows.Forms.Button();
+            this.databaseFilePath = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.backupMethodPanel = new System.Windows.Forms.Panel();
+            this.manualRadio = new System.Windows.Forms.RadioButton();
+            this.fullAutomaticRadio = new System.Windows.Forms.RadioButton();
+            this.ftpServers = new System.Windows.Forms.ComboBox();
+            this.compressCheckBox = new System.Windows.Forms.CheckBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.serversPanel = new System.Windows.Forms.Panel();
             this.configServersPanel = new System.Windows.Forms.Panel();
             this.saveServer = new System.Windows.Forms.Button();
@@ -139,9 +139,6 @@
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
             this.backupPanel.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.manualPanel.SuspendLayout();
-            this.backupMethodPanel.SuspendLayout();
             this.repeatPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumber)).BeginInit();
@@ -149,6 +146,9 @@
             this.panel4.SuspendLayout();
             this.repeatRadioPanel.SuspendLayout();
             this.panel5.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.manualPanel.SuspendLayout();
+            this.backupMethodPanel.SuspendLayout();
             this.serversPanel.SuspendLayout();
             this.configServersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.port)).BeginInit();
@@ -444,185 +444,13 @@
             // backupPanel
             // 
             this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.backupPanel.Controls.Add(this.panel3);
             this.backupPanel.Controls.Add(this.repeatPanel);
             this.backupPanel.Controls.Add(this.panel4);
+            this.backupPanel.Controls.Add(this.panel3);
             this.backupPanel.Location = new System.Drawing.Point(249, 103);
             this.backupPanel.Name = "backupPanel";
             this.backupPanel.Size = new System.Drawing.Size(526, 418);
             this.backupPanel.TabIndex = 4;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.manualPanel);
-            this.panel3.Controls.Add(this.label15);
-            this.panel3.Controls.Add(this.backupMethodPanel);
-            this.panel3.Controls.Add(this.ftpServers);
-            this.panel3.Controls.Add(this.compressCheckBox);
-            this.panel3.Controls.Add(this.label16);
-            this.panel3.Controls.Add(this.label13);
-            this.panel3.Controls.Add(this.label17);
-            this.panel3.Location = new System.Drawing.Point(-1, -1);
-            this.panel3.Margin = new System.Windows.Forms.Padding(10);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(268, 418);
-            this.panel3.TabIndex = 11;
-            // 
-            // manualPanel
-            // 
-            this.manualPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.manualPanel.Controls.Add(this.browseDatabase);
-            this.manualPanel.Controls.Add(this.databaseFilePath);
-            this.manualPanel.Controls.Add(this.label21);
-            this.manualPanel.Enabled = false;
-            this.manualPanel.Location = new System.Drawing.Point(-1, 293);
-            this.manualPanel.Name = "manualPanel";
-            this.manualPanel.Size = new System.Drawing.Size(268, 124);
-            this.manualPanel.TabIndex = 10;
-            // 
-            // browseDatabase
-            // 
-            this.browseDatabase.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.browseDatabase.Location = new System.Drawing.Point(181, 84);
-            this.browseDatabase.Margin = new System.Windows.Forms.Padding(10);
-            this.browseDatabase.Name = "browseDatabase";
-            this.browseDatabase.Size = new System.Drawing.Size(75, 24);
-            this.browseDatabase.TabIndex = 9;
-            this.browseDatabase.Text = "Browse";
-            this.browseDatabase.UseVisualStyleBackColor = true;
-            this.browseDatabase.Click += new System.EventHandler(this.browseDatabase_Click);
-            // 
-            // databaseFilePath
-            // 
-            this.databaseFilePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.databaseFilePath.Location = new System.Drawing.Point(14, 49);
-            this.databaseFilePath.Margin = new System.Windows.Forms.Padding(10);
-            this.databaseFilePath.Name = "databaseFilePath";
-            this.databaseFilePath.Size = new System.Drawing.Size(242, 24);
-            this.databaseFilePath.TabIndex = 1;
-            this.databaseFilePath.Text = "C:\\";
-            this.databaseFilePath.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label21.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label21.Location = new System.Drawing.Point(10, 10);
-            this.label21.Margin = new System.Windows.Forms.Padding(10);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(101, 19);
-            this.label21.TabIndex = 7;
-            this.label21.Text = "Database file";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label15.Location = new System.Drawing.Point(10, 10);
-            this.label15.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(107, 21);
-            this.label15.TabIndex = 6;
-            this.label15.Text = "Preferences";
-            // 
-            // backupMethodPanel
-            // 
-            this.backupMethodPanel.Controls.Add(this.manualRadio);
-            this.backupMethodPanel.Controls.Add(this.fullAutomaticRadio);
-            this.backupMethodPanel.Location = new System.Drawing.Point(-1, 142);
-            this.backupMethodPanel.Name = "backupMethodPanel";
-            this.backupMethodPanel.Size = new System.Drawing.Size(160, 57);
-            this.backupMethodPanel.TabIndex = 9;
-            // 
-            // manualRadio
-            // 
-            this.manualRadio.AutoSize = true;
-            this.manualRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.manualRadio.Location = new System.Drawing.Point(15, 31);
-            this.manualRadio.Name = "manualRadio";
-            this.manualRadio.Size = new System.Drawing.Size(81, 23);
-            this.manualRadio.TabIndex = 1;
-            this.manualRadio.Text = "Manual";
-            this.manualBackupTooltip.SetToolTip(this.manualRadio, "Manual browse database and send.");
-            this.manualRadio.UseVisualStyleBackColor = true;
-            this.manualRadio.Click += new System.EventHandler(this.Manual_Click);
-            // 
-            // fullAutomaticRadio
-            // 
-            this.fullAutomaticRadio.AutoSize = true;
-            this.fullAutomaticRadio.Checked = true;
-            this.fullAutomaticRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.fullAutomaticRadio.Location = new System.Drawing.Point(15, 2);
-            this.fullAutomaticRadio.Name = "fullAutomaticRadio";
-            this.fullAutomaticRadio.Size = new System.Drawing.Size(126, 23);
-            this.fullAutomaticRadio.TabIndex = 0;
-            this.fullAutomaticRadio.TabStop = true;
-            this.fullAutomaticRadio.Text = "Full automatic";
-            this.fullAutomaticTooltip.SetToolTip(this.fullAutomaticRadio, "Automatic export database and send.");
-            this.fullAutomaticRadio.UseVisualStyleBackColor = true;
-            this.fullAutomaticRadio.Click += new System.EventHandler(this.Full_Automatic_Click);
-            // 
-            // ftpServers
-            // 
-            this.ftpServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ftpServers.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.ftpServers.FormattingEnabled = true;
-            this.ftpServers.Location = new System.Drawing.Point(12, 73);
-            this.ftpServers.Name = "ftpServers";
-            this.ftpServers.Size = new System.Drawing.Size(171, 27);
-            this.ftpServers.TabIndex = 5;
-            this.ftpServers.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateFTPServer);
-            // 
-            // compressCheckBox
-            // 
-            this.compressCheckBox.AutoSize = true;
-            this.compressCheckBox.Checked = true;
-            this.compressCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.compressCheckBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.compressCheckBox.Location = new System.Drawing.Point(13, 244);
-            this.compressCheckBox.Name = "compressCheckBox";
-            this.compressCheckBox.Size = new System.Drawing.Size(180, 23);
-            this.compressCheckBox.TabIndex = 8;
-            this.compressCheckBox.Text = "Compress before send";
-            this.compressCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label16.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label16.Location = new System.Drawing.Point(10, 41);
-            this.label16.Margin = new System.Windows.Forms.Padding(10);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(128, 19);
-            this.label16.TabIndex = 7;
-            this.label16.Text = "Choose FTP server";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label13.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label13.Location = new System.Drawing.Point(10, 212);
-            this.label13.Margin = new System.Windows.Forms.Padding(10);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(75, 19);
-            this.label13.TabIndex = 7;
-            this.label13.Text = "Compress";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label17.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label17.Location = new System.Drawing.Point(10, 110);
-            this.label17.Margin = new System.Windows.Forms.Padding(10);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(121, 19);
-            this.label17.TabIndex = 7;
-            this.label17.Text = "Backup method";
             // 
             // repeatPanel
             // 
@@ -804,38 +632,38 @@
             // 
             // panel5
             // 
-            this.panel5.Controls.Add(this.laterSchedule);
-            this.panel5.Controls.Add(this.nowSchedule);
+            this.panel5.Controls.Add(this.laterRadio);
+            this.panel5.Controls.Add(this.nowRadio);
             this.panel5.Location = new System.Drawing.Point(-1, 78);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(124, 60);
             this.panel5.TabIndex = 8;
             // 
-            // laterSchedule
+            // laterRadio
             // 
-            this.laterSchedule.AutoSize = true;
-            this.laterSchedule.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.laterSchedule.Location = new System.Drawing.Point(15, 30);
-            this.laterSchedule.Name = "laterSchedule";
-            this.laterSchedule.Size = new System.Drawing.Size(61, 23);
-            this.laterSchedule.TabIndex = 1;
-            this.laterSchedule.Text = "Later";
-            this.laterSchedule.UseVisualStyleBackColor = true;
-            this.laterSchedule.Click += new System.EventHandler(this.Later_Click);
+            this.laterRadio.AutoSize = true;
+            this.laterRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.laterRadio.Location = new System.Drawing.Point(15, 30);
+            this.laterRadio.Name = "laterRadio";
+            this.laterRadio.Size = new System.Drawing.Size(61, 23);
+            this.laterRadio.TabIndex = 1;
+            this.laterRadio.Text = "Later";
+            this.laterRadio.UseVisualStyleBackColor = true;
+            this.laterRadio.Click += new System.EventHandler(this.Later_Click);
             // 
-            // nowSchedule
+            // nowRadio
             // 
-            this.nowSchedule.AutoSize = true;
-            this.nowSchedule.Checked = true;
-            this.nowSchedule.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.nowSchedule.Location = new System.Drawing.Point(15, 1);
-            this.nowSchedule.Name = "nowSchedule";
-            this.nowSchedule.Size = new System.Drawing.Size(58, 23);
-            this.nowSchedule.TabIndex = 0;
-            this.nowSchedule.TabStop = true;
-            this.nowSchedule.Text = "Now";
-            this.nowSchedule.UseVisualStyleBackColor = true;
-            this.nowSchedule.Click += new System.EventHandler(this.Now_Click);
+            this.nowRadio.AutoSize = true;
+            this.nowRadio.Checked = true;
+            this.nowRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.nowRadio.Location = new System.Drawing.Point(15, 1);
+            this.nowRadio.Name = "nowRadio";
+            this.nowRadio.Size = new System.Drawing.Size(58, 23);
+            this.nowRadio.TabIndex = 0;
+            this.nowRadio.TabStop = true;
+            this.nowRadio.Text = "Now";
+            this.nowRadio.UseVisualStyleBackColor = true;
+            this.nowRadio.Click += new System.EventHandler(this.Now_Click);
             // 
             // label9
             // 
@@ -895,6 +723,177 @@
             this.label22.Size = new System.Drawing.Size(51, 19);
             this.label22.TabIndex = 7;
             this.label22.Text = "When";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.manualPanel);
+            this.panel3.Controls.Add(this.label15);
+            this.panel3.Controls.Add(this.backupMethodPanel);
+            this.panel3.Controls.Add(this.ftpServers);
+            this.panel3.Controls.Add(this.compressCheckBox);
+            this.panel3.Controls.Add(this.label16);
+            this.panel3.Controls.Add(this.label13);
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Location = new System.Drawing.Point(-1, -1);
+            this.panel3.Margin = new System.Windows.Forms.Padding(10);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(268, 418);
+            this.panel3.TabIndex = 11;
+            // 
+            // manualPanel
+            // 
+            this.manualPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.manualPanel.Controls.Add(this.browseDatabase);
+            this.manualPanel.Controls.Add(this.databaseFilePath);
+            this.manualPanel.Controls.Add(this.label21);
+            this.manualPanel.Enabled = false;
+            this.manualPanel.Location = new System.Drawing.Point(-1, 293);
+            this.manualPanel.Name = "manualPanel";
+            this.manualPanel.Size = new System.Drawing.Size(268, 124);
+            this.manualPanel.TabIndex = 10;
+            // 
+            // browseDatabase
+            // 
+            this.browseDatabase.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.browseDatabase.Location = new System.Drawing.Point(181, 84);
+            this.browseDatabase.Margin = new System.Windows.Forms.Padding(10);
+            this.browseDatabase.Name = "browseDatabase";
+            this.browseDatabase.Size = new System.Drawing.Size(75, 24);
+            this.browseDatabase.TabIndex = 9;
+            this.browseDatabase.Text = "Browse";
+            this.browseDatabase.UseVisualStyleBackColor = true;
+            // 
+            // databaseFilePath
+            // 
+            this.databaseFilePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.databaseFilePath.Location = new System.Drawing.Point(14, 49);
+            this.databaseFilePath.Margin = new System.Windows.Forms.Padding(10);
+            this.databaseFilePath.Name = "databaseFilePath";
+            this.databaseFilePath.Size = new System.Drawing.Size(242, 24);
+            this.databaseFilePath.TabIndex = 1;
+            this.databaseFilePath.Text = "C:\\";
+            this.databaseFilePath.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label21.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label21.Location = new System.Drawing.Point(10, 10);
+            this.label21.Margin = new System.Windows.Forms.Padding(10);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(101, 19);
+            this.label21.TabIndex = 7;
+            this.label21.Text = "Database file";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label15.Location = new System.Drawing.Point(10, 10);
+            this.label15.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(107, 21);
+            this.label15.TabIndex = 6;
+            this.label15.Text = "Preferences";
+            // 
+            // backupMethodPanel
+            // 
+            this.backupMethodPanel.Controls.Add(this.manualRadio);
+            this.backupMethodPanel.Controls.Add(this.fullAutomaticRadio);
+            this.backupMethodPanel.Location = new System.Drawing.Point(-1, 142);
+            this.backupMethodPanel.Name = "backupMethodPanel";
+            this.backupMethodPanel.Size = new System.Drawing.Size(160, 57);
+            this.backupMethodPanel.TabIndex = 9;
+            // 
+            // manualRadio
+            // 
+            this.manualRadio.AutoSize = true;
+            this.manualRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.manualRadio.Location = new System.Drawing.Point(15, 31);
+            this.manualRadio.Name = "manualRadio";
+            this.manualRadio.Size = new System.Drawing.Size(81, 23);
+            this.manualRadio.TabIndex = 1;
+            this.manualRadio.Text = "Manual";
+            this.manualBackupTooltip.SetToolTip(this.manualRadio, "Manual browse database and send.");
+            this.manualRadio.UseVisualStyleBackColor = true;
+            this.manualRadio.Click += new System.EventHandler(this.Manual_Click);
+            // 
+            // fullAutomaticRadio
+            // 
+            this.fullAutomaticRadio.AutoSize = true;
+            this.fullAutomaticRadio.Checked = true;
+            this.fullAutomaticRadio.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.fullAutomaticRadio.Location = new System.Drawing.Point(15, 2);
+            this.fullAutomaticRadio.Name = "fullAutomaticRadio";
+            this.fullAutomaticRadio.Size = new System.Drawing.Size(126, 23);
+            this.fullAutomaticRadio.TabIndex = 0;
+            this.fullAutomaticRadio.TabStop = true;
+            this.fullAutomaticRadio.Text = "Full automatic";
+            this.fullAutomaticTooltip.SetToolTip(this.fullAutomaticRadio, "Automatic export database and send.");
+            this.fullAutomaticRadio.UseVisualStyleBackColor = true;
+            this.fullAutomaticRadio.Click += new System.EventHandler(this.Full_Automatic_Click);
+            // 
+            // ftpServers
+            // 
+            this.ftpServers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ftpServers.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.ftpServers.FormattingEnabled = true;
+            this.ftpServers.Location = new System.Drawing.Point(12, 73);
+            this.ftpServers.Name = "ftpServers";
+            this.ftpServers.Size = new System.Drawing.Size(171, 27);
+            this.ftpServers.TabIndex = 5;
+            this.ftpServers.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateFTPServer);
+            // 
+            // compressCheckBox
+            // 
+            this.compressCheckBox.AutoSize = true;
+            this.compressCheckBox.Checked = true;
+            this.compressCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.compressCheckBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.compressCheckBox.Location = new System.Drawing.Point(13, 244);
+            this.compressCheckBox.Name = "compressCheckBox";
+            this.compressCheckBox.Size = new System.Drawing.Size(180, 23);
+            this.compressCheckBox.TabIndex = 8;
+            this.compressCheckBox.Text = "Compress before send";
+            this.compressCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label16.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label16.Location = new System.Drawing.Point(10, 41);
+            this.label16.Margin = new System.Windows.Forms.Padding(10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(128, 19);
+            this.label16.TabIndex = 7;
+            this.label16.Text = "Choose FTP server";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label13.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label13.Location = new System.Drawing.Point(10, 212);
+            this.label13.Margin = new System.Windows.Forms.Padding(10);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(75, 19);
+            this.label13.TabIndex = 7;
+            this.label13.Text = "Compress";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label17.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label17.Location = new System.Drawing.Point(10, 110);
+            this.label17.Margin = new System.Windows.Forms.Padding(10);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(121, 19);
+            this.label17.TabIndex = 7;
+            this.label17.Text = "Backup method";
             // 
             // serversPanel
             // 
@@ -1031,9 +1030,9 @@
             this.label7.Location = new System.Drawing.Point(10, 98);
             this.label7.Margin = new System.Windows.Forms.Padding(10, 10, 10, 2);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(156, 19);
+            this.label7.Size = new System.Drawing.Size(108, 19);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Domain name or IPv4";
+            this.label7.Text = "Domain name";
             // 
             // label18
             // 
@@ -1125,8 +1124,7 @@
             // deleteFtpServer
             // 
             this.deleteFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.deleteFtpServer.Location = new System.Drawing.Point(16, 383);
-            this.deleteFtpServer.Margin = new System.Windows.Forms.Padding(10);
+            this.deleteFtpServer.Location = new System.Drawing.Point(16, 272);
             this.deleteFtpServer.Name = "deleteFtpServer";
             this.deleteFtpServer.Size = new System.Drawing.Size(75, 23);
             this.deleteFtpServer.TabIndex = 7;
@@ -1137,8 +1135,7 @@
             // editFtpServer
             // 
             this.editFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.editFtpServer.Location = new System.Drawing.Point(101, 383);
-            this.editFtpServer.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
+            this.editFtpServer.Location = new System.Drawing.Point(111, 273);
             this.editFtpServer.Name = "editFtpServer";
             this.editFtpServer.Size = new System.Drawing.Size(75, 23);
             this.editFtpServer.TabIndex = 6;
@@ -1149,8 +1146,7 @@
             // newFtpServer
             // 
             this.newFtpServer.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.newFtpServer.Location = new System.Drawing.Point(186, 383);
-            this.newFtpServer.Margin = new System.Windows.Forms.Padding(0, 10, 10, 10);
+            this.newFtpServer.Location = new System.Drawing.Point(192, 273);
             this.newFtpServer.Name = "newFtpServer";
             this.newFtpServer.Size = new System.Drawing.Size(75, 23);
             this.newFtpServer.TabIndex = 5;
@@ -1176,7 +1172,7 @@
             this.serversListBox.ItemHeight = 19;
             this.serversListBox.Location = new System.Drawing.Point(16, 41);
             this.serversListBox.Name = "serversListBox";
-            this.serversListBox.Size = new System.Drawing.Size(251, 327);
+            this.serversListBox.Size = new System.Drawing.Size(251, 194);
             this.serversListBox.TabIndex = 4;
             // 
             // logPanel
@@ -1393,12 +1389,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.logPanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.logPanel);
-            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.databasePanel);
+            this.Controls.Add(this.serversPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1411,12 +1407,6 @@
             this.databasePanel.ResumeLayout(false);
             this.databasePanel.PerformLayout();
             this.backupPanel.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.manualPanel.ResumeLayout(false);
-            this.manualPanel.PerformLayout();
-            this.backupMethodPanel.ResumeLayout(false);
-            this.backupMethodPanel.PerformLayout();
             this.repeatPanel.ResumeLayout(false);
             this.repeatPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).EndInit();
@@ -1428,6 +1418,12 @@
             this.repeatRadioPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.manualPanel.ResumeLayout(false);
+            this.manualPanel.PerformLayout();
+            this.backupMethodPanel.ResumeLayout(false);
+            this.backupMethodPanel.PerformLayout();
             this.serversPanel.ResumeLayout(false);
             this.serversPanel.PerformLayout();
             this.configServersPanel.ResumeLayout(false);
@@ -1518,8 +1514,8 @@
         private System.Windows.Forms.Panel repeatRadioPanel;
         private System.Windows.Forms.Button applySchedule;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.RadioButton laterSchedule;
-        private System.Windows.Forms.RadioButton nowSchedule;
+        private System.Windows.Forms.RadioButton laterRadio;
+        private System.Windows.Forms.RadioButton nowRadio;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Button browseDatabase;

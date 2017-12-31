@@ -17,6 +17,11 @@ namespace DataBaseBackup.Class
         public ObjectStream(string filePath)
         {
             this.filePath = filePath ?? throw new ArgumentNullException("Argument at pos: 1, not null.");
+            using (var streamReader = new StreamWriter(filePath, true))
+            {
+
+            }
+
         }
 
         public void WriteLines(params object[] objects)
@@ -41,7 +46,7 @@ namespace DataBaseBackup.Class
         public void EditLine(int lineForEdit, object newLine)
         {
             ArrayList list = ReadLines();
-            list.Insert(lineForEdit, newLine);
+            list[lineForEdit] = newLine;
             Write(false, list.ToArray());
         }
 
@@ -53,17 +58,48 @@ namespace DataBaseBackup.Class
             }
 
             ArrayList list = ReadLines();
-            for (int i=0; i<linesForEdit.Length; i++)
+            for (int i = 0; i < linesForEdit.Length; i++)
             {
-                list.Insert(linesForEdit[i], newLines[i]);
+                list[linesForEdit[i]] = newLines[i];
             }
             Write(false, list.ToArray());
+        }
+
+        /// <summary>
+        /// Uses a delegate in order to decied, which lines will be overwriten with the new ones.
+        /// </summary>
+        /// <param name="where">Delegate method, when it is match return true and a new line overwrite the old.</param>
+        /// <param name="newLines">The new lines.</param>
+        /// <returns>True if at least one line is match, with the delegate method, overwise false.</returns>
+        public bool EditLines(Where where, params object[] newLines)
+        {
+            bool flag = false;
+            int count = 0;
+            ArrayList list = ReadLines();
+            for (int i = 0; i < list.Count; i++)
+            {
+                if (count >= newLines.Length)
+                {
+                    break;
+                }
+                if (where(i, list[i]))
+                {
+                    flag = true;
+                    list[i] = newLines[count++];
+                }
+            }
+
+            if (flag)
+            {
+                Write(false, list.ToArray());
+            }
+            return flag;
         }
 
         public void DeleteLines(params int[] lines)
         {
             ArrayList list = ReadLines();
-            for (int i=0; i<lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 list.RemoveAt(lines[i]);
             }
@@ -124,6 +160,8 @@ namespace DataBaseBackup.Class
         {
             File.WriteAllText(filePath, string.Empty);
         }
+
+        public delegate bool Where(int pos, object line);
 
         private void Write(bool append, object[] objects)
         {

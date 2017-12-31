@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataBaseBackup.Class
 {
-    class Ftp
+    [Serializable]
+    public class Ftp
     {
         private string serverType;
         private string domainName;
         private string port;
         private string username;
+        public string Password { get; set; }
 
         public Ftp() { }
 
@@ -22,6 +24,13 @@ namespace DataBaseBackup.Class
             this.port = port;
             this.username = username;
         }
+
+        public Ftp(string serverType, string domainName, string port, string username, string password)
+            : this(serverType, domainName, port, username)
+        {
+            Password = password;
+        }
+
         public void setServerType(string serverType) { this.serverType = serverType; }
         public string getServerType() { return serverType; }
 
@@ -34,6 +43,7 @@ namespace DataBaseBackup.Class
         public void setUsername(string username) { this.username = username; }
         public string getUsername() { return username; }
 
+        
 
         public override string ToString()
         {
