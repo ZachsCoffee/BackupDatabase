@@ -1,5 +1,4 @@
-﻿using DataBaseBackup.Server;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,8 +13,6 @@ using System.IO;
 using DataBaseBackup.Class;
 using System.Collections;
 using System.Text.RegularExpressions;
-using System.Net;
-using System.Threading;
 
 namespace DataBaseBackup
 {
@@ -29,15 +26,19 @@ namespace DataBaseBackup
         private Panel[] panels;
         private Panel currentPanel;
         SftpClient sftpclient;
-        Sftp sftp;
-        Ftp ftp;
+        Sftp sftp=null;
         ObjectStream stream = new ObjectStream("saveServer");
+
+        //Initiation of logFile variables
+        private LogFile log1 = new LogFile();
+        private VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
+        
+        
 
         public Form1()
         {
             InitializeComponent();
-            stream.ClearFile();
-            
+
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
             panels = new Panel[] {databasePanel, serversPanel, backupPanel, logPanel} ;//krata ola ta panel gia na mporeis na ta allazeis 
             currentPanel = databasePanel;//einai to arxiko
@@ -54,32 +55,9 @@ namespace DataBaseBackup
             dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
 
-            /*new Thread(() =>
-            {
-                //server
-                ScheduleServer server = new ScheduleServer();
-                server.StartServer();
-
-            }).Start();
-
-            new Thread(() =>
-            {
-                //Thread.Sleep(1000);
-                ScheduleClient.AddSchedule(new Schedule(new DateTime(), "a", "b"));
-                ScheduleClient.AddSchedule(new Schedule(new DateTime(), "a1", "b1"));
-                ScheduleClient.AddSchedule(new Schedule(new DateTime(), "a2", "b2"));
-
-                List<Schedule> list = ScheduleClient.GetInfo();
-                Debug.Print(list[0].ToString());
-
-                ScheduleClient.DeleteSchedule(0);
-                ScheduleClient.DeleteSchedule(2);
-                list = ScheduleClient.GetInfo();
-                Debug.Print(list.Count+"");
-                Debug.Print(list[0].ToString());
-            }).Start();*/
+            VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
         }
-
+        
         //CUSTOM METHODS
         private void MenuClick(object sender, EventArgs e)
         {
@@ -96,6 +74,11 @@ namespace DataBaseBackup
                     break;
                 case "logButton":
                     SwitchPanels(3, "Log");
+                    log1.updateGridView(dataGridView1);
+                    textBox2.Text = logVariables.GetVariable("email").ToString();
+                    if (logVariables.GetVariable("errorLogs").ToString() == "true") checkBox1.Checked = true; else checkBox1.Checked = false;
+                    if (logVariables.GetVariable("successLogs").ToString() == "true") checkBox3.Checked = true; else checkBox3.Checked = false;
+                    if (logVariables.GetVariable("infoLogs").ToString() == "true") checkBox2.Checked = true; else checkBox2.Checked = false;
                     break;
             }
         }
@@ -176,34 +159,6 @@ namespace DataBaseBackup
 
             }
         }
-
-        private void testConnectionFTP()
-        {
-            //an mporw na kanw listing tote exw sinthethi kanonika :P
-            string uri = "ftp://" + domainName.Text + ":" + port.Value.ToString();
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(uri));
-            request.UsePassive = false;
-            request.Method = WebRequestMethods.Ftp.ListDirectory;
-            request.Credentials = new NetworkCredential(username.Text,password.Text);
-            request.KeepAlive = true;
-
-            try
-            {
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                SetConnectionStatus(ConnectionStatus.OK);
-                saveServer.Enabled = true;
-                
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetConnectionStatus(ConnectionStatus.Failed);
-            }
-           
-
-
-        }
         //END CUSTOM METHODS
 
         //EVENT METHODS
@@ -224,37 +179,13 @@ namespace DataBaseBackup
         private void makeAction_Click(object sender, EventArgs e)
         {
             //ResetServerActionValues();
-            if (serverType.Text.Equals("SFTP"))
-            {
-                testConnectionSFTP();
-            }
-            else
-            {
-                testConnectionFTP();
-            }
-            
+            testConnectionSFTP();
         }
 
         private void cancelAction_Click(object sender, EventArgs e)
         {
             configServersPanel.Visible = false;
             ResetServerActionValues();
-        }
-
-        
-        private void button2_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-
-            openFileDialog1.InitialDirectory = "C:\\";
-            openFileDialog1.Filter = "Text|*.txt|All|*.*"; ;
-            openFileDialog1.FilterIndex = 1;
-            openFileDialog1.RestoreDirectory = true;
-
-            if (DialogResult.OK == openFileDialog1.ShowDialog())
-            {
-
-            }
         }
 
         private void serverType_SelectedIndexChanged(object sender, EventArgs e)//me to pou dialegei protocolo sftp i ftp ginetai automata allagei port
@@ -276,56 +207,29 @@ namespace DataBaseBackup
                 int index = serversListBox.SelectedIndex;
                 if (index < 0)
                 {
-                    MessageBox.Show("The Listbox is empty", "!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                if (serverType.Text.Equals("SFTP"))
-                {
-                    sftp = new Sftp("", "", "", "");
-                    sftp.setServerType(serverType.Text);
-                    sftp.setDomainName(domainName.Text);
-                    sftp.setPort(port.Value.ToString());
-                    sftp.setUsername(username.Text);
-                    stream.DeleteLines(index);
-                    serversListBox.Items.RemoveAt(index);
-                    stream.WriteLines(sftp.ToString());
-                }
-                else
-                {
-                    ftp = new Ftp("", "", "", "");
-                    ftp.setServerType(serverType.Text);
-                    ftp.setDomainName(domainName.Text);
-                    ftp.setPort(port.Value.ToString());   
-                    ftp.setUsername(username.Text);
-                    stream.DeleteLines(index);
-                    serversListBox.Items.RemoveAt(index);
-                    stream.WriteLines(ftp.ToString());
-
-                }
                 
+                sftp.setServerType(serverType.Text);
+                sftp.setDomainName(domainName.Text);
+                sftp.setPort(port.Value.ToString());
+                sftp.setUsername(username.Text);
+                stream.DeleteLines(index);
+                stream.WriteLines(sftp.ToString());
                 serversListBox.Items.Clear();
-                
                 ArrayList list = stream.ReadLines();
                 foreach (Object obj in list)
                     serversListBox.Items.Add(obj);
+                
+
 
             }
             else
             {
-                if (serverType.Text.Equals("SFTP"))
-                {
-                    sftp = new Sftp(serverType.Text, domainName.Text, port.Value.ToString(), username.Text);
-                    //MessageBox.Show(sftp.ToString(), "Test", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    stream.WriteLines(sftp.ToString());
-                    serversListBox.Items.Add(sftp.ToString());
-                }
-                else
-                {
-                    ftp = new Ftp(serverType.Text, domainName.Text, port.Value.ToString(), username.Text);
-                    stream.WriteLines(ftp.ToString());
-                    serversListBox.Items.Add(ftp.ToString());
-                }
-                
+                sftp = new Sftp(serverType.Text, domainName.Text, port.Value.ToString(), username.Text);
+                //MessageBox.Show(sftp.ToString(), "Test", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                stream.WriteLines(sftp.ToString());
+                serversListBox.Items.Add(sftp.ToString());
             }
 
         }
@@ -346,21 +250,14 @@ namespace DataBaseBackup
 
         private void Full_Automatic_Click(object sender, EventArgs e)
         {
-
-            databaseFilePath.Enabled = false;
-            browseDatabase.Enabled = false;
-            autoDatabaseName.Enabled = true;
+            manualPanel.Enabled = false;
             compressCheckBox.Enabled = true;
-
-            errorProvider1.SetError(databaseFilePath, "");//na bgalw to warning apo to textbox
         }
 
         private void Manual_Click(object sender, EventArgs e)
         {
-            databaseFilePath.Enabled = true;
-            browseDatabase.Enabled = true;
+            manualPanel.Enabled = true;
             compressCheckBox.Enabled = false;
-            autoDatabaseName.Enabled = false;
         }
 
         private void Now_Click(object sender, EventArgs e)
@@ -374,18 +271,10 @@ namespace DataBaseBackup
             dateTimeWhen.Enabled = true;
         }
 
-        LogFile log1 = new LogFile();
-        String email = "";
-        bool errorLogs = true;
-        bool successLogs = false;
-        bool infoLogs = false;
-        //Test button
-        private void button2_Click_1(object sender, EventArgs e)
+        public void button2_Click_1(object sender, EventArgs e)//Send email          
         {
-            
-            log1.UpdateLogFile("01", "error", DateTime.Now, "desc",dataGridView1, errorLogs, successLogs, infoLogs,email);
-
-            //string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles");
+            log1.updateMail(logVariables.GetVariable("email").ToString(), logVariables.GetVariable("errorLogs").ToString(), logVariables.GetVariable("successLogs").ToString(), logVariables.GetVariable("infoLogs").ToString());
+            //log1.UpdateLogFile("01", "error", DateTime.Now, "desc");
         }
 
 
@@ -408,15 +297,15 @@ namespace DataBaseBackup
                 errorProvider1.SetError(textBox2, "");
             }
         }
-
+        
         
         //Apply email changes
-        private void button4_Click(object sender, EventArgs e)
+        private void button4_Click_1(object sender, EventArgs e)
         {
-            email = textBox2.Text;
-            if (checkBox1.Checked) errorLogs = true; else errorLogs = false;
-            if (checkBox3.Checked) successLogs = true; else successLogs = false;
-            if (checkBox2.Checked) infoLogs = true; else infoLogs = false;
+            logVariables.PutVariable("email", textBox2.Text);
+            if (checkBox1.Checked) logVariables.PutVariable("errorLogs", "true"); else logVariables.PutVariable("errorLogs", "false");
+            if (checkBox3.Checked) logVariables.PutVariable("successLogs", "true"); else logVariables.PutVariable("successLogs", "false");
+            if (checkBox2.Checked) logVariables.PutVariable("infoLogs", "true"); else logVariables.PutVariable("infoLogs", "false");
         }
 
         private void Show_Schedules(object sender, EventArgs e)
@@ -471,7 +360,7 @@ namespace DataBaseBackup
 
         private void ValidateDatabaseFile(object sender, CancelEventArgs e)
         {
-            if (manualRadio.Checked)//ama einai sto manual
+            if (manualPanel.Enabled)//ama einai sto manual
             {
                 
                 if (!File.Exists(databaseFilePath.Text))//ama DEN uparxei to arxeio pou exei dialeksei
@@ -486,6 +375,20 @@ namespace DataBaseBackup
             if (ftpServers.SelectedIndex < 0)
             {
                 errorProvider1.SetError(ftpServers, "You must select a SFTP/FTP server.");
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)//Clear log file button
+        {
+            
+            DialogResult dialogResult = MessageBox.Show("This will clear the entire log file.\n Are you sure?", "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                System.IO.File.WriteAllText(@"..\..\LogFiles\test1.txt", string.Empty);
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
             }
         }
 

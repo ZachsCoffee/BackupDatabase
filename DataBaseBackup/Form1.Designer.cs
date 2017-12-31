@@ -114,6 +114,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.serversListBox = new System.Windows.Forms.ListBox();
             this.logPanel = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.label29 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.panel6 = new System.Windows.Forms.Panel();
@@ -134,6 +135,7 @@
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -1178,6 +1180,8 @@
             // logPanel
             // 
             this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logPanel.Controls.Add(this.button6);
+            this.logPanel.Controls.Add(this.button2);
             this.logPanel.Controls.Add(this.label29);
             this.logPanel.Controls.Add(this.button4);
             this.logPanel.Controls.Add(this.panel6);
@@ -1191,12 +1195,24 @@
             this.logPanel.Size = new System.Drawing.Size(526, 418);
             this.logPanel.TabIndex = 10;
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button2.Location = new System.Drawing.Point(409, 339);
+            this.button2.Margin = new System.Windows.Forms.Padding(10);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(105, 29);
+            this.button2.TabIndex = 12;
+            this.button2.Text = "Send Email Now";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click_1);
+            // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label29.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label29.Location = new System.Drawing.Point(12, 318);
+            this.label29.Location = new System.Drawing.Point(16, 333);
             this.label29.Margin = new System.Windows.Forms.Padding(10);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(46, 19);
@@ -1206,14 +1222,14 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.button4.Location = new System.Drawing.Point(409, 383);
+            this.button4.Location = new System.Drawing.Point(409, 378);
             this.button4.Margin = new System.Windows.Forms.Padding(10);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(105, 23);
+            this.button4.Size = new System.Drawing.Size(105, 28);
             this.button4.TabIndex = 12;
             this.button4.Text = "Apply Changes";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.button4_Click_1);
             // 
             // panel6
             // 
@@ -1287,7 +1303,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(15, 347);
+            this.textBox2.Location = new System.Drawing.Point(20, 362);
             this.textBox2.Margin = new System.Windows.Forms.Padding(10);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(229, 23);
@@ -1382,6 +1398,17 @@
             // errorProvider1
             // 
             this.errorProvider1.ContainerControl = this;
+            // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button6.Location = new System.Drawing.Point(410, 298);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(104, 32);
+            this.button6.TabIndex = 15;
+            this.button6.Text = "Delete Logs";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Form1
             // 
@@ -1544,6 +1571,8 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button6;
     }
 }
 
