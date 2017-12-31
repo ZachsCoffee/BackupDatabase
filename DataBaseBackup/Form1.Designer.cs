@@ -114,6 +114,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.serversListBox = new System.Windows.Forms.ListBox();
             this.logPanel = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label29 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
@@ -135,7 +136,8 @@
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.button6 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.backupDatabaseName = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -747,18 +749,20 @@
             // 
             this.manualPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.manualPanel.Controls.Add(this.browseDatabase);
+            this.manualPanel.Controls.Add(this.backupDatabaseName);
             this.manualPanel.Controls.Add(this.databaseFilePath);
+            this.manualPanel.Controls.Add(this.label25);
             this.manualPanel.Controls.Add(this.label21);
             this.manualPanel.Enabled = false;
-            this.manualPanel.Location = new System.Drawing.Point(-1, 293);
+            this.manualPanel.Location = new System.Drawing.Point(-1, 272);
             this.manualPanel.Name = "manualPanel";
-            this.manualPanel.Size = new System.Drawing.Size(268, 124);
+            this.manualPanel.Size = new System.Drawing.Size(268, 145);
             this.manualPanel.TabIndex = 10;
             // 
             // browseDatabase
             // 
             this.browseDatabase.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.browseDatabase.Location = new System.Drawing.Point(181, 84);
+            this.browseDatabase.Location = new System.Drawing.Point(181, 115);
             this.browseDatabase.Margin = new System.Windows.Forms.Padding(10);
             this.browseDatabase.Name = "browseDatabase";
             this.browseDatabase.Size = new System.Drawing.Size(75, 24);
@@ -769,7 +773,7 @@
             // databaseFilePath
             // 
             this.databaseFilePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.databaseFilePath.Location = new System.Drawing.Point(14, 49);
+            this.databaseFilePath.Location = new System.Drawing.Point(12, 86);
             this.databaseFilePath.Margin = new System.Windows.Forms.Padding(10);
             this.databaseFilePath.Name = "databaseFilePath";
             this.databaseFilePath.Size = new System.Drawing.Size(242, 24);
@@ -782,7 +786,7 @@
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label21.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label21.Location = new System.Drawing.Point(10, 10);
+            this.label21.Location = new System.Drawing.Point(10, 59);
             this.label21.Margin = new System.Windows.Forms.Padding(10);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(101, 19);
@@ -1195,6 +1199,17 @@
             this.logPanel.Size = new System.Drawing.Size(526, 418);
             this.logPanel.TabIndex = 10;
             // 
+            // button6
+            // 
+            this.button6.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button6.Location = new System.Drawing.Point(410, 298);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(104, 32);
+            this.button6.TabIndex = 15;
+            this.button6.Text = "Delete Logs";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Century Gothic", 9.25F);
@@ -1399,16 +1414,28 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // button6
+            // label25
             // 
-            this.button6.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.button6.Location = new System.Drawing.Point(410, 298);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(104, 32);
-            this.button6.TabIndex = 15;
-            this.button6.Text = "Delete Logs";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label25.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label25.Location = new System.Drawing.Point(10, 3);
+            this.label25.Margin = new System.Windows.Forms.Padding(10);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(123, 19);
+            this.label25.TabIndex = 7;
+            this.label25.Text = "Database name";
+            // 
+            // backupDatabaseName
+            // 
+            this.backupDatabaseName.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.backupDatabaseName.Location = new System.Drawing.Point(12, 25);
+            this.backupDatabaseName.Margin = new System.Windows.Forms.Padding(10);
+            this.backupDatabaseName.Name = "backupDatabaseName";
+            this.backupDatabaseName.Size = new System.Drawing.Size(242, 24);
+            this.backupDatabaseName.TabIndex = 1;
+            this.backupDatabaseName.Text = "C:\\";
+            this.backupDatabaseName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
             // 
             // Form1
             // 
@@ -1416,8 +1443,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.logPanel);
             this.Controls.Add(this.backupPanel);
+            this.Controls.Add(this.logPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.databasePanel);
@@ -1573,6 +1600,8 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox backupDatabaseName;
+        private System.Windows.Forms.Label label25;
     }
 }
 

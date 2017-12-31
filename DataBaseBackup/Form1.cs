@@ -83,41 +83,6 @@ namespace DataBaseBackup
             }
         }
 
-        private void testConnectionSFTP()
-        {
-            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value, username.Text, password.Text)) // dimiourgia antikeimenou gia sindeso sftp
-            {
-
-                try
-                {
-                    sftpclient.Connect();
-                }
-                catch (Renci.SshNet.Common.SshAuthenticationException AuthEx)
-                {
-                    MessageBox.Show(AuthEx.Message, "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                catch (System.Net.Sockets.SocketException sochEx)
-                {
-                    MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-
-                if (sftpclient.IsConnected) //elenxos gia to connection
-                {
-                    SetConnectionStatus(ConnectionStatus.OK);
-                    saveServer.Enabled = true;
-                }
-                else
-                {
-                    SetConnectionStatus(ConnectionStatus.Failed);
-                }
-                sftpclient.Disconnect();
-                sftpclient.Dispose();
-
-
-            }
-        }
-
         private void testConnectionFTP()
         {
             //an mporw na kanw listing tote exw sinthethi kanonika :P
