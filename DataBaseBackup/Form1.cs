@@ -13,6 +13,7 @@ using System.IO;
 using DataBaseBackup.Class;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Net;
 
 namespace DataBaseBackup
 {
@@ -33,8 +34,7 @@ namespace DataBaseBackup
         private LogFile log1 = new LogFile();
         private VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
         
-        
-
+       
         public Form1()
         {
             InitializeComponent();
@@ -81,6 +81,69 @@ namespace DataBaseBackup
                     if (logVariables.GetVariable("infoLogs").ToString() == "true") checkBox2.Checked = true; else checkBox2.Checked = false;
                     break;
             }
+        }
+
+        private void testConnectionSFTP()
+        {
+            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value, username.Text, password.Text)) // dimiourgia antikeimenou gia sindeso sftp
+            {
+
+                try
+                {
+                    sftpclient.Connect();
+                }
+                catch (Renci.SshNet.Common.SshAuthenticationException AuthEx)
+                {
+                    MessageBox.Show(AuthEx.Message, "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (System.Net.Sockets.SocketException sochEx)
+                {
+                    MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+
+                if (sftpclient.IsConnected) //elenxos gia to connection
+                {
+                    SetConnectionStatus(ConnectionStatus.OK);
+                    saveServer.Enabled = true;
+                }
+                else
+                {
+                    SetConnectionStatus(ConnectionStatus.Failed);
+                }
+                sftpclient.Disconnect();
+                sftpclient.Dispose();
+
+
+            }
+        }
+
+        private void testConnectionFTP()
+        {
+            //an mporw na kanw listing tote exw sinthethi kanonika :P
+            string uri = "ftp://" + domainName.Text + ":" + port.Value.ToString();
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(uri));
+            request.UsePassive = false;
+            request.Method = WebRequestMethods.Ftp.ListDirectory;
+            request.Credentials = new NetworkCredential(username.Text, password.Text);
+            request.KeepAlive = true;
+
+            try
+            {
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                SetConnectionStatus(ConnectionStatus.OK);
+                saveServer.Enabled = true;
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                SetConnectionStatus(ConnectionStatus.Failed);
+            }
+
+
+
         }
 
         private void SwitchPanels(int index, string title)
