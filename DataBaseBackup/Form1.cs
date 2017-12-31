@@ -32,6 +32,8 @@ namespace DataBaseBackup
         Sftp sftp;
         Ftp ftp;
         ObjectStream stream = new ObjectStream("saveServer");
+        public string fileName; //onoma arxeiou
+        public string fullFileName; // fullpath name
 
         public Form1()
         {
@@ -141,6 +143,132 @@ namespace DataBaseBackup
                     break;
             }
         }
+
+
+        /*
+        private void downloadWithSFTP()
+        {
+       
+            using (var sftp = new SftpClient(host, port, username, pass))
+            {
+                sftp.Connect();
+                var files = sftp.ListDirectory(remoteDirectory);
+
+                foreach (var file in files)
+                {
+                    comboBox2.Items.Add(file);
+                    if (file.Name.Equals(textBox1.Text))
+                    {
+                        using (Stream file1 = File.OpenWrite(path))
+                        {
+                            sftp.DownloadFile(remoteDirectory + textBox1.Text, file1);
+                        }
+                    }
+
+                }
+                
+            }
+        }
+        */
+
+        private void downloadWithFTP()
+        {
+            string host = "ftp://127.0.0.1:21";
+            
+            try
+            {
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}/{1}", host, "test.txt")));
+                request.Method = WebRequestMethods.Ftp.DownloadFile;
+                request.Credentials = new NetworkCredential("Test", "12345");
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                Stream responseStream = response.GetResponseStream();
+                using (var file = File.Create("./" + "test"))
+                {
+                    responseStream.CopyTo(file);
+                }
+            }
+            catch (WebException e)
+            {
+                String status = ((FtpWebResponse)e.Response).StatusDescription;
+                MessageBox.Show(status.ToString());
+            }
+
+        }
+
+
+
+
+        private void uploadWithSFTP()
+        {
+            string line =ftpServers.SelectedItem.ToString();
+            string[] parts = line.Split(',');
+
+            try
+            {
+                string host = parts[1];
+                string username = parts[3];
+                string pass = password.Text;
+                int port =Int32.Parse(parts[2]);
+
+                using (var stream = new FileStream(fullFileName, FileMode.Open))
+                {
+
+                    using (var client = new SftpClient(host, port, username, pass))
+                    {
+                        client.Connect();
+                        //client.UploadFile(stream, fname + ".zip");
+                        client.UploadFile(stream, fileName);
+                        client.Disconnect();
+                        client.Dispose();
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+            
+
+
+        }
+
+        private void uploadWithFTP()
+        {
+            string line = ftpServers.SelectedItem.ToString();
+            string[] parts = line.Split(',');
+            string host = "ftp://"+parts[1]+":"+parts[2];
+            string username = parts[3];
+            string pass = password.Text;
+            
+
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}/{1}", host, fileName)));
+            request.Method = WebRequestMethods.Ftp.UploadFile;
+            request.Credentials = new NetworkCredential(username, pass);
+            Stream FtpStream = request.GetRequestStream();
+            FileStream fs = File.OpenRead(fullFileName);
+
+            byte[] buffer = new byte[1024];
+            double total = (double)fs.Length;
+            int byteRead = 0;
+            double read = 0;
+           
+            do
+            {
+                byteRead = fs.Read(buffer, 0, 2048);
+                FtpStream.Write(buffer, 0, byteRead);
+                read += (double)byteRead;
+            }
+            while (byteRead != 0);
+            fs.Close();
+            FtpStream.Close();
+            
+        }
+
+     
+
+
 
         private void testConnectionSFTP()
         {
@@ -253,6 +381,7 @@ namespace DataBaseBackup
 
             if (DialogResult.OK == openFileDialog1.ShowDialog())
             {
+            
 
             }
         }
@@ -327,6 +456,12 @@ namespace DataBaseBackup
                 }
                 
             }
+
+            ArrayList mylist = stream.ReadLines();
+            ftpServers.Items.Clear();
+            foreach (Object obj in mylist)
+                ftpServers.Items.Add(obj);
+            
 
         }
 
@@ -477,6 +612,25 @@ namespace DataBaseBackup
                 errorProvider1.SetError(ftpServers, "You must select a SFTP/FTP server.");
             }
         }
+
+        private void browseDatabase_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, ValidateNames = true, Filter = "All files|*.*" })
+            {
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    FileInfo fi = new FileInfo(ofd.FileName);
+                  
+                    fileName = fi.Name;
+                    fullFileName = fi.FullName;
+                }
+                databaseFilePath.Text = fullFileName;
+            }
+
+        }
+
+
 
 
         //END EVENT METHODS
