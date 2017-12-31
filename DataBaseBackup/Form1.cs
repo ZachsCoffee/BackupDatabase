@@ -346,14 +346,21 @@ namespace DataBaseBackup
 
         private void Full_Automatic_Click(object sender, EventArgs e)
         {
-            manualPanel.Enabled = false;
+
+            databaseFilePath.Enabled = false;
+            browseDatabase.Enabled = false;
+            autoDatabaseName.Enabled = true;
             compressCheckBox.Enabled = true;
+
+            errorProvider1.SetError(databaseFilePath, "");//na bgalw to warning apo to textbox
         }
 
         private void Manual_Click(object sender, EventArgs e)
         {
-            manualPanel.Enabled = true;
+            databaseFilePath.Enabled = true;
+            browseDatabase.Enabled = true;
             compressCheckBox.Enabled = false;
+            autoDatabaseName.Enabled = false;
         }
 
         private void Now_Click(object sender, EventArgs e)
@@ -460,7 +467,7 @@ namespace DataBaseBackup
 
         private void ValidateDatabaseFile(object sender, CancelEventArgs e)
         {
-            if (manualPanel.Enabled)//ama einai sto manual
+            if (manualRadio.Checked)//ama einai sto manual
             {
                 
                 if (!File.Exists(databaseFilePath.Text))//ama DEN uparxei to arxeio pou exei dialeksei
