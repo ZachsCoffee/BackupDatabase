@@ -1,12 +1,5 @@
-﻿using System.Diagnostics;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Renci.SshNet;
 using System.IO;
@@ -34,7 +27,6 @@ namespace DataBaseBackup
         private LogFile log1 = new LogFile();
         private VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
         
-       
         public Form1()
         {
             InitializeComponent();
@@ -50,12 +42,10 @@ namespace DataBaseBackup
             }
             currentPanel.Visible = true;
             //end panels
-
-            dateTimeWhen.CustomFormat = "dd/MM/yyyy hh:mm:ss";
-            dateTimeWhen.MinDate = DateTime.Now;
             serverType.SelectedIndex = 0;
 
             VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
+            
         }
         
         //CUSTOM METHODS
@@ -278,25 +268,26 @@ namespace DataBaseBackup
 
         private void Full_Automatic_Click(object sender, EventArgs e)
         {
-            manualPanel.Enabled = false;
+            backupDatabaseName.Enabled = true;
             compressCheckBox.Enabled = true;
+            databaseFilePath.Enabled = false;
+            browseDatabase.Enabled = false;
+
+            errorProvider1.SetError(databaseFilePath, "");
         }
 
         private void Manual_Click(object sender, EventArgs e)
         {
-            manualPanel.Enabled = true;
+            backupDatabaseName.Enabled = false;
             compressCheckBox.Enabled = false;
+            databaseFilePath.Enabled = true;
+            browseDatabase.Enabled = true;
         }
 
         private void Now_Click(object sender, EventArgs e)
         {
-            dateTimeWhen.Enabled = false;
             repeatPanel.Enabled = false;
-        }
-
-        private void Later_Click(object sender, EventArgs e)
-        {
-            dateTimeWhen.Enabled = true;
+            onceDatetimePicker.Enabled = false;
         }
 
         public void button2_Click_1(object sender, EventArgs e)//Send email          
@@ -346,15 +337,18 @@ namespace DataBaseBackup
             repeatPanel.Enabled = false;
             if (laterRadio.Checked)
             {
-                dateTimeWhen.Enabled = true;
+                onceDatetimePicker.Enabled = true;
             }
-            
+            else
+            {
+                onceDatetimePicker.Enabled = false;
+            }
         }
 
         private void Repeat_Click(object sender, EventArgs e)
         {
             repeatPanel.Enabled = true;
-            dateTimeWhen.Enabled = false;
+            onceDatetimePicker.Enabled = false;
         }
 
         private void ApplySchedule(object sender, EventArgs e)
@@ -362,6 +356,8 @@ namespace DataBaseBackup
             //validation
             if (this.ValidateChildren())//ama petuxan ola ta validation tote kanonika ginete to schedule
             {
+                // 1. ama exei dialeksei automatic prepei na uparxei na exei dwsei ton bin folder
+                // 2. ama den exei dialeksei automatic prepei na uparxei to arxeio pou exei dwsei
 
             }
             else//DEN prepei na ginei to shedule
@@ -369,21 +365,6 @@ namespace DataBaseBackup
 
             }
             //end validation
-        }
-
-        private void ValidateDayPicker(object sender, CancelEventArgs e)
-        {
-            if (dateTimeWhen.Enabled)
-            {
-                if (dateTimeWhen.Value.CompareTo(DateTime.Now) < 0)//ama h wra pou ebale einai poio palia apo twra
-                {
-                    errorProvider1.SetError(dateTimeWhen, "The date/time can't be before the current time.");
-                }
-                else
-                {
-                    errorProvider1.SetError(dateTimeWhen, "");
-                }
-            }
         }
 
         private void ValidateDatabaseFile(object sender, CancelEventArgs e)
@@ -417,6 +398,19 @@ namespace DataBaseBackup
             else if (dialogResult == DialogResult.No)
             {
                 //do something else
+            }
+        }
+
+        private void Later_Click(object sender, EventArgs e)
+        {
+            onceDatetimePicker.Enabled = false;
+            if (onceRadio.Checked)
+            {
+                onceDatetimePicker.Enabled = true;
+            }
+            else
+            {
+                onceDatetimePicker.Enabled = false;
             }
         }
 

@@ -55,6 +55,8 @@
             this.importDatabasePath = new System.Windows.Forms.TextBox();
             this.binFolderPath = new System.Windows.Forms.TextBox();
             this.backupPanel = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.onceDatetimePicker = new System.Windows.Forms.DateTimePicker();
             this.repeatPanel = new System.Windows.Forms.Panel();
             this.hoursNumber = new System.Windows.Forms.NumericUpDown();
             this.minutesNumber = new System.Windows.Forms.NumericUpDown();
@@ -63,8 +65,6 @@
             this.label27 = new System.Windows.Forms.Label();
             this.label26 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.dateTimeWhen = new System.Windows.Forms.DateTimePicker();
             this.repeatRadioPanel = new System.Windows.Forms.Panel();
             this.repeatRadio = new System.Windows.Forms.RadioButton();
             this.onceRadio = new System.Windows.Forms.RadioButton();
@@ -75,11 +75,14 @@
             this.button5 = new System.Windows.Forms.Button();
             this.applySchedule = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.manualPanel = new System.Windows.Forms.Panel();
             this.browseDatabase = new System.Windows.Forms.Button();
+            this.backupDatabaseName = new System.Windows.Forms.TextBox();
             this.databaseFilePath = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.backupMethodPanel = new System.Windows.Forms.Panel();
@@ -136,18 +139,17 @@
             this.fullAutomaticTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label25 = new System.Windows.Forms.Label();
-            this.backupDatabaseName = new System.Windows.Forms.TextBox();
+            this.scheduleTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
             this.backupPanel.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.repeatPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumber)).BeginInit();
-            this.panel4.SuspendLayout();
             this.repeatRadioPanel.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -448,13 +450,42 @@
             // backupPanel
             // 
             this.backupPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.backupPanel.Controls.Add(this.repeatPanel);
             this.backupPanel.Controls.Add(this.panel4);
             this.backupPanel.Controls.Add(this.panel3);
             this.backupPanel.Location = new System.Drawing.Point(249, 103);
             this.backupPanel.Name = "backupPanel";
             this.backupPanel.Size = new System.Drawing.Size(526, 418);
             this.backupPanel.TabIndex = 4;
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.onceDatetimePicker);
+            this.panel4.Controls.Add(this.repeatPanel);
+            this.panel4.Controls.Add(this.repeatRadioPanel);
+            this.panel4.Controls.Add(this.panel5);
+            this.panel4.Controls.Add(this.label9);
+            this.panel4.Controls.Add(this.button5);
+            this.panel4.Controls.Add(this.applySchedule);
+            this.panel4.Controls.Add(this.label23);
+            this.panel4.Controls.Add(this.label30);
+            this.panel4.Controls.Add(this.label22);
+            this.panel4.Location = new System.Drawing.Point(269, -1);
+            this.panel4.Margin = new System.Windows.Forms.Padding(10);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(256, 418);
+            this.panel4.TabIndex = 12;
+            // 
+            // onceDatetimePicker
+            // 
+            this.onceDatetimePicker.CustomFormat = "dd/MM/yy H:mm";
+            this.onceDatetimePicker.Enabled = false;
+            this.onceDatetimePicker.Font = new System.Drawing.Font("Century Gothic", 11.75F);
+            this.onceDatetimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.onceDatetimePicker.Location = new System.Drawing.Point(6, 187);
+            this.onceDatetimePicker.Name = "onceDatetimePicker";
+            this.onceDatetimePicker.Size = new System.Drawing.Size(242, 27);
+            this.onceDatetimePicker.TabIndex = 13;
             // 
             // repeatPanel
             // 
@@ -467,9 +498,9 @@
             this.repeatPanel.Controls.Add(this.label26);
             this.repeatPanel.Controls.Add(this.label20);
             this.repeatPanel.Enabled = false;
-            this.repeatPanel.Location = new System.Drawing.Point(269, 190);
+            this.repeatPanel.Location = new System.Drawing.Point(-1, 229);
             this.repeatPanel.Name = "repeatPanel";
-            this.repeatPanel.Size = new System.Drawing.Size(256, 104);
+            this.repeatPanel.Size = new System.Drawing.Size(256, 112);
             this.repeatPanel.TabIndex = 12;
             // 
             // hoursNumber
@@ -569,36 +600,6 @@
             this.label20.TabIndex = 7;
             this.label20.Text = "Repeat every ";
             // 
-            // panel4
-            // 
-            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel4.Controls.Add(this.dateTimeWhen);
-            this.panel4.Controls.Add(this.repeatRadioPanel);
-            this.panel4.Controls.Add(this.panel5);
-            this.panel4.Controls.Add(this.label9);
-            this.panel4.Controls.Add(this.button5);
-            this.panel4.Controls.Add(this.applySchedule);
-            this.panel4.Controls.Add(this.label23);
-            this.panel4.Controls.Add(this.label22);
-            this.panel4.Location = new System.Drawing.Point(269, -1);
-            this.panel4.Margin = new System.Windows.Forms.Padding(10);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(256, 418);
-            this.panel4.TabIndex = 12;
-            // 
-            // dateTimeWhen
-            // 
-            this.dateTimeWhen.Enabled = false;
-            this.dateTimeWhen.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimeWhen.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeWhen.Location = new System.Drawing.Point(10, 151);
-            this.dateTimeWhen.Margin = new System.Windows.Forms.Padding(10);
-            this.dateTimeWhen.MinDate = new System.DateTime(2017, 11, 29, 0, 0, 0, 0);
-            this.dateTimeWhen.Name = "dateTimeWhen";
-            this.dateTimeWhen.Size = new System.Drawing.Size(232, 26);
-            this.dateTimeWhen.TabIndex = 11;
-            this.dateTimeWhen.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDayPicker);
-            // 
             // repeatRadioPanel
             // 
             this.repeatRadioPanel.Controls.Add(this.repeatRadio);
@@ -617,6 +618,7 @@
             this.repeatRadio.Size = new System.Drawing.Size(79, 23);
             this.repeatRadio.TabIndex = 1;
             this.repeatRadio.Text = "Repeat";
+            this.scheduleTooltip.SetToolTip(this.repeatRadio, "Backup every specified interval");
             this.repeatRadio.UseVisualStyleBackColor = true;
             this.repeatRadio.Click += new System.EventHandler(this.Repeat_Click);
             // 
@@ -631,6 +633,7 @@
             this.onceRadio.TabIndex = 0;
             this.onceRadio.TabStop = true;
             this.onceRadio.Text = "Once";
+            this.scheduleTooltip.SetToolTip(this.onceRadio, "Backup only one time");
             this.onceRadio.UseVisualStyleBackColor = true;
             this.onceRadio.Click += new System.EventHandler(this.Once_Click);
             // 
@@ -652,6 +655,7 @@
             this.laterRadio.Size = new System.Drawing.Size(61, 23);
             this.laterRadio.TabIndex = 1;
             this.laterRadio.Text = "Later";
+            this.scheduleTooltip.SetToolTip(this.laterRadio, "The first backup, will be after the specified interval");
             this.laterRadio.UseVisualStyleBackColor = true;
             this.laterRadio.Click += new System.EventHandler(this.Later_Click);
             // 
@@ -666,6 +670,7 @@
             this.nowRadio.TabIndex = 0;
             this.nowRadio.TabStop = true;
             this.nowRadio.Text = "Now";
+            this.scheduleTooltip.SetToolTip(this.nowRadio, "The first backup, will be now");
             this.nowRadio.UseVisualStyleBackColor = true;
             this.nowRadio.Click += new System.EventHandler(this.Now_Click);
             // 
@@ -676,9 +681,9 @@
             this.label9.Location = new System.Drawing.Point(10, 10);
             this.label9.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(86, 21);
+            this.label9.Size = new System.Drawing.Size(157, 21);
             this.label9.TabIndex = 6;
-            this.label9.Text = "Schedule";
+            this.label9.Text = "Schedule backup";
             // 
             // button5
             // 
@@ -715,6 +720,18 @@
             this.label23.Size = new System.Drawing.Size(61, 19);
             this.label23.TabIndex = 7;
             this.label23.Text = "Repeat";
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label30.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label30.Location = new System.Drawing.Point(7, 160);
+            this.label30.Margin = new System.Windows.Forms.Padding(10);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(192, 19);
+            this.label30.TabIndex = 7;
+            this.label30.Text = "Choose when (dd/mm/yy)";
             // 
             // label22
             // 
@@ -753,7 +770,6 @@
             this.manualPanel.Controls.Add(this.databaseFilePath);
             this.manualPanel.Controls.Add(this.label25);
             this.manualPanel.Controls.Add(this.label21);
-            this.manualPanel.Enabled = false;
             this.manualPanel.Location = new System.Drawing.Point(-1, 272);
             this.manualPanel.Name = "manualPanel";
             this.manualPanel.Size = new System.Drawing.Size(268, 145);
@@ -770,6 +786,16 @@
             this.browseDatabase.Text = "Browse";
             this.browseDatabase.UseVisualStyleBackColor = true;
             // 
+            // backupDatabaseName
+            // 
+            this.backupDatabaseName.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.backupDatabaseName.Location = new System.Drawing.Point(12, 25);
+            this.backupDatabaseName.Margin = new System.Windows.Forms.Padding(10);
+            this.backupDatabaseName.Name = "backupDatabaseName";
+            this.backupDatabaseName.Size = new System.Drawing.Size(242, 24);
+            this.backupDatabaseName.TabIndex = 1;
+            this.backupDatabaseName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
+            // 
             // databaseFilePath
             // 
             this.databaseFilePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
@@ -780,6 +806,18 @@
             this.databaseFilePath.TabIndex = 1;
             this.databaseFilePath.Text = "C:\\";
             this.databaseFilePath.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label25.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label25.Location = new System.Drawing.Point(10, 3);
+            this.label25.Margin = new System.Windows.Forms.Padding(10);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(123, 19);
+            this.label25.TabIndex = 7;
+            this.label25.Text = "Database name";
             // 
             // label21
             // 
@@ -1414,28 +1452,9 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // label25
+            // scheduleTooltip
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label25.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label25.Location = new System.Drawing.Point(10, 3);
-            this.label25.Margin = new System.Windows.Forms.Padding(10);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(123, 19);
-            this.label25.TabIndex = 7;
-            this.label25.Text = "Database name";
-            // 
-            // backupDatabaseName
-            // 
-            this.backupDatabaseName.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.backupDatabaseName.Location = new System.Drawing.Point(12, 25);
-            this.backupDatabaseName.Margin = new System.Windows.Forms.Padding(10);
-            this.backupDatabaseName.Name = "backupDatabaseName";
-            this.backupDatabaseName.Size = new System.Drawing.Size(242, 24);
-            this.backupDatabaseName.TabIndex = 1;
-            this.backupDatabaseName.Text = "C:\\";
-            this.backupDatabaseName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
+            this.scheduleTooltip.ToolTipTitle = "Schedule";
             // 
             // Form1
             // 
@@ -1461,13 +1480,13 @@
             this.databasePanel.ResumeLayout(false);
             this.databasePanel.PerformLayout();
             this.backupPanel.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.repeatPanel.ResumeLayout(false);
             this.repeatPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.hoursNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minutesNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.daysNumber)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.repeatRadioPanel.ResumeLayout(false);
             this.repeatRadioPanel.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -1564,7 +1583,6 @@
         private System.Windows.Forms.Panel manualPanel;
         private System.Windows.Forms.TextBox databaseFilePath;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.DateTimePicker dateTimeWhen;
         private System.Windows.Forms.Panel repeatRadioPanel;
         private System.Windows.Forms.Button applySchedule;
         private System.Windows.Forms.Panel panel5;
@@ -1602,6 +1620,9 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.TextBox backupDatabaseName;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ToolTip scheduleTooltip;
+        private System.Windows.Forms.DateTimePicker onceDatetimePicker;
+        private System.Windows.Forms.Label label30;
     }
 }
 
