@@ -53,7 +53,6 @@
             this.browseBinFolder = new System.Windows.Forms.Button();
             this.dbNameExport = new System.Windows.Forms.TextBox();
             this.importDatabasePath = new System.Windows.Forms.TextBox();
-            this.binFolderPath = new System.Windows.Forms.TextBox();
             this.backupPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.onceDatetimePicker = new System.Windows.Forms.DateTimePicker();
@@ -140,6 +139,8 @@
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.scheduleTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.binFolderPath = new HintedTextBox.container();
+            this.saveBinFolder = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -285,6 +286,7 @@
             // databasePanel
             // 
             this.databasePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.databasePanel.Controls.Add(this.binFolderPath);
             this.databasePanel.Controls.Add(this.button1);
             this.databasePanel.Controls.Add(this.exportButton);
             this.databasePanel.Controls.Add(this.databaseName);
@@ -294,10 +296,10 @@
             this.databasePanel.Controls.Add(this.label3);
             this.databasePanel.Controls.Add(this.label1);
             this.databasePanel.Controls.Add(this.browseImportDatabase);
+            this.databasePanel.Controls.Add(this.saveBinFolder);
             this.databasePanel.Controls.Add(this.browseBinFolder);
             this.databasePanel.Controls.Add(this.dbNameExport);
             this.databasePanel.Controls.Add(this.importDatabasePath);
-            this.databasePanel.Controls.Add(this.binFolderPath);
             this.databasePanel.Location = new System.Drawing.Point(249, 103);
             this.databasePanel.Name = "databasePanel";
             this.databasePanel.Size = new System.Drawing.Size(526, 418);
@@ -436,16 +438,6 @@
             this.importDatabasePath.Size = new System.Drawing.Size(416, 24);
             this.importDatabasePath.TabIndex = 0;
             this.importDatabasePath.Text = "Path to database file.";
-            // 
-            // binFolderPath
-            // 
-            this.binFolderPath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.binFolderPath.Location = new System.Drawing.Point(14, 144);
-            this.binFolderPath.Margin = new System.Windows.Forms.Padding(10);
-            this.binFolderPath.Name = "binFolderPath";
-            this.binFolderPath.Size = new System.Drawing.Size(416, 24);
-            this.binFolderPath.TabIndex = 0;
-            this.binFolderPath.Text = "C:\\Program Files\\MySQL\\MySQL Server x.x\\bin";
             // 
             // backupPanel
             // 
@@ -798,6 +790,7 @@
             // 
             // databaseFilePath
             // 
+            this.databaseFilePath.Enabled = false;
             this.databaseFilePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.databaseFilePath.Location = new System.Drawing.Point(12, 86);
             this.databaseFilePath.Margin = new System.Windows.Forms.Padding(10);
@@ -1456,6 +1449,29 @@
             // 
             this.scheduleTooltip.ToolTipTitle = "Schedule";
             // 
+            // binFolderPath
+            // 
+            this.binFolderPath.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.binFolderPath.HintFont = null;
+            this.binFolderPath.HintText = "C:\\Program Files\\MySQL\\MySQL Server x.x\\bin";
+            this.binFolderPath.HintTextColor = System.Drawing.Color.Gray;
+            this.binFolderPath.Location = new System.Drawing.Point(14, 145);
+            this.binFolderPath.Name = "binFolderPath";
+            this.binFolderPath.Size = new System.Drawing.Size(416, 23);
+            this.binFolderPath.TabIndex = 6;
+            // 
+            // saveBinFolder
+            // 
+            this.saveBinFolder.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.saveBinFolder.Location = new System.Drawing.Point(446, 179);
+            this.saveBinFolder.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.saveBinFolder.Name = "saveBinFolder";
+            this.saveBinFolder.Size = new System.Drawing.Size(75, 24);
+            this.saveBinFolder.TabIndex = 1;
+            this.saveBinFolder.Text = "Save";
+            this.saveBinFolder.UseVisualStyleBackColor = true;
+            this.saveBinFolder.Click += new System.EventHandler(this.Save_Bin_Folder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1463,10 +1479,10 @@
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
             this.Controls.Add(this.backupPanel);
+            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.logPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.serversPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1528,7 +1544,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button browseBinFolder;
-        private System.Windows.Forms.TextBox binFolderPath;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button browseImportDatabase;
@@ -1623,6 +1638,8 @@
         private System.Windows.Forms.ToolTip scheduleTooltip;
         private System.Windows.Forms.DateTimePicker onceDatetimePicker;
         private System.Windows.Forms.Label label30;
+        private HintedTextBox.container binFolderPath;
+        private System.Windows.Forms.Button saveBinFolder;
     }
 }
 

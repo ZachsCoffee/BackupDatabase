@@ -25,8 +25,9 @@ namespace DataBaseBackup
 
         //Initiation of logFile variables
         private LogFile log1 = new LogFile();
-        private VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
-        
+        private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@"..\..\LogFiles\logV"));
+        private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
+
         public Form1()
         {
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace DataBaseBackup
             //end panels
             serverType.SelectedIndex = 0;
 
-            VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
+            //VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
             
         }
         
@@ -356,7 +357,12 @@ namespace DataBaseBackup
             //validation
             if (this.ValidateChildren())//ama petuxan ola ta validation tote kanonika ginete to schedule
             {
+
                 // 1. ama exei dialeksei automatic prepei na uparxei na exei dwsei ton bin folder
+                if (generalVariables.GetVariable("dbBinFolder") == null)// ama DEN uparxei h metablhth, tote den mporei na dialeksei full automatic
+                {
+
+                }
                 // 2. ama den exei dialeksei automatic prepei na uparxei to arxeio pou exei dwsei
 
             }
@@ -411,6 +417,18 @@ namespace DataBaseBackup
             else
             {
                 onceDatetimePicker.Enabled = false;
+            }
+        }
+
+        private void Save_Bin_Folder_Click(object sender, EventArgs e)
+        {
+            if (File.Exists(binFolderPath.TextBox.Text + @"\mysqldump.exe"))
+            {
+                generalVariables.PutVariable("dbBinFolder", binFolderPath.TextBox.Text);
+            }
+            else
+            {
+                MessageBox.Show("Wrong path, please set the corect full path, to mysql bin folder.", "Wrong path", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
