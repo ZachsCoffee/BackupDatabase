@@ -7,6 +7,7 @@ using DataBaseBackup.Class;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System.Net;
+using DataBaseBackup.Server;
 
 namespace DataBaseBackup
 {
@@ -177,6 +178,36 @@ namespace DataBaseBackup
 
 
             }
+        }
+
+        private Schedule BuildSchedule()
+        {
+            Ftp ftpServer = new Ftp();//edw bale ta xaraktitistika tou ftp server, wste meta na ta parei to scedule, ola ta pedia
+
+            Schedule schedule = new Schedule()
+            {
+                FullAutomatic = fullAutomaticRadio.Checked,
+                BackupNow = nowRadio.Checked,
+                BackupOnce = onceRadio.Checked,
+                WithCompress = compressCheckBox.Checked,
+                FtpServer = ftpServer,
+                DBName = backupDatabaseName.Text,
+                DBFilePath = databaseFilePath.Text
+            };
+
+            if (schedule.BackupOnce && !schedule.BackupNow)
+            {
+                schedule.BackupDateTime = onceDatetimePicker.Value;
+            }
+            else
+            {
+                DateTime tempDateTime = DateTime.Now;
+                tempDateTime.AddDays(Convert.ToDouble(daysNumber.Value));
+                tempDateTime.AddHours(Convert.ToDouble(hoursNumber.Value));
+                tempDateTime.AddMinutes(Convert.ToDouble(minutesNumber.Value));
+                schedule.BackupDateTime = tempDateTime;
+            }
+            return schedule;
         }
         //END CUSTOM METHODS
 
@@ -357,16 +388,51 @@ namespace DataBaseBackup
             //validation
             if (this.ValidateChildren())//ama petuxan ola ta validation tote kanonika ginete to schedule
             {
-
-                // 1. ama exei dialeksei automatic prepei na uparxei na exei dwsei ton bin folder
-                if (generalVariables.GetVariable("dbBinFolder") == null)// ama DEN uparxei h metablhth, tote den mporei na dialeksei full automatic
+                if (fullAutomaticRadio.Checked)
                 {
-
+                    if (generalVariables.GetVariable("dbBinFolder") != null)
+                    {
+                        if (ScheduleClient.AddSchedule(BuildSchedule()))// ama ola phgan ok.
+                        {
+                            applyFeedback.Text = "Schedule, successful added";
+                            applyFeedback.ForeColor = System.Drawing.Color.DodgerBlue;
+                        }
+                        else
+                        {
+                            applyFeedback.Text = "Failed to add schedule";
+                            applyFeedback.ForeColor = System.Drawing.Color.Red;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Can't continue, with full automatic backup. Please setup first, the path to mysql bin folder.", "Can't apply", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
+                else
+                {
+                    if (File.Exists(databaseFilePath.Text))
+                    {
+                        if (ScheduleClient.AddSchedule(BuildSchedule()))// ama ola phgan ok.
+                        {
+                            applyFeedback.Text = "Schedule, successful added";
+                            applyFeedback.ForeColor = System.Drawing.Color.DodgerBlue;
+                        }
+                        else
+                        {
+                            applyFeedback.Text = "Failed to add schedule";
+                            applyFeedback.ForeColor = System.Drawing.Color.Red;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("The database, file not exist.", "Can't apply", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                
                 // 2. ama den exei dialeksei automatic prepei na uparxei to arxeio pou exei dwsei
 
             }
-            else//DEN prepei na ginei to shedule
+            else//DEN prepei na ginei to schedule
             {
 
             }

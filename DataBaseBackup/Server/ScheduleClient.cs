@@ -21,15 +21,24 @@ namespace DataBaseBackup.Server
         /// Adds a schedule to the server.
         /// </summary>
         /// <param name="schedule">The new schedule to be add.</param>
-        public static void AddSchedule(Schedule schedule)
+        /// <returns>True if schedule added successful, otherwise false.</returns>
+        public static bool AddSchedule(Schedule schedule)
         {
-            NetworkStream stream = Connect(out TcpClient client);//kanw sundesh
+            try
+            {
+                NetworkStream stream = Connect(out TcpClient client);//kanw sundesh
 
-            stream.WriteByte((byte)MessageCode.Add);//stelnw to code
-            new BinaryFormatter().Serialize(stream, schedule);//stelnw to schedule
+                stream.WriteByte((byte)MessageCode.Add);//stelnw to code
+                new BinaryFormatter().Serialize(stream, schedule);//stelnw to schedule
 
-            stream.Close();
-            client.Close();
+                stream.Close();
+                client.Close();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -53,22 +62,32 @@ namespace DataBaseBackup.Server
         /// Deletes a schedule from the server.
         /// </summary>
         /// <param name="scheduleID">The ID of the schedule to delete.</param>
-        public static void DeleteSchedule(int scheduleID)
+        /// <returns>True if schedule delete successful, otherwise false.</returns>
+        public static bool DeleteSchedule(int scheduleID)
         {
-            if (scheduleID < 0)
+            try
             {
-                throw new ArgumentException("Schedule ID can't be < 0");
+                if (scheduleID < 0)
+                {
+                    throw new ArgumentException("Schedule ID can't be < 0");
+                }
+
+                NetworkStream stream = Connect(out TcpClient client);
+
+                stream.WriteByte((byte)MessageCode.Delete);
+
+                byte[] buffer = BitConverter.GetBytes(scheduleID);
+                stream.Write(buffer, 0, buffer.Length);
+
+                stream.Close();
+                client.Close();
+                return true;
             }
-
-            NetworkStream stream = Connect(out TcpClient client);
-
-            stream.WriteByte((byte)MessageCode.Delete);
-
-            byte[] buffer = BitConverter.GetBytes(scheduleID);
-            stream.Write(buffer, 0, buffer.Length);
-
-            stream.Close();
-            client.Close();
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
         }
 
         private static NetworkStream Connect(out TcpClient tcpClient)

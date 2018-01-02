@@ -13,9 +13,10 @@ namespace DataBaseBackup.Class
         private Timer timer;// me ton timer 8a ginete to schedule.
 
         //START NEW FIELDS
-        public DateTime RepeatEvery { get; set; }// ka8e poso interval 8a kanei backup
+        public DateTime BackupDateTime { get; set; }// ka8e poso interval 8a kanei backup
         public string MySqlBinFolderPath { get; set; }
 
+        
         private string
             dbName,// ama exei dialeksei full auto backup, tote auto den prepei na einai null
             dbFilePath = null;// ama exei dialeksei manual backup tote auto den prepei na einai null
@@ -31,6 +32,11 @@ namespace DataBaseBackup.Class
         public Ftp FtpServer { get; set; }// krata tis plhrofories gia ton ftp server.
 
         //END NEW FIELDS
+
+        public Schedule()
+        {
+
+        }
 
         public Schedule(DateTime timestamp, string dbName, Ftp ftpServer)
         {
@@ -68,6 +74,12 @@ namespace DataBaseBackup.Class
         {
             get { return timer; }
             set { timer = value; }
+        }
+
+        public string DBFilePath
+        {
+            get { return dbFilePath; }
+            set { dbFilePath = value; }
         }
     }
 }

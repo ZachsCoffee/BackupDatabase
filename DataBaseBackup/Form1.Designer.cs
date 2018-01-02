@@ -41,6 +41,7 @@
             this.serversButton = new System.Windows.Forms.Button();
             this.databaseButton = new System.Windows.Forms.Button();
             this.databasePanel = new System.Windows.Forms.Panel();
+            this.binFolderPath = new HintedTextBox.container();
             this.button1 = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.databaseName = new System.Windows.Forms.ComboBox();
@@ -50,6 +51,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.browseImportDatabase = new System.Windows.Forms.Button();
+            this.saveBinFolder = new System.Windows.Forms.Button();
             this.browseBinFolder = new System.Windows.Forms.Button();
             this.dbNameExport = new System.Windows.Forms.TextBox();
             this.importDatabasePath = new System.Windows.Forms.TextBox();
@@ -139,8 +141,7 @@
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.scheduleTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.binFolderPath = new HintedTextBox.container();
-            this.saveBinFolder = new System.Windows.Forms.Button();
+            this.applyFeedback = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -306,6 +307,17 @@
             this.databasePanel.TabIndex = 2;
             this.databasePanel.Visible = false;
             // 
+            // binFolderPath
+            // 
+            this.binFolderPath.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.binFolderPath.HintFont = null;
+            this.binFolderPath.HintText = "C:\\Program Files\\MySQL\\MySQL Server x.x\\bin";
+            this.binFolderPath.HintTextColor = System.Drawing.Color.Gray;
+            this.binFolderPath.Location = new System.Drawing.Point(14, 145);
+            this.binFolderPath.Name = "binFolderPath";
+            this.binFolderPath.Size = new System.Drawing.Size(416, 23);
+            this.binFolderPath.TabIndex = 6;
+            // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Century Gothic", 9.25F);
@@ -408,6 +420,18 @@
             this.browseImportDatabase.Text = "Browse";
             this.browseImportDatabase.UseVisualStyleBackColor = true;
             // 
+            // saveBinFolder
+            // 
+            this.saveBinFolder.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.saveBinFolder.Location = new System.Drawing.Point(446, 179);
+            this.saveBinFolder.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
+            this.saveBinFolder.Name = "saveBinFolder";
+            this.saveBinFolder.Size = new System.Drawing.Size(75, 24);
+            this.saveBinFolder.TabIndex = 1;
+            this.saveBinFolder.Text = "Save";
+            this.saveBinFolder.UseVisualStyleBackColor = true;
+            this.saveBinFolder.Click += new System.EventHandler(this.Save_Bin_Folder_Click);
+            // 
             // browseBinFolder
             // 
             this.browseBinFolder.Font = new System.Drawing.Font("Century Gothic", 9.25F);
@@ -459,6 +483,7 @@
             this.panel4.Controls.Add(this.label9);
             this.panel4.Controls.Add(this.button5);
             this.panel4.Controls.Add(this.applySchedule);
+            this.panel4.Controls.Add(this.applyFeedback);
             this.panel4.Controls.Add(this.label23);
             this.panel4.Controls.Add(this.label30);
             this.panel4.Controls.Add(this.label22);
@@ -879,7 +904,7 @@
             this.ftpServers.FormattingEnabled = true;
             this.ftpServers.Location = new System.Drawing.Point(12, 73);
             this.ftpServers.Name = "ftpServers";
-            this.ftpServers.Size = new System.Drawing.Size(171, 27);
+            this.ftpServers.Size = new System.Drawing.Size(242, 27);
             this.ftpServers.TabIndex = 5;
             this.ftpServers.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateFTPServer);
             // 
@@ -1449,28 +1474,17 @@
             // 
             this.scheduleTooltip.ToolTipTitle = "Schedule";
             // 
-            // binFolderPath
+            // applyFeedback
             // 
-            this.binFolderPath.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.binFolderPath.HintFont = null;
-            this.binFolderPath.HintText = "C:\\Program Files\\MySQL\\MySQL Server x.x\\bin";
-            this.binFolderPath.HintTextColor = System.Drawing.Color.Gray;
-            this.binFolderPath.Location = new System.Drawing.Point(14, 145);
-            this.binFolderPath.Name = "binFolderPath";
-            this.binFolderPath.Size = new System.Drawing.Size(416, 23);
-            this.binFolderPath.TabIndex = 6;
-            // 
-            // saveBinFolder
-            // 
-            this.saveBinFolder.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.saveBinFolder.Location = new System.Drawing.Point(446, 179);
-            this.saveBinFolder.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
-            this.saveBinFolder.Name = "saveBinFolder";
-            this.saveBinFolder.Size = new System.Drawing.Size(75, 24);
-            this.saveBinFolder.TabIndex = 1;
-            this.saveBinFolder.Text = "Save";
-            this.saveBinFolder.UseVisualStyleBackColor = true;
-            this.saveBinFolder.Click += new System.EventHandler(this.Save_Bin_Folder_Click);
+            this.applyFeedback.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.applyFeedback.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.applyFeedback.Location = new System.Drawing.Point(11, 349);
+            this.applyFeedback.Margin = new System.Windows.Forms.Padding(10);
+            this.applyFeedback.Name = "applyFeedback";
+            this.applyFeedback.Size = new System.Drawing.Size(233, 19);
+            this.applyFeedback.TabIndex = 7;
+            this.applyFeedback.Text = "Repeat";
+            this.applyFeedback.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Form1
             // 
@@ -1640,6 +1654,7 @@
         private System.Windows.Forms.Label label30;
         private HintedTextBox.container binFolderPath;
         private System.Windows.Forms.Button saveBinFolder;
+        private System.Windows.Forms.Label applyFeedback;
     }
 }
 

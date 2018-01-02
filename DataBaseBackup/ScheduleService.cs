@@ -61,7 +61,7 @@ namespace DataBaseBackup
 
                 if (!schedule.BackupOnce)// kai einai repeat
                 {
-                    timer.Interval = (schedule.RepeatEvery - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                    timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
                     timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                     timer.Start();
                 }
@@ -73,7 +73,7 @@ namespace DataBaseBackup
                     timer.AutoReset = false;
                 }
 
-                timer.Interval = (schedule.RepeatEvery - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
                 timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                 timer.Start();
             }
@@ -81,7 +81,7 @@ namespace DataBaseBackup
 
         private void OnRemoveSchedule(Schedule schedule)
         {
-
+            schedule.Timer.Close();
         }
 
         private void Backup(Schedule schedule)
