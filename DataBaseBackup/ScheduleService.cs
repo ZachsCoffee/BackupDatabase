@@ -2,10 +2,14 @@
 using DataBaseBackup.Server;
 using System.Threading;
 using System.Timers;
-
 using System.ServiceProcess;
 using System.Collections.Generic;
 using System;
+using System.IO.Compression;
+using System.IO;
+using System.Net;
+using Renci.SshNet;
+using System.Windows.Forms;
 
 namespace DataBaseBackup
 {
@@ -112,8 +116,15 @@ namespace DataBaseBackup
                     {
                         finalFile = exportedFilePath;
                     }
-
-                    UploadFile(finalFile, schedule);
+                    if (schedule.FtpServer.getServerType().ToString().Equals("SFTP"))
+                    {
+                        UploadFileWithSFTP(finalFile, schedule);
+                    }
+                    else
+                    {
+                        UploadFileWithFTP(finalFile, schedule);
+                    }
+                    //UploadFile(finalFile, schedule);
                 }
                 else// NOT ok
                 {
@@ -128,10 +139,88 @@ namespace DataBaseBackup
             //TODO: ama kati paei la8os prepei na mpei log, ama pane ola ok pali log
         }
 
+        private void UploadFileWithFTP(string filePath, Schedule schedule)
+        {
+            try
+            {
+                string uri = "ftp://" + schedule.FtpServer.getDomainName() + ":" + schedule.FtpServer.getPort();
+                string username = schedule.FtpServer.getUsername();
+                FileInfo fi = new FileInfo(filePath);
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}/{1}", uri, fi.Name)));
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential(schedule.FtpServer.getUsername(), Upload.password);
+                Stream FtpStream = request.GetRequestStream();
+                FileStream fs = File.OpenRead(filePath);
+
+                byte[] buffer = new byte[2048];
+                double total = (double)fs.Length;
+                int byteRead = 0;
+                do
+                {
+                    byteRead = fs.Read(buffer, 0, buffer.Length);
+                    FtpStream.Write(buffer, 0, byteRead);
+                }
+                while (byteRead != 0);
+                fs.Close();
+                FtpStream.Close();
+
+            }
+            catch (WebException e)
+            {
+                MessageBox.Show(e.Message, "Αn error occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+         
+
+        }
+
+        private void UploadFileWithSFTP(string filePath, Schedule schedule)
+        {
+            FileInfo fi = new FileInfo(filePath);
+            string host = schedule.FtpServer.getDomainName();
+            string port = schedule.FtpServer.getPort();
+            string username = schedule.FtpServer.getUsername();
+            string password = Upload.password;
+
+            try
+            {
+                using (var stream = new FileStream(filePath, FileMode.Open))
+                {
+                    using (var client = new SftpClient(host, Convert.ToInt32(port), username, password))
+                    {
+                        client.Connect();
+                        client.UploadFile(stream, fi.Name);
+                        client.Disconnect();
+                        client.Dispose();
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+               
+                MessageBox.Show(e.Message, "Αn error occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+
+        }
+
+
         private string CompressFile(string filePath)
         {
-            //TODO: compress to filePath
-            return "";//prepei na kanei return to path tou COMPRESSED arxeiou
+            string zipFilePath = "";
+
+            using (Ionic.Zip.ZipFile zip = new Ionic.Zip.ZipFile())
+            {
+                FileInfo fi = new FileInfo(filePath);
+                zip.AddFile(filePath);
+                zip.CompressionLevel = Ionic.Zlib.CompressionLevel.Default; //epilogi tou compression
+                zipFilePath = fi.Name + ".zip";
+                zip.Save(zipFilePath);
+            }
+            File.Delete(zipFilePath);
+            return zipFilePath;
+
         }
 
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)

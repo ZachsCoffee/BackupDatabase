@@ -17,10 +17,12 @@ namespace DataBaseBackup.Class
         public ObjectStream(string filePath)
         {
             this.filePath = filePath ?? throw new ArgumentNullException("Argument at pos: 1, not null.");
+            /*
             using (var streamReader = new StreamWriter(filePath, true))
             {
 
             }
+            */
 
         }
 
