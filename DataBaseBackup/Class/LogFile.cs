@@ -42,13 +42,14 @@ namespace DataBaseBackup.Class
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
             };
-            using (var message = new MailMessage(fromAddress, toAddress)
             {
-                Subject = subject,
-                Body = body
-            })
-            {
-                smtp.Send(message);
+                MailMessage message = new MailMessage();
+                message.To.Add(to);
+                message.From = fromAddress;
+                message.Subject = subject;
+                message.Body = body;
+                smtp.SendAsync(message, "Test");
+
             }
         }
 

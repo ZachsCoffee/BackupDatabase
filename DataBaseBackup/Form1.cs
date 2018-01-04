@@ -47,7 +47,7 @@ namespace DataBaseBackup
             serverType.SelectedIndex = 0;
 
             //VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
-            
+     
         }
         
         //CUSTOM METHODS
