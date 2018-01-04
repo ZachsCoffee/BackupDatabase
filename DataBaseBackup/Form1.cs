@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Net;
 using DataBaseBackup.Server;
 
+
 namespace DataBaseBackup
 {
     public partial class Form1 : Form
@@ -25,13 +26,17 @@ namespace DataBaseBackup
         ObjectStream stream = new ObjectStream("saveServer");
 
         //Initiation of logFile variables
+        
         private LogFile log1 = new LogFile();
         private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@"..\..\LogFiles\logV"));
         private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
 
+        public static string serverSettings; //mia static gia na krataw to server pou epelexse o xristis.
+        
         public Form1()
         {
             InitializeComponent();
+            stream.ClearFile();
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
             panels = new Panel[] {databasePanel, serversPanel, backupPanel, logPanel} ;//krata ola ta panel gia na mporeis na ta allazeis 
@@ -182,7 +187,13 @@ namespace DataBaseBackup
 
         private Schedule BuildSchedule()
         {
-            Ftp ftpServer = new Ftp();//edw bale ta xaraktitistika tou ftp server, wste meta na ta parei to scedule, ola ta pedia
+            string[] parts = serverSettings.Split(',');
+            string serverType = parts[0];
+            string host = parts[1];
+            string port = parts[2];
+            string username = parts[3];
+
+            Ftp ftpServer = new Ftp(serverType,host,port,username);//edw bale ta xaraktitistika tou ftp server, wste meta na ta parei to scedule, ola ta pedia
 
             Schedule schedule = new Schedule()
             {
@@ -229,7 +240,16 @@ namespace DataBaseBackup
         private void makeAction_Click(object sender, EventArgs e)
         {
             //ResetServerActionValues();
-            testConnectionSFTP();
+            if(domainName.Text.ToString().Equals("") || username.Text.ToString().Equals("") || password.Text.ToString().Equals(""))
+            {
+                MessageBox.Show("Please fill all fields");
+                
+            }
+            else
+            {
+                testConnectionSFTP();
+            }
+            
         }
 
         private void cancelAction_Click(object sender, EventArgs e)
@@ -281,6 +301,11 @@ namespace DataBaseBackup
                 stream.WriteLines(sftp.ToString());
                 serversListBox.Items.Add(sftp.ToString());
             }
+            ArrayList servers = stream.ReadLines();
+            ftpServers.Items.Clear();
+            foreach (Object obj in servers)
+                ftpServers.Items.Add(obj);
+
 
         }
 
@@ -496,6 +521,26 @@ namespace DataBaseBackup
             {
                 MessageBox.Show("Wrong path, please set the corect full path, to mysql bin folder.", "Wrong path", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void browseDatabase_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, ValidateNames = true, Filter = "All files|*.*" })
+            {
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    FileInfo fi = new FileInfo(ofd.FileName);
+                    databaseFilePath.Text = fi.FullName;   
+                }
+                string selectFtp=ftpServers.GetItemText(this.ftpServers.SelectedItem);
+                serverSettings = selectFtp;
+                Upload up = new Upload();
+                up.ShowDialog();
+                
+            }
+
+
         }
 
 
