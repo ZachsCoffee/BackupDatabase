@@ -33,7 +33,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.pageTitle = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.logButton = new System.Windows.Forms.Button();
+            this.downloadDatabase = new System.Windows.Forms.Button();
+            this.backupButton = new System.Windows.Forms.Button();
+            this.serversButton = new System.Windows.Forms.Button();
+            this.databaseButton = new System.Windows.Forms.Button();
             this.databasePanel = new System.Windows.Forms.Panel();
             this.binFolderPath = new HintedTextBox.container();
             this.button1 = new System.Windows.Forms.Button();
@@ -136,13 +142,26 @@
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.scheduleTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.logButton = new System.Windows.Forms.Button();
-            this.downloadDatabase = new System.Windows.Forms.Button();
-            this.backupButton = new System.Windows.Forms.Button();
-            this.serversButton = new System.Windows.Forms.Button();
-            this.databaseButton = new System.Windows.Forms.Button();
+            this.downloadPanel = new System.Windows.Forms.Panel();
+            this.DonwloadAfterSFile = new System.Windows.Forms.Panel();
+            this.DownloadProgress = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label34 = new System.Windows.Forms.Label();
+            this.EnterPassPanel = new System.Windows.Forms.Panel();
+            this.DownloadConnection = new System.Windows.Forms.Label();
+            this.PasswordTBDownload = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.ConnectB = new System.Windows.Forms.Button();
+            this.label32 = new System.Windows.Forms.Label();
+            this.SelectFileDownload = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.gvFiles = new System.Windows.Forms.DataGridView();
+            this.label33 = new System.Windows.Forms.Label();
+            this.SelectHost = new System.Windows.Forms.Panel();
+            this.FtpDownload = new System.Windows.Forms.ComboBox();
+            this.SelectDB = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
             this.databasePanel.SuspendLayout();
             this.backupPanel.SuspendLayout();
@@ -163,7 +182,12 @@
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.downloadPanel.SuspendLayout();
+            this.DonwloadAfterSFile.SuspendLayout();
+            this.EnterPassPanel.SuspendLayout();
+            this.SelectFileDownload.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
+            this.SelectHost.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -188,6 +212,16 @@
             this.pageTitle.Text = "Database";
             this.pageTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DataBaseBackup.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 85);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -200,6 +234,79 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(231, 227);
             this.panel2.TabIndex = 1;
+            // 
+            // logButton
+            // 
+            this.logButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.logButton.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.logButton.Image = global::DataBaseBackup.Properties.Resources.document_32xMD;
+            this.logButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.logButton.Location = new System.Drawing.Point(0, 180);
+            this.logButton.Name = "logButton";
+            this.logButton.Size = new System.Drawing.Size(231, 45);
+            this.logButton.TabIndex = 4;
+            this.logButton.Text = "Log";
+            this.logButton.UseVisualStyleBackColor = true;
+            this.logButton.Click += new System.EventHandler(this.MenuClick);
+            // 
+            // downloadDatabase
+            // 
+            this.downloadDatabase.Dock = System.Windows.Forms.DockStyle.Top;
+            this.downloadDatabase.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.downloadDatabase.Image = global::DataBaseBackup.Properties.Resources.build_Selection_32xMD;
+            this.downloadDatabase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.downloadDatabase.Location = new System.Drawing.Point(0, 135);
+            this.downloadDatabase.Name = "downloadDatabase";
+            this.downloadDatabase.Size = new System.Drawing.Size(231, 45);
+            this.downloadDatabase.TabIndex = 3;
+            this.downloadDatabase.Text = "Download DB";
+            this.downloadDatabase.UseVisualStyleBackColor = true;
+            this.downloadDatabase.Click += new System.EventHandler(this.MenuClick);
+            // 
+            // backupButton
+            // 
+            this.backupButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.backupButton.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.backupButton.Image = global::DataBaseBackup.Properties.Resources.package_32xMD;
+            this.backupButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.backupButton.Location = new System.Drawing.Point(0, 90);
+            this.backupButton.Name = "backupButton";
+            this.backupButton.Size = new System.Drawing.Size(231, 45);
+            this.backupButton.TabIndex = 2;
+            this.backupButton.Text = "Backup";
+            this.backupButton.UseVisualStyleBackColor = true;
+            this.backupButton.Click += new System.EventHandler(this.MenuClick);
+            // 
+            // serversButton
+            // 
+            this.serversButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.serversButton.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.serversButton.Image = global::DataBaseBackup.Properties.Resources.server_Remote_32xMD;
+            this.serversButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.serversButton.Location = new System.Drawing.Point(0, 45);
+            this.serversButton.Name = "serversButton";
+            this.serversButton.Size = new System.Drawing.Size(231, 45);
+            this.serversButton.TabIndex = 1;
+            this.serversButton.Tag = "";
+            this.serversButton.Text = "Servers";
+            this.serversButton.UseVisualStyleBackColor = true;
+            this.serversButton.Click += new System.EventHandler(this.MenuClick);
+            // 
+            // databaseButton
+            // 
+            this.databaseButton.Dock = System.Windows.Forms.DockStyle.Top;
+            this.databaseButton.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.databaseButton.Image = global::DataBaseBackup.Properties.Resources.database_32xLG;
+            this.databaseButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.databaseButton.Location = new System.Drawing.Point(0, 0);
+            this.databaseButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.databaseButton.Name = "databaseButton";
+            this.databaseButton.Size = new System.Drawing.Size(231, 45);
+            this.databaseButton.TabIndex = 0;
+            this.databaseButton.Tag = "";
+            this.databaseButton.Text = "Database";
+            this.databaseButton.UseVisualStyleBackColor = true;
+            this.databaseButton.Click += new System.EventHandler(this.MenuClick);
             // 
             // databasePanel
             // 
@@ -1404,88 +1511,197 @@
             // 
             this.scheduleTooltip.ToolTipTitle = "Schedule";
             // 
-            // pictureBox1
+            // downloadPanel
             // 
-            this.pictureBox1.Image = global::DataBaseBackup.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 85);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.downloadPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.downloadPanel.Controls.Add(this.DonwloadAfterSFile);
+            this.downloadPanel.Controls.Add(this.EnterPassPanel);
+            this.downloadPanel.Controls.Add(this.SelectFileDownload);
+            this.downloadPanel.Controls.Add(this.SelectHost);
+            this.downloadPanel.Location = new System.Drawing.Point(249, 103);
+            this.downloadPanel.Name = "downloadPanel";
+            this.downloadPanel.Size = new System.Drawing.Size(526, 418);
+            this.downloadPanel.TabIndex = 9;
             // 
-            // logButton
+            // DonwloadAfterSFile
             // 
-            this.logButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.logButton.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.logButton.Image = global::DataBaseBackup.Properties.Resources.document_32xMD;
-            this.logButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.logButton.Location = new System.Drawing.Point(0, 180);
-            this.logButton.Name = "logButton";
-            this.logButton.Size = new System.Drawing.Size(231, 45);
-            this.logButton.TabIndex = 4;
-            this.logButton.Text = "Log";
-            this.logButton.UseVisualStyleBackColor = true;
-            this.logButton.Click += new System.EventHandler(this.MenuClick);
+            this.DonwloadAfterSFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DonwloadAfterSFile.Controls.Add(this.DownloadProgress);
+            this.DonwloadAfterSFile.Controls.Add(this.progressBar1);
+            this.DonwloadAfterSFile.Controls.Add(this.label34);
+            this.DonwloadAfterSFile.Location = new System.Drawing.Point(260, 209);
+            this.DonwloadAfterSFile.Name = "DonwloadAfterSFile";
+            this.DonwloadAfterSFile.Size = new System.Drawing.Size(265, 208);
+            this.DonwloadAfterSFile.TabIndex = 0;
             // 
-            // downloadDatabase
+            // DownloadProgress
             // 
-            this.downloadDatabase.Dock = System.Windows.Forms.DockStyle.Top;
-            this.downloadDatabase.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.downloadDatabase.Image = global::DataBaseBackup.Properties.Resources.build_Selection_32xMD;
-            this.downloadDatabase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.downloadDatabase.Location = new System.Drawing.Point(0, 135);
-            this.downloadDatabase.Name = "downloadDatabase";
-            this.downloadDatabase.Size = new System.Drawing.Size(231, 45);
-            this.downloadDatabase.TabIndex = 3;
-            this.downloadDatabase.Text = "Download DB";
-            this.downloadDatabase.UseVisualStyleBackColor = true;
-            this.downloadDatabase.Click += new System.EventHandler(this.MenuClick);
+            this.DownloadProgress.AutoSize = true;
+            this.DownloadProgress.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
+            this.DownloadProgress.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DownloadProgress.Location = new System.Drawing.Point(130, 72);
+            this.DownloadProgress.Name = "DownloadProgress";
+            this.DownloadProgress.Size = new System.Drawing.Size(32, 17);
+            this.DownloadProgress.TabIndex = 11;
+            this.DownloadProgress.Text = "0 %";
             // 
-            // backupButton
+            // progressBar1
             // 
-            this.backupButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.backupButton.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.backupButton.Image = global::DataBaseBackup.Properties.Resources.package_32xMD;
-            this.backupButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.backupButton.Location = new System.Drawing.Point(0, 90);
-            this.backupButton.Name = "backupButton";
-            this.backupButton.Size = new System.Drawing.Size(231, 45);
-            this.backupButton.TabIndex = 2;
-            this.backupButton.Text = "Backup";
-            this.backupButton.UseVisualStyleBackColor = true;
-            this.backupButton.Click += new System.EventHandler(this.MenuClick);
+            this.progressBar1.Location = new System.Drawing.Point(27, 92);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(216, 23);
+            this.progressBar1.TabIndex = 10;
             // 
-            // serversButton
+            // label34
             // 
-            this.serversButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.serversButton.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.serversButton.Image = global::DataBaseBackup.Properties.Resources.server_Remote_32xMD;
-            this.serversButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.serversButton.Location = new System.Drawing.Point(0, 45);
-            this.serversButton.Name = "serversButton";
-            this.serversButton.Size = new System.Drawing.Size(231, 45);
-            this.serversButton.TabIndex = 1;
-            this.serversButton.Tag = "";
-            this.serversButton.Text = "Servers";
-            this.serversButton.UseVisualStyleBackColor = true;
-            this.serversButton.Click += new System.EventHandler(this.MenuClick);
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label34.Location = new System.Drawing.Point(9, 4);
+            this.label34.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(96, 21);
+            this.label34.TabIndex = 9;
+            this.label34.Text = "Download";
             // 
-            // databaseButton
+            // EnterPassPanel
             // 
-            this.databaseButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.databaseButton.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.databaseButton.Image = global::DataBaseBackup.Properties.Resources.database_32xLG;
-            this.databaseButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.databaseButton.Location = new System.Drawing.Point(0, 0);
-            this.databaseButton.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
-            this.databaseButton.Name = "databaseButton";
-            this.databaseButton.Size = new System.Drawing.Size(231, 45);
-            this.databaseButton.TabIndex = 0;
-            this.databaseButton.Tag = "";
-            this.databaseButton.Text = "Database";
-            this.databaseButton.UseVisualStyleBackColor = true;
-            this.databaseButton.Click += new System.EventHandler(this.MenuClick);
+            this.EnterPassPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EnterPassPanel.Controls.Add(this.DownloadConnection);
+            this.EnterPassPanel.Controls.Add(this.PasswordTBDownload);
+            this.EnterPassPanel.Controls.Add(this.label31);
+            this.EnterPassPanel.Controls.Add(this.ConnectB);
+            this.EnterPassPanel.Controls.Add(this.label32);
+            this.EnterPassPanel.Location = new System.Drawing.Point(260, -1);
+            this.EnterPassPanel.Name = "EnterPassPanel";
+            this.EnterPassPanel.Size = new System.Drawing.Size(265, 211);
+            this.EnterPassPanel.TabIndex = 13;
+            // 
+            // DownloadConnection
+            // 
+            this.DownloadConnection.AutoSize = true;
+            this.DownloadConnection.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
+            this.DownloadConnection.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DownloadConnection.Location = new System.Drawing.Point(173, 147);
+            this.DownloadConnection.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.DownloadConnection.Name = "DownloadConnection";
+            this.DownloadConnection.Size = new System.Drawing.Size(76, 17);
+            this.DownloadConnection.TabIndex = 12;
+            this.DownloadConnection.Text = "Not tested";
+            // 
+            // PasswordTBDownload
+            // 
+            this.PasswordTBDownload.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.PasswordTBDownload.Location = new System.Drawing.Point(27, 55);
+            this.PasswordTBDownload.Margin = new System.Windows.Forms.Padding(5, 10, 10, 5);
+            this.PasswordTBDownload.Name = "PasswordTBDownload";
+            this.PasswordTBDownload.Size = new System.Drawing.Size(223, 24);
+            this.PasswordTBDownload.TabIndex = 10;
+            this.PasswordTBDownload.UseSystemPasswordChar = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label31.Location = new System.Drawing.Point(8, 3);
+            this.label31.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(135, 21);
+            this.label31.TabIndex = 9;
+            this.label31.Text = "Enter Password";
+            // 
+            // ConnectB
+            // 
+            this.ConnectB.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.ConnectB.Location = new System.Drawing.Point(75, 98);
+            this.ConnectB.Name = "ConnectB";
+            this.ConnectB.Size = new System.Drawing.Size(130, 23);
+            this.ConnectB.TabIndex = 11;
+            this.ConnectB.Text = "Connect";
+            this.ConnectB.UseVisualStyleBackColor = true;
+            this.ConnectB.Click += new System.EventHandler(this.SelectFileB_Click);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label32.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label32.Location = new System.Drawing.Point(31, 146);
+            this.label32.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(138, 19);
+            this.label32.TabIndex = 7;
+            this.label32.Text = "Connection status:";
+            // 
+            // SelectFileDownload
+            // 
+            this.SelectFileDownload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SelectFileDownload.Controls.Add(this.button7);
+            this.SelectFileDownload.Controls.Add(this.gvFiles);
+            this.SelectFileDownload.Controls.Add(this.label33);
+            this.SelectFileDownload.Location = new System.Drawing.Point(-1, 209);
+            this.SelectFileDownload.Name = "SelectFileDownload";
+            this.SelectFileDownload.Size = new System.Drawing.Size(259, 208);
+            this.SelectFileDownload.TabIndex = 1;
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button7.Location = new System.Drawing.Point(63, 167);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(130, 23);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Download File";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // gvFiles
+            // 
+            this.gvFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvFiles.Location = new System.Drawing.Point(4, 31);
+            this.gvFiles.Name = "gvFiles";
+            this.gvFiles.Size = new System.Drawing.Size(240, 124);
+            this.gvFiles.TabIndex = 9;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label33.Location = new System.Drawing.Point(6, 5);
+            this.label33.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(91, 21);
+            this.label33.TabIndex = 8;
+            this.label33.Text = "Select File";
+            // 
+            // SelectHost
+            // 
+            this.SelectHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SelectHost.Controls.Add(this.FtpDownload);
+            this.SelectHost.Controls.Add(this.SelectDB);
+            this.SelectHost.Location = new System.Drawing.Point(-1, -1);
+            this.SelectHost.Name = "SelectHost";
+            this.SelectHost.Size = new System.Drawing.Size(259, 211);
+            this.SelectHost.TabIndex = 0;
+            // 
+            // FtpDownload
+            // 
+            this.FtpDownload.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.FtpDownload.FormattingEnabled = true;
+            this.FtpDownload.Location = new System.Drawing.Point(4, 40);
+            this.FtpDownload.Name = "FtpDownload";
+            this.FtpDownload.Size = new System.Drawing.Size(240, 27);
+            this.FtpDownload.TabIndex = 12;
+            // 
+            // SelectDB
+            // 
+            this.SelectDB.AutoSize = true;
+            this.SelectDB.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.SelectDB.Location = new System.Drawing.Point(0, 0);
+            this.SelectDB.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.SelectDB.Name = "SelectDB";
+            this.SelectDB.Size = new System.Drawing.Size(117, 21);
+            this.SelectDB.TabIndex = 7;
+            this.SelectDB.Text = "Select Server";
             // 
             // Form1
             // 
@@ -1493,9 +1709,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.downloadPanel);
+            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.logPanel);
@@ -1506,6 +1723,7 @@
             this.Text = "Database Backup";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel2.ResumeLayout(false);
             this.databasePanel.ResumeLayout(false);
             this.databasePanel.PerformLayout();
@@ -1538,7 +1756,16 @@
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.downloadPanel.ResumeLayout(false);
+            this.DonwloadAfterSFile.ResumeLayout(false);
+            this.DonwloadAfterSFile.PerformLayout();
+            this.EnterPassPanel.ResumeLayout(false);
+            this.EnterPassPanel.PerformLayout();
+            this.SelectFileDownload.ResumeLayout(false);
+            this.SelectFileDownload.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
+            this.SelectHost.ResumeLayout(false);
+            this.SelectHost.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1656,6 +1883,24 @@
         private HintedTextBox.container binFolderPath;
         private System.Windows.Forms.Button saveBinFolder;
         private System.Windows.Forms.Label applyFeedback;
+        private System.Windows.Forms.Panel downloadPanel;
+        private System.Windows.Forms.Panel SelectHost;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label SelectDB;
+        private System.Windows.Forms.Button ConnectB;
+        private System.Windows.Forms.TextBox PasswordTBDownload;
+        private System.Windows.Forms.Panel SelectFileDownload;
+        private System.Windows.Forms.ComboBox FtpDownload;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Panel EnterPassPanel;
+        private System.Windows.Forms.Panel DonwloadAfterSFile;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label DownloadConnection;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.DataGridView gvFiles;
+        private System.Windows.Forms.Label DownloadProgress;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button button7;
     }
 }
 
