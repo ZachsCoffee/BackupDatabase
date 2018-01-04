@@ -14,10 +14,11 @@ namespace DataBaseBackup.Class
     {
         private string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
         private ObjectStream ObjStr;
+        private int Id=0;
 
         public LogFile()
         {
-            ObjStr = new ObjectStream(startupPath);
+            ObjStr = new ObjectStream(startupPath);          
         }
 
         public ArrayList print()
@@ -170,6 +171,12 @@ namespace DataBaseBackup.Class
                 i++; 
             }
             return allLogs;
+        }
+        
+        public int getId()
+        {
+            Id++;
+            return Id;
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace DataBaseBackup
 {
+    
     partial class ScheduleService : ServiceBase
     {
         private ScheduleServer scheduleServer;
@@ -28,7 +29,9 @@ namespace DataBaseBackup
                 onRemoveSchedule = OnRemoveSchedule
             };
             //end initial variables
-        }
+            
+    }
+        private LogFile log1 = new LogFile();//Logfile initiation
 
         protected override void OnStart(string[] args)
         {
@@ -38,7 +41,7 @@ namespace DataBaseBackup
 
             }).Start();
         }
-
+        
         protected override void OnStop()
         {
             scheduleServer.StopServer();// stamatw ton server
@@ -129,6 +132,7 @@ namespace DataBaseBackup
                 else// NOT ok
                 {
                     //TODO: na mpainei log gia oti kati phge straba sto export.
+                    log1.UpdateLogFile(log1.getId().ToString(),"error",DateTime.Now,"export fail");//Id,Type,Datetime,Description
                 }
             }
         }
@@ -137,6 +141,9 @@ namespace DataBaseBackup
         {
             //1 connection me ton ftp
             //TODO: ama kati paei la8os prepei na mpei log, ama pane ola ok pali log
+
+            log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");//log otan ola ok
+            log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");//log otan kati paei lathos
         }
 
         private void UploadFileWithFTP(string filePath, Schedule schedule)
