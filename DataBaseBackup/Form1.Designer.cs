@@ -1539,7 +1539,7 @@
             this.DownloadProgress.AutoSize = true;
             this.DownloadProgress.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
             this.DownloadProgress.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.DownloadProgress.Location = new System.Drawing.Point(130, 72);
+            this.DownloadProgress.Location = new System.Drawing.Point(120, 74);
             this.DownloadProgress.Name = "DownloadProgress";
             this.DownloadProgress.Size = new System.Drawing.Size(32, 17);
             this.DownloadProgress.TabIndex = 11;

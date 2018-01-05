@@ -11,8 +11,8 @@ using DataBaseBackup.Server;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using Renci.SshNet.Sftp;
+using System.Threading.Tasks;
 
 namespace DataBaseBackup
 {
@@ -29,6 +29,7 @@ namespace DataBaseBackup
         Sftp sftp=null;
         ObjectStream stream = new ObjectStream("saveServer");
         List<string> Allnames = new List<string>(); //lista gia na krataw ta arxeio pou thelei na katevasei
+       
 
         //Initiation of logFile variables
 
@@ -619,8 +620,7 @@ namespace DataBaseBackup
 
         public static string getHomePath()
         {
-            // Not in .NET 2.0
-            // System.Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
+            
             if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
                 return System.Environment.GetEnvironmentVariable("HOME");
 
@@ -644,25 +644,48 @@ namespace DataBaseBackup
                 )
             );
         }
-        private void downloadWithFTP()
+        private void downloadWithFTP(string filename)
         {
-            string filename = Allnames.ElementAt(gvFiles.CurrentRow.Index);
+            
             string[] parts = FtpDownload.SelectedItem.ToString().Split(',');
             string host = parts[1];
             string port = parts[2];
             string username = parts[3];
 
             string hostName = "ftp://"+host+":"+port;
+            string url = string.Format("{0}/{1}", hostName, filename);
             try
             {
-                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(string.Format("{0}/{1}", hostName, filename)));
+                WebRequest sizeRequest = WebRequest.Create(url);
+                sizeRequest.Credentials = new NetworkCredential(username, PasswordTBDownload.Text.ToString());
+                sizeRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+                int size = (int)sizeRequest.GetResponse().ContentLength;
+
+                progressBar1.Invoke(
+                (MethodInvoker)(() => progressBar1.Maximum = size));
+
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(url));
                 request.Method = WebRequestMethods.Ftp.DownloadFile;
                 request.Credentials = new NetworkCredential(username, PasswordTBDownload.Text.ToString());
-                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                Stream responseStream = response.GetResponseStream();
-                using (var file = File.Create(getDownloadFolderPath() + @"\" + filename))
+                //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                //Stream responseStream = response.GetResponseStream();
+
+                using (Stream ftpStream = request.GetResponse().GetResponseStream())
+                using (var fileStream = File.Create(getDownloadFolderPath() + @"\" + filename))
                 {
-                    responseStream.CopyTo(file);
+                    byte[] buffer = new byte[1024];
+                    int read;
+                    while ((read = ftpStream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        fileStream.Write(buffer, 0, read);
+                        int position = (int)fileStream.Position;
+                        progressBar1.Invoke(
+                            (MethodInvoker)(() => progressBar1.Value = position));
+                        int percent = (int)(((double)progressBar1.Value / (double)progressBar1.Maximum) * 100);
+                        DownloadProgress.Text = percent + " %";
+                    }
+                    MessageBox.Show("Download Complete");
+
                 }
             }
             catch (WebException e)
@@ -673,31 +696,29 @@ namespace DataBaseBackup
 
         }
 
-        private void downloadWithSFTP()
+        private void downloadWithSFTP(string fileName)
         {
-            string fileName = Allnames.ElementAt(gvFiles.CurrentRow.Index);
+            
             string[] parts = FtpDownload.SelectedItem.ToString().Split(',');
             string host = parts[1];
             string port = parts[2];
             string username = parts[3];
-
+            
             try
             {
+                using (Stream stream = new FileStream(getDownloadFolderPath() + @"\" + fileName,FileMode.Create))
                 using (var sftp = new SftpClient(host, Convert.ToInt32(port), username, PasswordTBDownload.Text.ToString()))
                 {
                     sftp.Connect();
                     SftpFileAttributes attributes = sftp.GetAttributes("./"+fileName);
                     var files = sftp.ListDirectory("./");
-                    using (Stream file1 = File.OpenWrite(getDownloadFolderPath() + @"\" + fileName))
-                    {
-                        progressBar1.Invoke(
+                    progressBar1.Invoke(
                             (MethodInvoker)delegate { progressBar1.Maximum = (int)attributes.Size; });
-                        sftp.DownloadFile(fileName, file1,UpdateProgressBar);
+                        sftp.DownloadFile(fileName, stream,UpdateProgressBar);
                         MessageBox.Show("Download Complete");
-                    }
-
+                     
                     sftp.Disconnect();
-                    sftp.Dispose();
+                    sftp.Dispose();   
                 }
             }
             catch(Exception e)
@@ -718,7 +739,6 @@ namespace DataBaseBackup
             string host = parts[1];
             string port = parts[2];
             string username = parts[3];
-
             string hostName = "ftp://"+host+":"+port;
 
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(hostName));
@@ -738,6 +758,7 @@ namespace DataBaseBackup
                     entries = reader.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
                     reader.Dispose();
                 }
+
                 response.Close();
                 DataTable dtFiles = new DataTable();
                 dtFiles.Columns.AddRange(new DataColumn[3] { new DataColumn("Name", typeof(string)),
@@ -853,34 +874,26 @@ namespace DataBaseBackup
             string serverType = parts[0];
             if (serverType.Equals("SFTP"))
             {
-                Task.Run(() => downloadWithSFTP());
-
+                downloadWithSFTP(filename);        
             }
             else
             {
-                downloadWithFTP();
+               downloadWithFTP(filename));
             }
-            
-
-
+       
         }
 
         private void UpdateProgressBar(ulong downloaded)
         {
             progressBar1.Invoke(
-                (MethodInvoker)delegate { progressBar1.Value = (int)downloaded;});
+                (MethodInvoker)delegate { progressBar1.Value = (int)downloaded;
+                 int percent = (int)(((double)progressBar1.Value / (double)progressBar1.Maximum) * 100);
+                 DownloadProgress.Text = percent + " %";
+                });
         }
 
-      
-
-
-
+       
         // methodoi gia to download__Finish
-
-
-
-
-
 
         //END EVENT METHODS
     }

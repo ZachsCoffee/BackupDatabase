@@ -142,8 +142,8 @@ namespace DataBaseBackup
             //1 connection me ton ftp
             //TODO: ama kati paei la8os prepei na mpei log, ama pane ola ok pali log
 
-            log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");//log otan ola ok
-            log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");//log otan kati paei lathos
+            //log otan ola ok
+            //log otan kati paei lathos
         }
 
         private void UploadFileWithFTP(string filePath, Schedule schedule)
@@ -170,11 +170,12 @@ namespace DataBaseBackup
                 while (byteRead != 0);
                 fs.Close();
                 FtpStream.Close();
+                log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");
 
             }
             catch (WebException e)
             {
-                MessageBox.Show(e.Message, "Αn error occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
             }
          
 
@@ -198,6 +199,7 @@ namespace DataBaseBackup
                         client.UploadFile(stream, fi.Name);
                         client.Disconnect();
                         client.Dispose();
+                        log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");
                     }
 
                 }
@@ -205,8 +207,7 @@ namespace DataBaseBackup
             }
             catch (Exception e)
             {
-               
-                MessageBox.Show(e.Message, "Αn error occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
             }
 
 
