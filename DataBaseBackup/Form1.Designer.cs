@@ -1691,6 +1691,7 @@
             this.FtpDownload.Name = "FtpDownload";
             this.FtpDownload.Size = new System.Drawing.Size(240, 27);
             this.FtpDownload.TabIndex = 12;
+            this.FtpDownload.SelectedIndexChanged += new System.EventHandler(this.FtpDownload_SelectedIndexChanged);
             // 
             // SelectDB
             // 
@@ -1709,8 +1710,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.databasePanel);
