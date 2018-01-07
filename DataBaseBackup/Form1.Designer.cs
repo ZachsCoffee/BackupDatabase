@@ -75,6 +75,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
             this.applySchedule = new System.Windows.Forms.Button();
+            this.applyFeedback = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -141,7 +142,6 @@
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.scheduleTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.applyFeedback = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -725,6 +725,17 @@
             this.applySchedule.Text = "Apply";
             this.applySchedule.UseVisualStyleBackColor = true;
             this.applySchedule.Click += new System.EventHandler(this.ApplySchedule);
+            // 
+            // applyFeedback
+            // 
+            this.applyFeedback.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.applyFeedback.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.applyFeedback.Location = new System.Drawing.Point(11, 349);
+            this.applyFeedback.Margin = new System.Windows.Forms.Padding(10);
+            this.applyFeedback.Name = "applyFeedback";
+            this.applyFeedback.Size = new System.Drawing.Size(233, 19);
+            this.applyFeedback.TabIndex = 7;
+            this.applyFeedback.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label23
             // 
@@ -1473,18 +1484,6 @@
             // scheduleTooltip
             // 
             this.scheduleTooltip.ToolTipTitle = "Schedule";
-            // 
-            // applyFeedback
-            // 
-            this.applyFeedback.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applyFeedback.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.applyFeedback.Location = new System.Drawing.Point(11, 349);
-            this.applyFeedback.Margin = new System.Windows.Forms.Padding(10);
-            this.applyFeedback.Name = "applyFeedback";
-            this.applyFeedback.Size = new System.Drawing.Size(233, 19);
-            this.applyFeedback.TabIndex = 7;
-            this.applyFeedback.Text = "Repeat";
-            this.applyFeedback.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Form1
             // 
