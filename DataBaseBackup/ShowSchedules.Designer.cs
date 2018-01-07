@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BackupSchedules));
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.schedulesListBox = new System.Windows.Forms.ListBox();
             this.label9 = new System.Windows.Forms.Label();
             this.deleteSchedules = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // schedulesListBox
             // 
-            this.listBox1.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 17;
-            this.listBox1.Items.AddRange(new object[] {
+            this.schedulesListBox.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.schedulesListBox.FormattingEnabled = true;
+            this.schedulesListBox.ItemHeight = 17;
+            this.schedulesListBox.Items.AddRange(new object[] {
             "[minutes:hours] [d/a/t/e] [databe name] [domain name of server]"});
-            this.listBox1.Location = new System.Drawing.Point(23, 55);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(10);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(453, 344);
-            this.listBox1.TabIndex = 0;
+            this.schedulesListBox.Location = new System.Drawing.Point(23, 55);
+            this.schedulesListBox.Margin = new System.Windows.Forms.Padding(10);
+            this.schedulesListBox.Name = "schedulesListBox";
+            this.schedulesListBox.Size = new System.Drawing.Size(453, 344);
+            this.schedulesListBox.TabIndex = 0;
             // 
             // label9
             // 
@@ -77,7 +77,7 @@
             this.ClientSize = new System.Drawing.Size(628, 418);
             this.Controls.Add(this.deleteSchedules);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.schedulesListBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "BackupSchedules";
@@ -89,7 +89,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox schedulesListBox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button deleteSchedules;
     }

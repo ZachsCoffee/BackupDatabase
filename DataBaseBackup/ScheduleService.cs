@@ -22,6 +22,13 @@ namespace DataBaseBackup
         {
             InitializeComponent();
 
+            
+            
+        }
+        private LogFile log1 = new LogFile();//Logfile initiation
+
+        protected override void OnStart(string[] args)
+        {
             //initial variables
             scheduleServer = new ScheduleServer()
             {
@@ -29,12 +36,7 @@ namespace DataBaseBackup
                 onRemoveSchedule = OnRemoveSchedule
             };
             //end initial variables
-            
-    }
-        private LogFile log1 = new LogFile();//Logfile initiation
 
-        protected override void OnStart(string[] args)
-        {
             new Thread(() =>
             {
                 scheduleServer.StartServer();
