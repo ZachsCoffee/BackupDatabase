@@ -8,6 +8,11 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using System.Net;
 using DataBaseBackup.Server;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using Renci.SshNet.Sftp;
+using System.Threading.Tasks;
 
 namespace DataBaseBackup
 {
@@ -23,18 +28,26 @@ namespace DataBaseBackup
         SftpClient sftpclient;
         Sftp sftp=null;
         ObjectStream stream = new ObjectStream("saveServer");
+        List<string> Allnames = new List<string>(); //lista gia na krataw ta arxeio pou thelei na katevasei
+        string[] parts = new string[4];
+
 
         //Initiation of logFile variables
+
         private LogFile log1 = new LogFile();
         private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@"..\..\LogFiles\logV"));
         private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
 
+        public static string serverSettings; //mia static gia na krataw to server pou epelexse o xristis.
+        
         public Form1()
         {
             InitializeComponent();
+            stream.ClearFile();
+            SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
-            panels = new Panel[] {databasePanel, serversPanel, backupPanel, logPanel} ;//krata ola ta panel gia na mporeis na ta allazeis 
+            panels = new Panel[] {databasePanel, serversPanel, backupPanel, logPanel,downloadPanel} ;//krata ola ta panel gia na mporeis na ta allazeis 
             currentPanel = databasePanel;//einai to arxiko
 
             //declare gia ta panels
@@ -47,7 +60,7 @@ namespace DataBaseBackup
             serverType.SelectedIndex = 0;
 
             //VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
-            
+     
         }
         
         //CUSTOM METHODS
@@ -71,6 +84,9 @@ namespace DataBaseBackup
                     if (logVariables.GetVariable("errorLogs").ToString() == "true") checkBox1.Checked = true; else checkBox1.Checked = false;
                     if (logVariables.GetVariable("successLogs").ToString() == "true") checkBox3.Checked = true; else checkBox3.Checked = false;
                     if (logVariables.GetVariable("infoLogs").ToString() == "true") checkBox2.Checked = true; else checkBox2.Checked = false;
+                    break;
+                case "downloadDatabase":
+                    SwitchPanels(4, "Download DB");
                     break;
             }
         }
@@ -182,7 +198,13 @@ namespace DataBaseBackup
 
         private Schedule BuildSchedule()
         {
-            Ftp ftpServer = new Ftp();//edw bale ta xaraktitistika tou ftp server, wste meta na ta parei to scedule, ola ta pedia
+            string[] parts = serverSettings.Split(',');
+            string serverType = parts[0];
+            string host = parts[1];
+            string port = parts[2];
+            string username = parts[3];
+
+            Ftp ftpServer = new Ftp(serverType,host,port,username);//edw bale ta xaraktitistika tou ftp server, wste meta na ta parei to scedule, ola ta pedia
 
             Schedule schedule = new Schedule()
             {
@@ -229,7 +251,23 @@ namespace DataBaseBackup
         private void makeAction_Click(object sender, EventArgs e)
         {
             //ResetServerActionValues();
-            testConnectionSFTP();
+            if(domainName.Text.ToString().Equals("") || username.Text.ToString().Equals("") || password.Text.ToString().Equals(""))
+            {
+                MessageBox.Show("Please fill all fields");
+                
+            }
+            else
+            {
+                if (serverType.SelectedItem.ToString().Equals("SFTP"))
+                {
+                    testConnectionSFTP();
+                }
+                else
+                {
+                    testConnectionFTP();
+                }
+            }
+            
         }
 
         private void cancelAction_Click(object sender, EventArgs e)
@@ -281,6 +319,16 @@ namespace DataBaseBackup
                 stream.WriteLines(sftp.ToString());
                 serversListBox.Items.Add(sftp.ToString());
             }
+            ArrayList servers = stream.ReadLines();
+            ftpServers.Items.Clear();
+            foreach (Object obj in servers)
+                ftpServers.Items.Add(obj);
+            FtpDownload.Items.Clear();
+            foreach(Object obj in servers)
+                FtpDownload.Items.Add(obj);
+            saveServer.Enabled = false;
+            SetConnectionStatus(ConnectionStatus.NotTested);
+
 
         }
 
@@ -498,7 +546,368 @@ namespace DataBaseBackup
             }
         }
 
+        private void browseDatabase_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog() { Multiselect = false, ValidateNames = true, Filter = "All files|*.*" })
+            {
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    FileInfo fi = new FileInfo(ofd.FileName);
+                    databaseFilePath.Text = fi.FullName;   
+                }
+                string selectFtp=ftpServers.GetItemText(this.ftpServers.SelectedItem);
+                serverSettings = selectFtp;
+                Upload up = new Upload();
+                up.ShowDialog();
+                
+            }
+
+
+        }
+
+        private void SelectFileB_Click(object sender, EventArgs e)
+        {
+            if(FtpDownload.SelectedItem == null)
+            {
+                MessageBox.Show("There is no saved server.", "No Server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if(FtpDownload.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a server to connect.", "Select Server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (PasswordTBDownload.Text.ToString().Equals(""))
+            {
+                MessageBox.Show("Please enter the password.", "Password", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            string[] parts = FtpDownload.SelectedItem.ToString().Split(',');
+            string serverType = parts[0];
+            if (serverType.Equals("SFTP"))
+            {
+                listingWithSFTP();
+            }
+            else
+            {
+                listingWithFTP();
+            }
+        }
+
+
+        // methodoi gia to download__Start
+        private void SetConnectionDownloadStatus(ConnectionStatus status)
+        {
+            switch (status)
+            {
+                case ConnectionStatus.NotTested:
+                    DownloadConnection.ForeColor = System.Drawing.Color.Black;
+                    DownloadConnection.Text = "Not tested";
+                    break;
+                case ConnectionStatus.OK:
+                    DownloadConnection.ForeColor = System.Drawing.Color.Green;
+                    DownloadConnection.Text = "OK";
+                    break;
+                case ConnectionStatus.Failed:
+                    DownloadConnection.ForeColor = System.Drawing.Color.Red;
+                    DownloadConnection.Text = "FAILED";
+                    break;
+                case ConnectionStatus.Testing:
+                    DownloadConnection.ForeColor = System.Drawing.Color.Black;
+                    DownloadConnection.Text = "Testing...";
+                    break;
+            }
+        }
+
+        public static string getHomePath()
+        {
+            
+            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+                return System.Environment.GetEnvironmentVariable("HOME");
+
+            return System.Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
+        }
+
+        // methodoi gia na katevasw ston fakelo Downloads
+        public static string getDownloadFolderPath()
+        {
+            if (System.Environment.OSVersion.Platform == System.PlatformID.Unix)
+            {
+                string pathDownload = System.IO.Path.Combine(getHomePath(), "Downloads");
+                return pathDownload;
+            }
+
+            return System.Convert.ToString(
+                Microsoft.Win32.Registry.GetValue(
+                     @"HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders"
+                    , "{374DE290-123F-4565-9164-39C4925E467B}"
+                    , String.Empty
+                )
+            );
+        }
+        private void downloadWithFTP(string filename)
+        {
+            
+            string host = parts[1];
+            string port = parts[2];
+            string username = parts[3];
+
+            string hostName = "ftp://"+host+":"+port;
+            string url = string.Format("{0}/{1}", hostName, filename);
+            try
+            {
+                WebRequest sizeRequest = WebRequest.Create(url);
+                sizeRequest.Credentials = new NetworkCredential(username, PasswordTBDownload.Text.ToString());
+                sizeRequest.Method = WebRequestMethods.Ftp.GetFileSize;
+                int size = (int)sizeRequest.GetResponse().ContentLength;
+                progressBar1.Invoke(
+                (MethodInvoker)(() => progressBar1.Maximum = size));
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(url));
+                request.Method = WebRequestMethods.Ftp.DownloadFile;
+                request.Credentials = new NetworkCredential(username, PasswordTBDownload.Text.ToString());
+                request.KeepAlive = true;
+                request.UsePassive = true;
+                //FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                //Stream responseStream = response.GetResponseStream();
+
+                using (Stream ftpStream = request.GetResponse().GetResponseStream())
+                using (var fileStream = File.Create(getDownloadFolderPath() + @"\" + filename))
+                {
+                    byte[] buffer = new byte[10240];
+                    int read;
+                    while ((read = ftpStream.Read(buffer, 0, buffer.Length)) > 0)
+                    {
+                        fileStream.Write(buffer, 0, read);
+                        int position = (int)fileStream.Position;
+                        int percent = (int)(((float)read / (float)fileStream.Length) * 100);
+                        progressBar1.Invoke(
+                        (MethodInvoker)(() => progressBar1.Value = position));
+                        DownloadProgress.Invoke(
+                        (MethodInvoker)(() => DownloadProgress.Text = percent+"%"));
+                        
+                    }
+                    MessageBox.Show("Download Complete");
+                    ftpStream.Close();
+
+
+                }
+            }
+            catch (Exception e)
+            { /*
+                String status = ((FtpWebResponse)e.Response).StatusDescription;
+                MessageBox.Show(status, "Αn Εrror Οccurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                */
+                MessageBox.Show(e.Message, "Αn Εrror Οccurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void downloadWithSFTP(string fileName)
+        {
+            
+            string host = parts[1];
+            string port = parts[2];
+            string username = parts[3];
+            
+            try
+            {
+                using (Stream stream = new FileStream(getDownloadFolderPath() + @"\" + fileName,FileMode.Create))
+                using (var sftp = new SftpClient(host, Convert.ToInt32(port), username, PasswordTBDownload.Text.ToString()))
+                {
+                    sftp.Connect();
+                    SftpFileAttributes attributes = sftp.GetAttributes("./"+fileName);
+                    var files = sftp.ListDirectory("./");
+                    progressBar1.Invoke(
+                            (MethodInvoker)delegate { progressBar1.Maximum = (int)attributes.Size; });
+                        sftp.DownloadFile(fileName, stream,UpdateProgressBar);
+                        MessageBox.Show("Download Complete");
+                     
+                    sftp.Disconnect();
+                    sftp.Dispose();   
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.Message, "Αn Εrror Οccurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+         
+           
+        }
+
+        private void listingWithFTP()
+        {
+            if (Allnames.Count > 0)
+            {
+                Allnames.Clear();
+            }
+            
+            string host = parts[1];
+            string port = parts[2];
+            string username = parts[3];
+            string hostName = "ftp://"+host+":"+port;
+
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(hostName));
+            request.UsePassive = false;
+            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
+            request.Credentials = new NetworkCredential(username,PasswordTBDownload.Text.ToString());
+            request.KeepAlive = true;
+
+            try
+            {
+                FtpWebResponse response = (FtpWebResponse)request.GetResponse();
+                List<string> entries = new List<string>();
+                Allnames = new List<string>();
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                {
+                    //Read the Response as String and split using New Line character.
+                    entries = reader.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                    reader.Dispose();
+                }
+
+                response.Close();
+                DataTable dtFiles = new DataTable();
+                dtFiles.Columns.AddRange(new DataColumn[3] { new DataColumn("Name", typeof(string)),
+                                                    new DataColumn("Size", typeof(decimal)),
+                                                    new DataColumn("Date", typeof(string))});
+                foreach (string entry in entries)
+                {
+                    string[] splits = entry.Split(new string[] { " ", }, StringSplitOptions.RemoveEmptyEntries);
+
+                    //Determine whether entry is for File or Directory.
+                    bool isFile = splits[0].Substring(0, 1) != "d";
+                    bool isDirectory = splits[0].Substring(0, 1) == "d";
+
+                    //If entry is for File, add details to DataTable.
+                    if (isFile)
+                    {
+                        dtFiles.Rows.Add();
+                        dtFiles.Rows[dtFiles.Rows.Count - 1]["Size"] = decimal.Parse(splits[4]) / 1024;
+                        dtFiles.Rows[dtFiles.Rows.Count - 1]["Date"] = string.Join(" ", splits[5], splits[6], splits[7]);
+                        string name = string.Empty;
+                        for (int i = 8; i < splits.Length; i++)
+                        {
+                            name = string.Join(" ", name, splits[i]);
+                        }
+                        Allnames.Add(name.Trim());
+                        dtFiles.Rows[dtFiles.Rows.Count - 1]["Name"] = name.Trim();
+                    }
+                }
+                gvFiles.DataSource = dtFiles;
+                gvFiles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                gvFiles.MultiSelect = false;
+                SetConnectionDownloadStatus(ConnectionStatus.OK);
+                SetDownloadPanelVisible();
+                //gvFiles.Columns[0].Selected = true;
+
+            }
+            catch (WebException ex)
+            {
+                SetConnectionDownloadStatus(ConnectionStatus.Failed);
+                MessageBox.Show(ex.Message, "Αn Εrror Οccurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void listingWithSFTP()
+        {
+            if (Allnames.Count > 0)
+            {
+                Allnames.Clear();
+            }
+
+            string host = parts[1];
+            string port = parts[2];
+            string username = parts[3];
+            try
+            {
+                using (var sftp = new SftpClient(host, Convert.ToInt32(port), username, PasswordTBDownload.Text.ToString()))
+                {
+                    sftp.Connect();
+                    var files = sftp.ListDirectory("./");
+                    DataTable dtFiles = new DataTable();
+                    dtFiles.Columns.AddRange(new DataColumn[3] { new DataColumn("Name", typeof(string)),
+                                                    new DataColumn("Size", typeof(decimal)),
+                                                    new DataColumn("Date", typeof(string))});
+                    foreach (var file in files)
+                    {
+                        if (file.IsRegularFile)
+                        {
+                            dtFiles.Rows.Add();
+                            dtFiles.Rows[dtFiles.Rows.Count - 1]["Size"] = decimal.Parse(file.Length.ToString());
+                            dtFiles.Rows[dtFiles.Rows.Count - 1]["Date"] = file.LastAccessTime;
+                            dtFiles.Rows[dtFiles.Rows.Count - 1]["Name"] = file.Name;
+                            Allnames.Add(file.Name);
+                        }
+                    }
+                    gvFiles.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    gvFiles.MultiSelect = false;
+                    gvFiles.DataSource = dtFiles;
+                    sftp.Disconnect();
+                    sftp.Dispose();
+                    SetConnectionDownloadStatus(ConnectionStatus.OK);
+                    SetDownloadPanelVisible();
+
+
+                }
+            
+            }
+            catch(Exception e)
+            {
+                SetConnectionDownloadStatus(ConnectionStatus.Failed);
+                MessageBox.Show(e.Message, "Αn Εrror Οccurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void SetDownloadPanelNotVisble()
+        {
+            SelectFileDownload.Visible = false;
+            DonwloadAfterSFile.Visible = false;
+        }
+        private void SetDownloadPanelVisible()
+        {
+            SelectFileDownload.Visible = true;
+            DonwloadAfterSFile.Visible = true;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            if(gvFiles.SelectedRows.Count < 0)
+            {
+                MessageBox.Show("Please select a file to download", "Select A File", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            string filename = Allnames.ElementAt(gvFiles.CurrentRow.Index);
+            
+            string serverType = parts[0];
+            if (serverType.Equals("SFTP"))
+            {
+                Task.Run(() => downloadWithSFTP(filename));        
+            }
+            else
+            {
+                Task.Run( () => downloadWithFTP(filename));
+            }
+       
+        }
+
+        private void UpdateProgressBar(ulong downloaded)
+        {
+            progressBar1.Invoke(
+                (MethodInvoker)delegate { progressBar1.Value = (int)downloaded;
+                 int percent = (int)(((double)progressBar1.Value / (double)progressBar1.Maximum) * 100);
+                 DownloadProgress.Text = percent + " %";
+                });
+        }
+
+        private void FtpDownload_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            parts = FtpDownload.SelectedItem.ToString().Split(',');
+            SetDownloadPanelNotVisble();
+        }
+
+     
+        // methodoi gia to download__Finish
 
         //END EVENT METHODS
-    }      
+    }
 }

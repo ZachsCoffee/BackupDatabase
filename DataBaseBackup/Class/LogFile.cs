@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -14,10 +15,13 @@ namespace DataBaseBackup.Class
     {
         private string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
         private ObjectStream ObjStr;
+        private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@"..\..\LogFiles\logV"));
+        private int Id = 0;
 
         public LogFile()
         {
             ObjStr = new ObjectStream(startupPath);
+            Int32.Parse(logVariables.GetVariable("Id").ToString());
         }
 
         public ArrayList print()
@@ -42,13 +46,14 @@ namespace DataBaseBackup.Class
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
             };
-            using (var message = new MailMessage(fromAddress, toAddress)
             {
-                Subject = subject,
-                Body = body
-            })
-            {
-                smtp.Send(message);
+                MailMessage message = new MailMessage();
+                message.To.Add(to);
+                message.From = fromAddress;
+                message.Subject = subject;
+                message.Body = body;
+                smtp.SendAsync(message, "Test");
+
             }
         }
 
@@ -169,6 +174,13 @@ namespace DataBaseBackup.Class
                 i++; 
             }
             return allLogs;
+        }
+        
+        public int getId()
+        {
+            Id = Int32.Parse(logVariables.GetVariable("Id").ToString());
+            logVariables.PutVariable("Id", ++Id);
+            return Id++;
         }
     }
 }

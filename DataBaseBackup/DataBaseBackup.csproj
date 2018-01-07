@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.10.1.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="HintedTextBox">
       <HintPath>E:\Dropbox\C# Libs\HintedTextBox.dll</HintPath>
     </Reference>
@@ -82,6 +85,12 @@
     <Compile Include="ShowSchedules.Designer.cs">
       <DependentUpon>ShowSchedules.cs</DependentUpon>
     </Compile>
+    <Compile Include="Upload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Upload.Designer.cs">
+      <DependentUpon>Upload.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,6 +106,9 @@
     </Compile>
     <EmbeddedResource Include="ShowSchedules.resx">
       <DependentUpon>ShowSchedules.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Upload.resx">
+      <DependentUpon>Upload.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -141,6 +153,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\HintedTextBox.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ionic\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -142,6 +142,24 @@
             this.manualBackupTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.scheduleTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.downloadPanel = new System.Windows.Forms.Panel();
+            this.DonwloadAfterSFile = new System.Windows.Forms.Panel();
+            this.DownloadProgress = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label34 = new System.Windows.Forms.Label();
+            this.EnterPassPanel = new System.Windows.Forms.Panel();
+            this.DownloadConnection = new System.Windows.Forms.Label();
+            this.PasswordTBDownload = new System.Windows.Forms.TextBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.ConnectB = new System.Windows.Forms.Button();
+            this.label32 = new System.Windows.Forms.Label();
+            this.SelectFileDownload = new System.Windows.Forms.Panel();
+            this.button7 = new System.Windows.Forms.Button();
+            this.gvFiles = new System.Windows.Forms.DataGridView();
+            this.label33 = new System.Windows.Forms.Label();
+            this.SelectHost = new System.Windows.Forms.Panel();
+            this.FtpDownload = new System.Windows.Forms.ComboBox();
+            this.SelectDB = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -164,6 +182,12 @@
             this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.downloadPanel.SuspendLayout();
+            this.DonwloadAfterSFile.SuspendLayout();
+            this.EnterPassPanel.SuspendLayout();
+            this.SelectFileDownload.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).BeginInit();
+            this.SelectHost.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -735,6 +759,7 @@
             this.applyFeedback.Name = "applyFeedback";
             this.applyFeedback.Size = new System.Drawing.Size(233, 19);
             this.applyFeedback.TabIndex = 7;
+            this.applyFeedback.Text = "Repeat";
             this.applyFeedback.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label23
@@ -813,6 +838,7 @@
             this.browseDatabase.TabIndex = 9;
             this.browseDatabase.Text = "Browse";
             this.browseDatabase.UseVisualStyleBackColor = true;
+            this.browseDatabase.Click += new System.EventHandler(this.browseDatabase_Click);
             // 
             // backupDatabaseName
             // 
@@ -1485,18 +1511,212 @@
             // 
             this.scheduleTooltip.ToolTipTitle = "Schedule";
             // 
+            // downloadPanel
+            // 
+            this.downloadPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.downloadPanel.Controls.Add(this.DonwloadAfterSFile);
+            this.downloadPanel.Controls.Add(this.EnterPassPanel);
+            this.downloadPanel.Controls.Add(this.SelectFileDownload);
+            this.downloadPanel.Controls.Add(this.SelectHost);
+            this.downloadPanel.Location = new System.Drawing.Point(249, 103);
+            this.downloadPanel.Name = "downloadPanel";
+            this.downloadPanel.Size = new System.Drawing.Size(526, 418);
+            this.downloadPanel.TabIndex = 9;
+            // 
+            // DonwloadAfterSFile
+            // 
+            this.DonwloadAfterSFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.DonwloadAfterSFile.Controls.Add(this.DownloadProgress);
+            this.DonwloadAfterSFile.Controls.Add(this.progressBar1);
+            this.DonwloadAfterSFile.Controls.Add(this.label34);
+            this.DonwloadAfterSFile.Location = new System.Drawing.Point(260, 209);
+            this.DonwloadAfterSFile.Name = "DonwloadAfterSFile";
+            this.DonwloadAfterSFile.Size = new System.Drawing.Size(265, 208);
+            this.DonwloadAfterSFile.TabIndex = 0;
+            // 
+            // DownloadProgress
+            // 
+            this.DownloadProgress.AutoSize = true;
+            this.DownloadProgress.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
+            this.DownloadProgress.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DownloadProgress.Location = new System.Drawing.Point(120, 74);
+            this.DownloadProgress.Name = "DownloadProgress";
+            this.DownloadProgress.Size = new System.Drawing.Size(32, 17);
+            this.DownloadProgress.TabIndex = 11;
+            this.DownloadProgress.Text = "0 %";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(27, 92);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(216, 23);
+            this.progressBar1.TabIndex = 10;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label34.Location = new System.Drawing.Point(9, 4);
+            this.label34.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(96, 21);
+            this.label34.TabIndex = 9;
+            this.label34.Text = "Download";
+            // 
+            // EnterPassPanel
+            // 
+            this.EnterPassPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.EnterPassPanel.Controls.Add(this.DownloadConnection);
+            this.EnterPassPanel.Controls.Add(this.PasswordTBDownload);
+            this.EnterPassPanel.Controls.Add(this.label31);
+            this.EnterPassPanel.Controls.Add(this.ConnectB);
+            this.EnterPassPanel.Controls.Add(this.label32);
+            this.EnterPassPanel.Location = new System.Drawing.Point(260, -1);
+            this.EnterPassPanel.Name = "EnterPassPanel";
+            this.EnterPassPanel.Size = new System.Drawing.Size(265, 211);
+            this.EnterPassPanel.TabIndex = 13;
+            // 
+            // DownloadConnection
+            // 
+            this.DownloadConnection.AutoSize = true;
+            this.DownloadConnection.Font = new System.Drawing.Font("Century Gothic", 10.25F, System.Drawing.FontStyle.Bold);
+            this.DownloadConnection.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DownloadConnection.Location = new System.Drawing.Point(173, 147);
+            this.DownloadConnection.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.DownloadConnection.Name = "DownloadConnection";
+            this.DownloadConnection.Size = new System.Drawing.Size(76, 17);
+            this.DownloadConnection.TabIndex = 12;
+            this.DownloadConnection.Text = "Not tested";
+            // 
+            // PasswordTBDownload
+            // 
+            this.PasswordTBDownload.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.PasswordTBDownload.Location = new System.Drawing.Point(27, 55);
+            this.PasswordTBDownload.Margin = new System.Windows.Forms.Padding(5, 10, 10, 5);
+            this.PasswordTBDownload.Name = "PasswordTBDownload";
+            this.PasswordTBDownload.Size = new System.Drawing.Size(223, 24);
+            this.PasswordTBDownload.TabIndex = 10;
+            this.PasswordTBDownload.UseSystemPasswordChar = true;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label31.Location = new System.Drawing.Point(8, 3);
+            this.label31.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(135, 21);
+            this.label31.TabIndex = 9;
+            this.label31.Text = "Enter Password";
+            // 
+            // ConnectB
+            // 
+            this.ConnectB.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.ConnectB.Location = new System.Drawing.Point(75, 98);
+            this.ConnectB.Name = "ConnectB";
+            this.ConnectB.Size = new System.Drawing.Size(130, 23);
+            this.ConnectB.TabIndex = 11;
+            this.ConnectB.Text = "Connect";
+            this.ConnectB.UseVisualStyleBackColor = true;
+            this.ConnectB.Click += new System.EventHandler(this.SelectFileB_Click);
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label32.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label32.Location = new System.Drawing.Point(31, 146);
+            this.label32.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(138, 19);
+            this.label32.TabIndex = 7;
+            this.label32.Text = "Connection status:";
+            // 
+            // SelectFileDownload
+            // 
+            this.SelectFileDownload.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SelectFileDownload.Controls.Add(this.button7);
+            this.SelectFileDownload.Controls.Add(this.gvFiles);
+            this.SelectFileDownload.Controls.Add(this.label33);
+            this.SelectFileDownload.Location = new System.Drawing.Point(-1, 209);
+            this.SelectFileDownload.Name = "SelectFileDownload";
+            this.SelectFileDownload.Size = new System.Drawing.Size(259, 208);
+            this.SelectFileDownload.TabIndex = 1;
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("Century Gothic", 9.25F);
+            this.button7.Location = new System.Drawing.Point(63, 167);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(130, 23);
+            this.button7.TabIndex = 12;
+            this.button7.Text = "Download File";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // gvFiles
+            // 
+            this.gvFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gvFiles.Location = new System.Drawing.Point(4, 31);
+            this.gvFiles.Name = "gvFiles";
+            this.gvFiles.Size = new System.Drawing.Size(240, 124);
+            this.gvFiles.TabIndex = 9;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label33.Location = new System.Drawing.Point(6, 5);
+            this.label33.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(91, 21);
+            this.label33.TabIndex = 8;
+            this.label33.Text = "Select File";
+            // 
+            // SelectHost
+            // 
+            this.SelectHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SelectHost.Controls.Add(this.FtpDownload);
+            this.SelectHost.Controls.Add(this.SelectDB);
+            this.SelectHost.Location = new System.Drawing.Point(-1, -1);
+            this.SelectHost.Name = "SelectHost";
+            this.SelectHost.Size = new System.Drawing.Size(259, 211);
+            this.SelectHost.TabIndex = 0;
+            // 
+            // FtpDownload
+            // 
+            this.FtpDownload.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.FtpDownload.FormattingEnabled = true;
+            this.FtpDownload.Location = new System.Drawing.Point(4, 40);
+            this.FtpDownload.Name = "FtpDownload";
+            this.FtpDownload.Size = new System.Drawing.Size(240, 27);
+            this.FtpDownload.TabIndex = 12;
+            this.FtpDownload.SelectedIndexChanged += new System.EventHandler(this.FtpDownload_SelectedIndexChanged);
+            // 
+            // SelectDB
+            // 
+            this.SelectDB.AutoSize = true;
+            this.SelectDB.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.SelectDB.Location = new System.Drawing.Point(0, 0);
+            this.SelectDB.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
+            this.SelectDB.Name = "SelectDB";
+            this.SelectDB.Size = new System.Drawing.Size(117, 21);
+            this.SelectDB.TabIndex = 7;
+            this.SelectDB.Text = "Select Server";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.backupPanel);
-            this.Controls.Add(this.databasePanel);
-            this.Controls.Add(this.logPanel);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.downloadPanel);
+            this.Controls.Add(this.backupPanel);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.databasePanel);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.logPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -1537,6 +1757,16 @@
             this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.downloadPanel.ResumeLayout(false);
+            this.DonwloadAfterSFile.ResumeLayout(false);
+            this.DonwloadAfterSFile.PerformLayout();
+            this.EnterPassPanel.ResumeLayout(false);
+            this.EnterPassPanel.PerformLayout();
+            this.SelectFileDownload.ResumeLayout(false);
+            this.SelectFileDownload.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gvFiles)).EndInit();
+            this.SelectHost.ResumeLayout(false);
+            this.SelectHost.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1654,6 +1884,24 @@
         private HintedTextBox.container binFolderPath;
         private System.Windows.Forms.Button saveBinFolder;
         private System.Windows.Forms.Label applyFeedback;
+        private System.Windows.Forms.Panel downloadPanel;
+        private System.Windows.Forms.Panel SelectHost;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label SelectDB;
+        private System.Windows.Forms.Button ConnectB;
+        private System.Windows.Forms.TextBox PasswordTBDownload;
+        private System.Windows.Forms.Panel SelectFileDownload;
+        private System.Windows.Forms.ComboBox FtpDownload;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Panel EnterPassPanel;
+        private System.Windows.Forms.Panel DonwloadAfterSFile;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label DownloadConnection;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.DataGridView gvFiles;
+        private System.Windows.Forms.Label DownloadProgress;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.Button button7;
     }
 }
 
