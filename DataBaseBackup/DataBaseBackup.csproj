@@ -154,5 +154,8 @@
   <ItemGroup>
     <Content Include="Resources\HintedTextBox.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ionic\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

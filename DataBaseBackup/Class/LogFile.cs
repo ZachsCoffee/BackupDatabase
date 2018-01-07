@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -14,11 +15,13 @@ namespace DataBaseBackup.Class
     {
         private string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
         private ObjectStream ObjStr;
-        private int Id=0;
+        private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@"..\..\LogFiles\logV"));
+        private int Id = 0;
 
         public LogFile()
         {
-            ObjStr = new ObjectStream(startupPath);          
+            ObjStr = new ObjectStream(startupPath);
+            Int32.Parse(logVariables.GetVariable("Id").ToString());
         }
 
         public ArrayList print()
@@ -175,8 +178,9 @@ namespace DataBaseBackup.Class
         
         public int getId()
         {
-            Id++;
-            return Id;
+            Id = Int32.Parse(logVariables.GetVariable("Id").ToString());
+            logVariables.PutVariable("Id", ++Id);
+            return Id++;
         }
     }
 }
