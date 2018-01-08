@@ -45,21 +45,27 @@ namespace DataBaseBackup
         {
             InitializeComponent();
 
-            //gia to service
-            ServiceController serviceController = new ServiceController("ScheduleService");
-            switch (serviceController.Status)
+            try
             {
-                case ServiceControllerStatus.Paused:
-                    serviceController.Start();
-                    break;
-                case ServiceControllerStatus.Stopped:
-                    serviceController.Start();
-                    break;
+                //gia to service
+                ServiceController serviceController = new ServiceController("ScheduleService");
+                switch (serviceController.Status)
+                {
+                    case ServiceControllerStatus.Paused:
+                        serviceController.Start();
+                        break;
+                    case ServiceControllerStatus.Stopped:
+                        serviceController.Start();
+                        break;
+                }
+                serviceController.Refresh();
+                //end service
             }
-            serviceController.Refresh();
-            //end service
+            catch (Exception ex)
+            {
 
-
+            }
+            
             stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
@@ -985,11 +991,11 @@ namespace DataBaseBackup
             int code = ExportDB.Export(binFolderPath.TextBox.Text,userNameTextBox.Text,passwordTextBox.Text, dbNameExport.Text,out string exportFile);
             if (code == 0)
             {
-
+                MessageBox.Show("Export complete successful.", "Export complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Export Failed!");
+                MessageBox.Show("Please make sure, username, passwrod, database name, and bin folder path is correct.", "Export failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
