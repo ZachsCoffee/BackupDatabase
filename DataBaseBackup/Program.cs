@@ -17,16 +17,19 @@ namespace DataBaseBackup
         [STAThread]
         static void Main(string[] args)
         {
-           
+            
             if (System.Environment.UserInteractive)
             {
+                ScheduleServiceInstaller installer;
                 string parameter = string.Concat(args);
                 switch (parameter)
                 {
                     case "--install":
+                        installer = new ScheduleServiceInstaller();
                         ManagedInstallerClass.InstallHelper(new string[] { Assembly.GetExecutingAssembly().Location });
                         break;
                     case "--uninstall":
+                        installer = new ScheduleServiceInstaller();
                         ManagedInstallerClass.InstallHelper(new string[] { "/u", Assembly.GetExecutingAssembly().Location });
                         break;
                 }
