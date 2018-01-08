@@ -441,6 +441,11 @@ namespace DataBaseBackup
 
         private void ApplySchedule(object sender, EventArgs e)
         {
+            string selectFtp = ftpServers.GetItemText(this.ftpServers.SelectedItem);
+            serverSettings = selectFtp;
+            Upload up = new Upload();
+            up.ShowDialog();
+
             //validation
             if (this.ValidateChildren())//ama petuxan ola ta validation tote kanonika ginete to schedule
             {
@@ -564,10 +569,7 @@ namespace DataBaseBackup
                     FileInfo fi = new FileInfo(ofd.FileName);
                     databaseFilePath.Text = fi.FullName;   
                 }
-                string selectFtp=ftpServers.GetItemText(this.ftpServers.SelectedItem);
-                serverSettings = selectFtp;
-                Upload up = new Upload();
-                up.ShowDialog();
+                
                 
             }
 
