@@ -913,7 +913,67 @@ namespace DataBaseBackup
             SetDownloadPanelNotVisble();
         }
 
-     
+        private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
+        {
+
+        }
+
+        private void browseBinFolder_Click(object sender, EventArgs e)
+        {
+  
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                binFolderPath.TextBox.Text = folderBrowserDialog1.SelectedPath;
+            }
+        }
+
+
+        private void browseImportDatabase_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.Title = "C# Corner Open File Dialog";
+            openFileDialog1.InitialDirectory = @"c:\";
+            openFileDialog1.Filter = "All files (*.*)|*.*|All files (*.*)|*.*";
+            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.RestoreDirectory = true;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                importDatabasePath.Text = openFileDialog1.FileName;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)//refresh button gia to logpanel
+        {
+            log1.updateGridView(dataGridView1);
+        }
+
+
+        string exportPath;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
+            {
+                exportPath = folderBrowserDialog2.SelectedPath;
+            }
+        }
+
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            int code = ExportDB.Export(binFolderPath.TextBox.Text,userNameTextBox.Text,passwordTextBox.Text, dbNameExport.Text,out string exportFile);
+            if (code == 0)
+            {
+
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("Export Failed!");
+            }
+        }
+
+
+
+
+
         // methodoi gia to download__Finish
 
         //END EVENT METHODS

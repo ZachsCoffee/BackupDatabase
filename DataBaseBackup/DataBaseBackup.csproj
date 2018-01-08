@@ -157,6 +157,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\HintedTextBox.dll" />
+    <None Include="Resources\ic_refresh_48px-128.png" />
+    <None Include="Resources\main-qimg-ae92b32bf2255fc758cf0ea8e4b76b18-c.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Ionic\" />

@@ -103,9 +103,29 @@ namespace DataBaseBackup.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ic_refresh_48px_128 {
+            get {
+                object obj = ResourceManager.GetObject("ic_refresh_48px-128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logo {
             get {
                 object obj = ResourceManager.GetObject("logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap main_qimg_ae92b32bf2255fc758cf0ea8e4b76b18_c {
+            get {
+                object obj = ResourceManager.GetObject("main-qimg-ae92b32bf2255fc758cf0ea8e4b76b18-c", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
