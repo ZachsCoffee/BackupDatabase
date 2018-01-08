@@ -46,7 +46,7 @@ namespace DataBaseBackup
         public Form1()
         {
             InitializeComponent();
-            FillServerListBox();
+            Fillinit();
             try
             {
                 //gia to service
@@ -68,7 +68,7 @@ namespace DataBaseBackup
 
             }
             
-            //stream.ClearFile();
+            stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
@@ -128,12 +128,18 @@ namespace DataBaseBackup
         }
 
 
-        public void FillServerListBox()
+        public void Fillinit()
         {
             ArrayList list = stream.ReadLines();
-            foreach (Object obj in list)
+            foreach (Object obj in list) {
                 serversListBox.Items.Add(obj);
+                ftpServers.Items.Add(obj);
+                FtpDownload.Items.Add(obj);
+            }
+                
+            
         }
+       
 
 
         public static ConnectionStatus testConnectionFTP(string domainName, string port, string username, string password)
@@ -220,6 +226,11 @@ namespace DataBaseBackup
                 {
                     MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
 
                 if (sftpclient.IsConnected) //elenxos gia to connection
                 {
@@ -274,14 +285,23 @@ namespace DataBaseBackup
         private void newFtpServer_Click(object sender, EventArgs e)
         {
             actionTitle.Text = "New server";
-
             configServersPanel.Visible = true;
+            domainName.Text = "";
+            username.Text = "";
+            password.Text = "";
         }
 
         private void editFtpServer_Click(object sender, EventArgs e)
         {
             actionTitle.Text = "Edit server";
             configServersPanel.Visible = true;
+            string[] line=serversListBox.SelectedItem.ToString().Split(',');
+            serverType.SelectedItem = line[0];
+            domainName.Text = line[1];
+            port.Value = Convert.ToUInt32(line[2]);
+            username.Text = line[3];
+            password.Text = "";
+
 
         }
 
