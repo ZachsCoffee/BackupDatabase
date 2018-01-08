@@ -38,7 +38,7 @@ namespace DataBaseBackup
 
         private LogFile log1 = new LogFile();
         private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));
-        private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@".\var\genV"));
+        private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
 
         public static string serverSettings; //mia static gia na krataw to server pou epelexse o xristis.
       
