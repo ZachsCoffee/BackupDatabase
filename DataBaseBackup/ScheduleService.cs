@@ -28,7 +28,7 @@ namespace DataBaseBackup
         protected override void OnStart(string[] args)
         {
             log1 = new LogFile();//Logfile initiation
-            //initial variables
+            logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));//initial variables
             scheduleServer = new ScheduleServer()
             {
                 onAddSchedule = OnAddSchedule,
@@ -181,7 +181,15 @@ namespace DataBaseBackup
                 else// NOT ok
                 {
                     //TODO: na mpainei log gia oti kati phge straba sto export.
-                    log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "export fail");//Id,Type,Datetime,Description
+                    string logType = "error";
+                    string desc = "upload failed";
+                    log1.UpdateLogFile(log1.getId().ToString(), logType, DateTime.Now, desc);
+                    if (logVariables.GetVariable("errorLogs").ToString() == "true")
+                    {
+                        string body = "The following log have been created to your database backup:\n";
+                        body += "Id= " + log1.getId().ToString() + " type= " + logType + " at " + DateTime.Now + " with the following reason : " + desc;
+                        log1.sendMail(body, logVariables.GetVariable("email").ToString());
+                    }
                 }
             }
         }
@@ -219,12 +227,29 @@ namespace DataBaseBackup
                 while (byteRead != 0);
                 fs.Close();
                 FtpStream.Close();
-                log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");
+                string logType = "success";
+                string desc = "upload completed";
+                log1.UpdateLogFile(log1.getId().ToString(), logType, DateTime.Now, desc);
+                if (logVariables.GetVariable("successLogs").ToString() == "true")
+                {
+                    string body = "The following log have been created to your database backup:\n";
+                    body += "Id= " + log1.getId().ToString() + " type= " + logType + " at " + DateTime.Now + " with the following reason : " + desc;
+                    log1.sendMail(body, logVariables.GetVariable("email").ToString());
+                }
 
             }
             catch (WebException e)
             {
-                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
+
+                string logType = "error";
+                string desc = "upload failed";
+                log1.UpdateLogFile(log1.getId().ToString(), logType, DateTime.Now, desc);
+                if (logVariables.GetVariable("errorLogs").ToString() == "true")
+                {
+                    string body = "The following log have been created to your database backup:\n";
+                    body += "Id= " + log1.getId().ToString() + " type= " + logType + " at " + DateTime.Now + " with the following reason : " + desc;
+                    log1.sendMail(body, logVariables.GetVariable("email").ToString());
+                }
             }
 
 
@@ -248,7 +273,16 @@ namespace DataBaseBackup
                         client.UploadFile(stream, fi.Name);
                         client.Disconnect();
                         client.Dispose();
-                        log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");
+                        string logType = "success";
+                        string desc = "upload completed";
+                        log1.UpdateLogFile(log1.getId().ToString(), logType, DateTime.Now, desc);
+                        if (logVariables.GetVariable("successLogs").ToString() == "true")
+                        {
+                            string body = "The following log have been created to your database backup:\n";
+                            body += "Id= " + log1.getId().ToString() + " type= " + logType + " at " + DateTime.Now + " with the following reason : " + desc;
+                            log1.sendMail(body, logVariables.GetVariable("email").ToString());
+                        }
+                        
                     }
 
                 }
@@ -256,7 +290,16 @@ namespace DataBaseBackup
             }
             catch (Exception e)
             {
-                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
+                string logType = "error";
+                string desc = "upload failed";
+                log1.UpdateLogFile(log1.getId().ToString(), logType, DateTime.Now, desc);
+                if (logVariables.GetVariable("errorLogs").ToString() == "true")
+                {
+                    string body = "The following log have been created to your database backup:\n";
+                    body += "Id= " + log1.getId().ToString() + " type= " + logType + " at " + DateTime.Now + " with the following reason : " + desc;
+                    log1.sendMail(body, logVariables.GetVariable("email").ToString());
+                }
+                
             }
 
 
