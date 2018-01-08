@@ -27,8 +27,8 @@ namespace DataBaseBackup
         
         protected override void OnStart(string[] args)
         {
-            log1 = new LogFile();//Logfile initiation
-            //logVariables = new VariableStorage(log1.LogVariablePath);//initial variables
+            //log1 = new LogFile();//Logfile initiation
+            //initial variables
             scheduleServer = new ScheduleServer()
             {
                 onAddSchedule = OnAddSchedule,
@@ -112,17 +112,6 @@ namespace DataBaseBackup
             timer.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
                 Backup(schedule);
-                try
-                {
-                    if (!timer.AutoReset)
-                    {
-                        timer.Close();
-                    }
-                }
-                catch (Exception ex)
-                {
-
-                }
                 //na ginei to backup
             };
             schedule.Timer = timer;
@@ -181,7 +170,7 @@ namespace DataBaseBackup
                 else// NOT ok
                 {
                     //TODO: na mpainei log gia oti kati phge straba sto export.
-                    log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
+                    log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "export fail");//Id,Type,Datetime,Description
                 }
             }
         }
@@ -224,8 +213,7 @@ namespace DataBaseBackup
             }
             catch (WebException e)
             {
-
-                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
+                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed "+e.Message+" "+e.StackTrace);
             }
 
 
@@ -237,7 +225,7 @@ namespace DataBaseBackup
             string host = schedule.FtpServer.getDomainName();
             string port = schedule.FtpServer.getPort();
             string username = schedule.FtpServer.getUsername();
-            string password = Upload.password;
+            string password = schedule.FtpServer.Password;
 
             try
             {
@@ -250,7 +238,6 @@ namespace DataBaseBackup
                         client.Disconnect();
                         client.Dispose();
                         log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");
-
                     }
 
                 }
@@ -259,7 +246,6 @@ namespace DataBaseBackup
             catch (Exception e)
             {
                 log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
-
             }
 
 
