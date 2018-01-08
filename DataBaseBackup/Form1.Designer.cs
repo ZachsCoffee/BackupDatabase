@@ -165,12 +165,7 @@
             this.SelectHost = new System.Windows.Forms.Panel();
             this.FtpDownload = new System.Windows.Forms.ComboBox();
             this.SelectDB = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.logButton = new System.Windows.Forms.Button();
-            this.downloadDatabase = new System.Windows.Forms.Button();
-            this.backupButton = new System.Windows.Forms.Button();
-            this.serversButton = new System.Windows.Forms.Button();
-            this.databaseButton = new System.Windows.Forms.Button();
+
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
