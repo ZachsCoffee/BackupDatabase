@@ -46,7 +46,7 @@ namespace DataBaseBackup
         public Form1()
         {
             InitializeComponent();
-
+            FillServerListBox();
             try
             {
                 //gia to service
@@ -68,7 +68,7 @@ namespace DataBaseBackup
 
             }
             
-            stream.ClearFile();
+            //stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
@@ -126,6 +126,15 @@ namespace DataBaseBackup
                     break;
             }
         }
+
+
+        public void FillServerListBox()
+        {
+            ArrayList list = stream.ReadLines();
+            foreach (Object obj in list)
+                serversListBox.Items.Add(obj);
+        }
+
 
         public static ConnectionStatus testConnectionFTP(string domainName, string port, string username, string password)
         {

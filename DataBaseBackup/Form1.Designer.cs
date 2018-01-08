@@ -1788,11 +1788,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.logPanel);
             this.Controls.Add(this.backupPanel);
-            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.databasePanel);
-            this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
