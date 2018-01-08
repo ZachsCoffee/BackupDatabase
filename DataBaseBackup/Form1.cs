@@ -978,6 +978,7 @@ namespace DataBaseBackup
 
         private void button8_Click(object sender, EventArgs e)//refresh button gia to logpanel
         {
+            dataGridView1.Rows.Clear();
             log1.updateGridView(dataGridView1);
         }
 
