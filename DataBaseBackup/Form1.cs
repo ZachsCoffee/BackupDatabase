@@ -18,7 +18,7 @@ namespace DataBaseBackup
 {
     public partial class Form1 : Form
     {
-        enum ConnectionStatus//einai 3 katastaseis gia to label connectionStatusLabel, (method SetConnectionStatus)
+        public enum ConnectionStatus//einai 3 katastaseis gia to label connectionStatusLabel, (method SetConnectionStatus)
         {
             NotTested, OK, Failed, Testing
         }
@@ -99,28 +99,26 @@ namespace DataBaseBackup
             }
         }
 
-        private void testConnectionFTP()
+        public static ConnectionStatus testConnectionFTP(string domainName, string port, string username, string password)
         {
             //an mporw na kanw listing tote exw sinthethi kanonika :P
-            string uri = "ftp://" + domainName.Text + ":" + port.Value.ToString();
+
+            string uri = "ftp://" + domainName + ":" + port;
             FtpWebRequest request = (FtpWebRequest)WebRequest.Create(new Uri(uri));
             request.UsePassive = false;
             request.Method = WebRequestMethods.Ftp.ListDirectory;
-            request.Credentials = new NetworkCredential(username.Text, password.Text);
+            request.Credentials = new NetworkCredential(username, password);
             request.KeepAlive = true;
 
             try
             {
                 FtpWebResponse response = (FtpWebResponse)request.GetResponse();
-                SetConnectionStatus(ConnectionStatus.OK);
-                saveServer.Enabled = true;
-
-
+                return ConnectionStatus.OK;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                SetConnectionStatus(ConnectionStatus.Failed);
+                return ConnectionStatus.Failed;
             }
 
 
@@ -272,7 +270,13 @@ namespace DataBaseBackup
                 }
                 else
                 {
-                    testConnectionFTP();
+                    ConnectionStatus connectionStatus = testConnectionFTP(domainName.Text, port.Value.ToString(), username.Text, password.Text);
+                    SetConnectionStatus(connectionStatus);
+                    if (connectionStatus == ConnectionStatus.OK)
+                    {
+                        
+                        saveServer.Enabled = true;
+                    }
                 }
             }
             

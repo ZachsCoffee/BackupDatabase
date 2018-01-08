@@ -38,6 +38,11 @@ namespace DataBaseBackup.Class
 
         }
 
+        public override string ToString()
+        {
+            return "Scheduled backup at: " + BackupDateTime.ToShortDateString() + " " + BackupDateTime.ToShortTimeString() + " for DB " + dbName + " at server " + FtpServer.getDomainName();
+        }
+
         public Schedule(DateTime timestamp, string dbName, Ftp ftpServer)
         {
             this.dbName = dbName ?? throw new ArgumentNullException(nameof(dbName));
