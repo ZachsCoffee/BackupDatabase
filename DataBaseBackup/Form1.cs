@@ -60,7 +60,15 @@ namespace DataBaseBackup
             serverType.SelectedIndex = 0;
 
             //VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
-     
+            try
+            {
+                ScheduleClient.SetLogFile(new LogFile());
+            }
+            catch (Exception ex)
+            {
+
+            }
+            
         }
         
         //CUSTOM METHODS

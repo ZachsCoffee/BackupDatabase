@@ -39,7 +39,7 @@
             // 
             // serviceInstaller1
             // 
-            this.serviceInstaller1.DisplayName = "ScheduleService";
+            this.serviceInstaller1.DisplayName = "Schedule Service";
             this.serviceInstaller1.ServiceName = "ScheduleService";
             this.serviceInstaller1.StartType = System.ServiceProcess.ServiceStartMode.Automatic;
             // 

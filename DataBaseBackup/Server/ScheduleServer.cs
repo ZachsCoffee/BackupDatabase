@@ -16,18 +16,22 @@ namespace DataBaseBackup.Server
     {
         private enum MessageCode
         {
-            GetInfo, Delete, Add
+            GetInfo, Delete, Add, SetLogFile
         }
 
         public const int DEFAULT_PORT = 51100;
         public OnAddSchedule onAddSchedule { get; set; }
         public OnRemoveSchedule onRemoveSchedule { get; set; }
         public OnError onError { get; set; }
+        public OnSetLog onSetLog { get; set; }
+
+        public LogFile Log { get; private set; }
 
         private bool isStoped = true;
         private List<Schedule> schedules;
         private TcpListener server;
 
+        public delegate void OnSetLog(LogFile logFile);
         public delegate void OnAddSchedule(Schedule addedSchedule);
         public delegate void OnRemoveSchedule(Schedule removedSchedule);
         public delegate void OnError(Exception ex);
@@ -69,7 +73,12 @@ namespace DataBaseBackup.Server
                         case (int)MessageCode.Delete:
                             RemoveSchedule(stream);
                             break;
+                        case (int)MessageCode.SetLogFile:
+                            SetLogFile(stream);
+                            break;
                     }
+                    stream.Close();
+                    income.Close();
                 }
             }
             catch (Exception ex)
@@ -96,6 +105,11 @@ namespace DataBaseBackup.Server
             schedules.Add(schedule);//to bazw sthn list
 
             onAddSchedule?.Invoke(schedule);
+        }
+
+        private void SetLogFile(NetworkStream stream)
+        {
+            Log = (LogFile)new BinaryFormatter().Deserialize(stream);
         }
 
         private void RemoveSchedule(NetworkStream stream)

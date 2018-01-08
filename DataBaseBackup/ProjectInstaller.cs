@@ -14,6 +14,9 @@ namespace DataBaseBackup
         public ProjectInstaller()
         {
             InitializeComponent();
+            this.Installers.Add(serviceProcessInstaller1);
+            this.Installers.Add(serviceInstaller1);
+            
         }
     }
 }

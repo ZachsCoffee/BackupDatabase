@@ -11,18 +11,38 @@ using System.Windows.Forms;
 
 namespace DataBaseBackup.Class
 {
-    class LogFile
+    [Serializable]
+    public class LogFile
     {
-        private string startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
+        private string startupPath;
+        public string LogVariablePath { get; set; }
+        [NonSerialized]
         private ObjectStream ObjStr;
-        private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@"..\..\LogFiles\logV"));
+        [NonSerialized]
+        private VariableStorage logVariables;
+        [NonSerialized]
         private int Id = 0;
 
         public LogFile()
         {
+            this.startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
+            this.LogVariablePath = Path.GetFullPath(@"..\..\LogFiles\logV");
+
+            logVariables = new VariableStorage(LogVariablePath);
             ObjStr = new ObjectStream(startupPath);
             Int32.Parse(logVariables.GetVariable("Id").ToString());
         }
+
+        public LogFile(string startupPath, string logVariablesPath)
+        {
+            this.startupPath = startupPath;
+            this.LogVariablePath = logVariablesPath;
+
+            logVariables = new VariableStorage(logVariablesPath);
+            ObjStr = new ObjectStream(startupPath);
+            Int32.Parse(logVariables.GetVariable("Id").ToString());
+        }
+
 
         public ArrayList print()
         {
@@ -57,6 +77,17 @@ namespace DataBaseBackup.Class
             }
         }
 
+        public string StartupPath
+        {
+            get
+            {
+                return startupPath;
+            }
+            set
+            {
+                startupPath = value;
+            }
+        }
 
         public void UpdateLogFile(String Id,  String type, DateTime time, String desc)
         {

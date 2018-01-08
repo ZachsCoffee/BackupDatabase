@@ -59,7 +59,6 @@
   <ItemGroup>
     <Compile Include="Class\ExportDB.cs" />
     <Compile Include="Class\Ftp.cs" />
-    <Compile Include="Class\Log.cs" />
     <Compile Include="Class\LogFile.cs" />
     <Compile Include="Class\ObjectStream.cs" />
     <Compile Include="Class\Schedule.cs" />

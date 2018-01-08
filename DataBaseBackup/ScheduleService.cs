@@ -17,23 +17,22 @@ namespace DataBaseBackup
     partial class ScheduleService : ServiceBase
     {
         private ScheduleServer scheduleServer;
+        private LogFile log1;
 
         public ScheduleService()
         {
-            InitializeComponent();
-
-            
-            
+            InitializeComponent(); 
         }
-        private LogFile log1 = new LogFile();//Logfile initiation
-
+        
         protected override void OnStart(string[] args)
         {
+            //log1 = new LogFile();//Logfile initiation
             //initial variables
             scheduleServer = new ScheduleServer()
             {
                 onAddSchedule = OnAddSchedule,
-                onRemoveSchedule = OnRemoveSchedule
+                onRemoveSchedule = OnRemoveSchedule,
+                onSetLog = OnSetLog
             };
             //end initial variables
 
@@ -86,6 +85,11 @@ namespace DataBaseBackup
                 timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                 timer.Start();
             }
+        }
+
+        private void OnSetLog(LogFile logFile)
+        {
+            log1 = new LogFile(logFile.StartupPath, logFile.LogVariablePath);
         }
 
         private void OnRemoveSchedule(Schedule schedule)

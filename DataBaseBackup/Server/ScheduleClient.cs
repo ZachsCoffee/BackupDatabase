@@ -14,7 +14,7 @@ namespace DataBaseBackup.Server
     {
         private enum MessageCode
         {
-            GetInfo, Delete, Add
+            GetInfo, Delete, Add, SetLogFile
         }
 
         /// <summary>
@@ -88,6 +88,24 @@ namespace DataBaseBackup.Server
                 return false;
             }
             
+        }
+        
+        public static bool SetLogFile(LogFile logFile)
+        {
+            try
+            {
+                NetworkStream stream = Connect(out TcpClient client);
+                stream.WriteByte((byte)MessageCode.SetLogFile);
+                new BinaryFormatter().Serialize(stream, logFile);//stelnw to schedule
+                stream.Close();
+                client.Close();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         private static NetworkStream Connect(out TcpClient tcpClient)
