@@ -26,7 +26,7 @@ namespace DataBaseBackup
         
         protected override void OnStart(string[] args)
         {
-            //log1 = new LogFile();//Logfile initiation
+            log1 = new LogFile();//Logfile initiation
             //initial variables
             scheduleServer = new ScheduleServer()
             {
