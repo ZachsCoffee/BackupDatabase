@@ -17,16 +17,8 @@ namespace DataBaseBackup
         public Upload()
         {
             InitializeComponent();
-            InitListBox();
         }
      
-
-
-        public void InitListBox()
-        {
-            listBox1.Items.Clear();
-            listBox1.Items.Add(Form1.serverSettings);
-        }
 
         private void button1_Click(object sender, EventArgs e)
         {

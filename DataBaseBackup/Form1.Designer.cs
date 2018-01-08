@@ -785,6 +785,7 @@
             // 
             // applyFeedback
             // 
+            this.applyFeedback.Enabled = false;
             this.applyFeedback.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.applyFeedback.ForeColor = System.Drawing.SystemColors.Highlight;
             this.applyFeedback.Location = new System.Drawing.Point(11, 349);
@@ -1788,8 +1789,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.backupPanel);
+            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.panel1);
