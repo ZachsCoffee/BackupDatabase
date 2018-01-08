@@ -145,7 +145,11 @@ namespace DataBaseBackup
                     {
                         UploadFileWithFTP(finalFile, schedule);
                     }
-                    File.Delete(finalFile);
+                    if (schedule.WithCompress)
+                    {
+                        File.Delete(finalFile);
+                    }
+                    
                     //UploadFile(finalFile, schedule);
                 }
                 else// NOT ok
