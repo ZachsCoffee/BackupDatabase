@@ -109,7 +109,7 @@ namespace DataBaseBackup
                 binFolderPath.TextBox.Text = dbBinFolder.ToString();
             }
 
-            TestService test = new TestService();
+            //TestService test = new TestService();
         }
         
         //CUSTOM METHODS
@@ -1023,7 +1023,7 @@ namespace DataBaseBackup
             openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                importDatabasePath.Text = openFileDialog1.FileName;
+                //importDatabasePath.Text = openFileDialog1.FileName;
             }
         }
 
