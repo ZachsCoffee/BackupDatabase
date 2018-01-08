@@ -1,30 +1,23 @@
-﻿using DataBaseBackup.Class;
-using DataBaseBackup.Server;
-using System.Threading;
-using System.Timers;
-using System.ServiceProcess;
-using System.Collections.Generic;
-using System;
-using System.IO.Compression;
-using System.IO;
-using System.Net;
+﻿using DataBaseBackup.Server;
 using Renci.SshNet;
-using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Timers;
 
-namespace DataBaseBackup
+namespace DataBaseBackup.Class
 {
-    
-    partial class ScheduleService : ServiceBase
+    public class TestService
     {
         private ScheduleServer scheduleServer;
         private LogFile log1;
 
-        public ScheduleService()
-        {
-            InitializeComponent(); 
-        }
-        
-        protected override void OnStart(string[] args)
+        public TestService()
         {
             log1 = new LogFile();//Logfile initiation
             //initial variables
@@ -42,8 +35,10 @@ namespace DataBaseBackup
 
             }).Start();
         }
-        
-        protected override void OnStop()
+
+
+
+        /*protected override void OnStop()
         {
             try
             {
@@ -56,7 +51,7 @@ namespace DataBaseBackup
                     {
                         schedule.Timer.Close();
                     }
-                    
+
                 }
                 //end stop timers
             }
@@ -64,12 +59,12 @@ namespace DataBaseBackup
             {
 
             }
-        }
+        }*/
 
         private void OnAddSchedule(Schedule schedule)
         {
             System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 0;
+            
             if (schedule.BackupNow)// 8elei na ginei backup twra
             {
                 new Thread(() =>
@@ -96,7 +91,7 @@ namespace DataBaseBackup
                 //timer.Start();
             }
 
-            timer.Elapsed += (object sender, ElapsedEventArgs e) => 
+            timer.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
                 System.Timers.Timer insideTimer = sender as System.Timers.Timer;
                 if (insideTimer.Enabled)//gia asfaleia blepw ama einai enable o timer
@@ -115,7 +110,7 @@ namespace DataBaseBackup
             {
                 schedule.Timer.Start();
             }
-            
+
         }
 
         private void OnSetLog(LogFile logFile)
@@ -136,9 +131,9 @@ namespace DataBaseBackup
             {
                 //gia na ektelestei h entolh sto shell, h entolh gia na kanei export thn DB
                 int exitCode = ExportDB.Export(
-                    schedule.MySqlBinFolderPath, 
-                    schedule.FtpServer.getUsername(), 
-                    schedule.FtpServer.Password, 
+                    schedule.MySqlBinFolderPath,
+                    schedule.FtpServer.getUsername(),
+                    schedule.FtpServer.Password,
                     schedule.DBName,
                     out string exportedFilePath
                 );
@@ -170,7 +165,7 @@ namespace DataBaseBackup
                 else// NOT ok
                 {
                     //TODO: na mpainei log gia oti kati phge straba sto export.
-                    log1.UpdateLogFile(log1.getId().ToString(),"error",DateTime.Now,"export fail");//Id,Type,Datetime,Description
+                    log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "export fail");//Id,Type,Datetime,Description
                 }
             }
         }
@@ -215,7 +210,7 @@ namespace DataBaseBackup
             {
                 log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
             }
-         
+
 
         }
 
@@ -264,9 +259,10 @@ namespace DataBaseBackup
                 zipFilePath = fi.Name + ".zip";
                 zip.Save(zipFilePath);
             }
-            
+
             return zipFilePath;
 
         }
     }
+
 }

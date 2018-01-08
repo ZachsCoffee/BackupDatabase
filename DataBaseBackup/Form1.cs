@@ -29,7 +29,7 @@ namespace DataBaseBackup
         private Panel currentPanel;
         static SftpClient sftpclient;
         Sftp sftp=null;
-        ObjectStream stream = new ObjectStream("saveServer");
+        ObjectStream stream;
         List<string> Allnames = new List<string>(); //lista gia na krataw ta arxeio pou thelei na katevasei
         string[] parts = new string[4];
 
@@ -50,8 +50,10 @@ namespace DataBaseBackup
             //gia to logfiles folder
             Directory.CreateDirectory(Path.GetFullPath(@".\LogFiles"));
             Directory.CreateDirectory(Path.GetFullPath(@".\var"));
+            Directory.CreateDirectory(@".\servers");
             logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));
             generalVariables = new VariableStorage(Path.GetFullPath(@".\var\genV"));
+            stream = new ObjectStream(@".\servers\saveServer");
             Fillinit();
             try
             {
@@ -74,7 +76,7 @@ namespace DataBaseBackup
 
             }
             
-            stream.ClearFile();
+            //stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
@@ -106,7 +108,8 @@ namespace DataBaseBackup
             {
                 binFolderPath.TextBox.Text = dbBinFolder.ToString();
             }
-            
+
+            TestService test = new TestService();
         }
         
         //CUSTOM METHODS

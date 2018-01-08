@@ -914,7 +914,6 @@
             this.backupDatabaseName.Name = "backupDatabaseName";
             this.backupDatabaseName.Size = new System.Drawing.Size(242, 24);
             this.backupDatabaseName.TabIndex = 1;
-            this.backupDatabaseName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
             // 
             // databaseFilePath
             // 
@@ -926,7 +925,6 @@
             this.databaseFilePath.Size = new System.Drawing.Size(242, 24);
             this.databaseFilePath.TabIndex = 1;
             this.databaseFilePath.Text = "C:\\";
-            this.databaseFilePath.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateDatabaseFile);
             // 
             // label25
             // 
@@ -1009,7 +1007,6 @@
             this.ftpServers.Name = "ftpServers";
             this.ftpServers.Size = new System.Drawing.Size(242, 27);
             this.ftpServers.TabIndex = 5;
-            this.ftpServers.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateFTPServer);
             // 
             // compressCheckBox
             // 
@@ -1788,10 +1785,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.logPanel);
-            this.Controls.Add(this.backupPanel);
-            this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.serversPanel);
+            this.Controls.Add(this.backupPanel);
+            this.Controls.Add(this.logPanel);
+            this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);

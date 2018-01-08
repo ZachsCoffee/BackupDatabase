@@ -221,9 +221,14 @@ namespace DataBaseBackup.Class
         
         public int getId()
         {
-            Id = Int32.Parse(logVariables.GetVariable("Id").ToString());
-            logVariables.PutVariable("Id", ++Id);
-            return Id++;
+            object id = logVariables.GetVariable("Id");
+            if (id != null)
+            {
+                Id = Int32.Parse(id.ToString());
+                logVariables.PutVariable("Id", ++Id);
+                return Id++;
+            }
+            return 0;
         }
     }
 }
