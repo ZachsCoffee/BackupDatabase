@@ -13,6 +13,11 @@ namespace DataBaseBackup
 {
     public partial class Upload : Form
     {
+        public enum ConnectionStatus//einai 3 katastaseis gia to label connectionStatusLabel, (method SetConnectionStatus)
+        {
+            NotTested, OK, Failed, Testing
+        }
+
         public static string password;
         public Upload()
         {
@@ -32,10 +37,38 @@ namespace DataBaseBackup
         {
             if (textBox1.Text.ToString().Equals(""))
             {
-                MessageBox.Show("Please fill all fields", "Empty Fields", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Please fill the field", "Empty Field", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            password = textBox1.Text.ToString();
+            string[] parts=Form1.serverSettings.Split(',');
+            if (parts[0].Equals("SFTP"))
+            {
+                if(Form1.testConnectionSFTP(parts[1],parts[2],parts[3],textBox1.Text.ToString()) == Form1.ConnectionStatus.OK)
+                {
+                    label2.Text = "OK";
+                    label2.BackColor= System.Drawing.Color.Green;
+                    password = textBox1.Text.ToString();
+                }
+                else{
+                    label2.Text = "Failed";
+                    label2.BackColor = System.Drawing.Color.Red;
+                }
+            }
+            else
+            {
+                if(Form1.testConnectionFTP(parts[1], parts[2], parts[3], textBox1.Text.ToString()) == Form1.ConnectionStatus.OK)
+                {
+                    label2.Text = "OK";
+                    label2.ForeColor = System.Drawing.Color.Green;
+                    password = textBox1.Text.ToString();
+                }
+                else
+                {
+                    label2.Text = "Failed";
+                    label2.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+            
             
         }
     }

@@ -26,7 +26,7 @@ namespace DataBaseBackup
 
         private Panel[] panels;
         private Panel currentPanel;
-        SftpClient sftpclient;
+        static SftpClient sftpclient;
         Sftp sftp=null;
         ObjectStream stream = new ObjectStream("saveServer");
         List<string> Allnames = new List<string>(); //lista gia na krataw ta arxeio pou thelei na katevasei
@@ -46,6 +46,7 @@ namespace DataBaseBackup
             InitializeComponent();
 
             //gia to service
+            /*
             ServiceController serviceController = new ServiceController("ScheduleService");
             switch (serviceController.Status)
             {
@@ -58,7 +59,7 @@ namespace DataBaseBackup
             }
             serviceController.Refresh();
             //end service
-
+*/
 
             stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
@@ -184,9 +185,9 @@ namespace DataBaseBackup
             }
         }
 
-        private void testConnectionSFTP()
+        public static ConnectionStatus testConnectionSFTP(string domainName, string port, string username, string password)
         {
-            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value, username.Text, password.Text)) // dimiourgia antikeimenou gia sindeso sftp
+            using (sftpclient = new SftpClient(domainName, Convert.ToInt32(port), username, password)) // dimiourgia antikeimenou gia sindeso sftp
             {
 
                 try
@@ -202,18 +203,15 @@ namespace DataBaseBackup
                     MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-
                 if (sftpclient.IsConnected) //elenxos gia to connection
                 {
-                    SetConnectionStatus(ConnectionStatus.OK);
-                    saveServer.Enabled = true;
+                    return ConnectionStatus.OK;
                 }
                 else
                 {
-                    SetConnectionStatus(ConnectionStatus.Failed);
+                    return ConnectionStatus.Failed;
                 }
-                sftpclient.Disconnect();
-                sftpclient.Dispose();
+                
 
 
             }
@@ -283,7 +281,14 @@ namespace DataBaseBackup
             {
                 if (serverType.SelectedItem.ToString().Equals("SFTP"))
                 {
-                    testConnectionSFTP();
+                    
+                    ConnectionStatus connectionStatus = testConnectionSFTP(domainName.Text, port.Value.ToString(), username.Text, password.Text);
+                    SetConnectionStatus(connectionStatus);
+                    if (connectionStatus == ConnectionStatus.OK)
+                    {
+
+                        saveServer.Enabled = true;
+                    }
                 }
                 else
                 {
@@ -338,8 +343,6 @@ namespace DataBaseBackup
                 foreach (Object obj in list)
                     serversListBox.Items.Add(obj);
                 
-
-
             }
             else
             {
