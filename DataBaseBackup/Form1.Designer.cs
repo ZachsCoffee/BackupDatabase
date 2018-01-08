@@ -50,16 +50,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.label37 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.browseImportDatabase = new System.Windows.Forms.Button();
             this.saveBinFolder = new System.Windows.Forms.Button();
             this.browseBinFolder = new System.Windows.Forms.Button();
             this.dbNameExport = new System.Windows.Forms.TextBox();
-            this.importDatabasePath = new System.Windows.Forms.TextBox();
             this.backupPanel = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.onceDatetimePicker = new System.Windows.Forms.DateTimePicker();
@@ -326,16 +323,13 @@
             this.databasePanel.Controls.Add(this.label2);
             this.databasePanel.Controls.Add(this.label4);
             this.databasePanel.Controls.Add(this.label5);
-            this.databasePanel.Controls.Add(this.label3);
             this.databasePanel.Controls.Add(this.label39);
             this.databasePanel.Controls.Add(this.label38);
             this.databasePanel.Controls.Add(this.label37);
             this.databasePanel.Controls.Add(this.label1);
-            this.databasePanel.Controls.Add(this.browseImportDatabase);
             this.databasePanel.Controls.Add(this.saveBinFolder);
             this.databasePanel.Controls.Add(this.browseBinFolder);
             this.databasePanel.Controls.Add(this.dbNameExport);
-            this.databasePanel.Controls.Add(this.importDatabasePath);
             this.databasePanel.Location = new System.Drawing.Point(249, 103);
             this.databasePanel.Name = "databasePanel";
             this.databasePanel.Size = new System.Drawing.Size(526, 418);
@@ -345,7 +339,7 @@
             // userNameTextBox
             // 
             this.userNameTextBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.userNameTextBox.Location = new System.Drawing.Point(185, 334);
+            this.userNameTextBox.Location = new System.Drawing.Point(186, 270);
             this.userNameTextBox.Margin = new System.Windows.Forms.Padding(10);
             this.userNameTextBox.Name = "userNameTextBox";
             this.userNameTextBox.Size = new System.Drawing.Size(140, 24);
@@ -354,7 +348,7 @@
             // passwordTextBox
             // 
             this.passwordTextBox.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.passwordTextBox.Location = new System.Drawing.Point(345, 334);
+            this.passwordTextBox.Location = new System.Drawing.Point(346, 270);
             this.passwordTextBox.Margin = new System.Windows.Forms.Padding(10);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
@@ -375,7 +369,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.button1.Location = new System.Drawing.Point(290, 377);
+            this.button1.Location = new System.Drawing.Point(291, 313);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 23);
             this.button1.TabIndex = 5;
@@ -388,7 +382,7 @@
             this.exportButton.BackColor = System.Drawing.Color.Gainsboro;
             this.exportButton.FlatAppearance.BorderSize = 0;
             this.exportButton.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.exportButton.Location = new System.Drawing.Point(446, 377);
+            this.exportButton.Location = new System.Drawing.Point(447, 313);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(75, 23);
             this.exportButton.TabIndex = 4;
@@ -425,7 +419,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label4.Location = new System.Drawing.Point(10, 273);
+            this.label4.Location = new System.Drawing.Point(11, 209);
             this.label4.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(152, 21);
@@ -443,23 +437,12 @@
             this.label5.TabIndex = 2;
             this.label5.Text = "Preferences";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label3.Location = new System.Drawing.Point(10, 193);
-            this.label3.Margin = new System.Windows.Forms.Padding(10, 10, 10, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(155, 21);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Import database";
-            // 
             // label39
             // 
             this.label39.AutoSize = true;
             this.label39.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label39.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label39.Location = new System.Drawing.Point(341, 305);
+            this.label39.Location = new System.Drawing.Point(342, 241);
             this.label39.Name = "label39";
             this.label39.Size = new System.Drawing.Size(72, 19);
             this.label39.TabIndex = 2;
@@ -470,7 +453,7 @@
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label38.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label38.Location = new System.Drawing.Point(181, 305);
+            this.label38.Location = new System.Drawing.Point(182, 241);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(81, 19);
             this.label38.TabIndex = 2;
@@ -481,7 +464,7 @@
             this.label37.AutoSize = true;
             this.label37.Font = new System.Drawing.Font("Century Gothic", 10.25F);
             this.label37.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label37.Location = new System.Drawing.Point(11, 305);
+            this.label37.Location = new System.Drawing.Point(12, 241);
             this.label37.Name = "label37";
             this.label37.Size = new System.Drawing.Size(123, 19);
             this.label37.TabIndex = 2;
@@ -497,18 +480,6 @@
             this.label1.Size = new System.Drawing.Size(149, 19);
             this.label1.TabIndex = 2;
             this.label1.Text = "Database, Bin folder";
-            // 
-            // browseImportDatabase
-            // 
-            this.browseImportDatabase.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.browseImportDatabase.Location = new System.Drawing.Point(446, 229);
-            this.browseImportDatabase.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
-            this.browseImportDatabase.Name = "browseImportDatabase";
-            this.browseImportDatabase.Size = new System.Drawing.Size(75, 24);
-            this.browseImportDatabase.TabIndex = 1;
-            this.browseImportDatabase.Text = "Browse";
-            this.browseImportDatabase.UseVisualStyleBackColor = true;
-            this.browseImportDatabase.Click += new System.EventHandler(this.browseImportDatabase_Click);
             // 
             // saveBinFolder
             // 
@@ -537,21 +508,11 @@
             // dbNameExport
             // 
             this.dbNameExport.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.dbNameExport.Location = new System.Drawing.Point(14, 334);
+            this.dbNameExport.Location = new System.Drawing.Point(15, 270);
             this.dbNameExport.Margin = new System.Windows.Forms.Padding(10);
             this.dbNameExport.Name = "dbNameExport";
             this.dbNameExport.Size = new System.Drawing.Size(151, 24);
             this.dbNameExport.TabIndex = 0;
-            // 
-            // importDatabasePath
-            // 
-            this.importDatabasePath.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.importDatabasePath.Location = new System.Drawing.Point(14, 229);
-            this.importDatabasePath.Margin = new System.Windows.Forms.Padding(10);
-            this.importDatabasePath.Name = "importDatabasePath";
-            this.importDatabasePath.Size = new System.Drawing.Size(416, 24);
-            this.importDatabasePath.TabIndex = 0;
-            this.importDatabasePath.Text = "Path to database file.";
             // 
             // backupPanel
             // 
@@ -1785,11 +1746,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.logPanel);
             this.Controls.Add(this.downloadPanel);
-            this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1863,9 +1824,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button browseBinFolder;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button browseImportDatabase;
-        private System.Windows.Forms.TextBox importDatabasePath;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button exportButton;
         private System.Windows.Forms.TextBox dbNameExport;
