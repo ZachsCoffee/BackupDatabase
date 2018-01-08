@@ -46,12 +46,12 @@ namespace DataBaseBackup
                 if(Form1.testConnectionSFTP(parts[1],parts[2],parts[3],textBox1.Text.ToString()) == Form1.ConnectionStatus.OK)
                 {
                     label2.Text = "OK";
-                    label2.BackColor= System.Drawing.Color.Green;
+                    label2.ForeColor= System.Drawing.Color.Green;
                     password = textBox1.Text.ToString();
                 }
                 else{
                     label2.Text = "Failed";
-                    label2.BackColor = System.Drawing.Color.Red;
+                    label2.ForeColor = System.Drawing.Color.Red;
                 }
             }
             else
