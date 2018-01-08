@@ -395,7 +395,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.button1.Location = new System.Drawing.Point(198, 347);
+            this.button1.Location = new System.Drawing.Point(290, 377);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 23);
             this.button1.TabIndex = 5;
@@ -408,7 +408,7 @@
             this.exportButton.BackColor = System.Drawing.Color.Gainsboro;
             this.exportButton.FlatAppearance.BorderSize = 0;
             this.exportButton.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.exportButton.Location = new System.Drawing.Point(354, 347);
+            this.exportButton.Location = new System.Drawing.Point(446, 377);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(75, 23);
             this.exportButton.TabIndex = 4;

@@ -1,5 +1,7 @@
 ﻿using System.IO;
 using System;
+using System.Diagnostics;
+
 namespace DataBaseBackup.Class
 {
     public class ExportDB
@@ -10,19 +12,24 @@ namespace DataBaseBackup.Class
         {
 
             exportedFile = exportPath + dbName + DateTime.Now.ToString(" dd-MM-yy H-mm-ss FFFFF") + ".txt";
-
+            //Debug.Print("/C \"" + binPath + "\\mysqldump\" -u " + userName + " -p" + password + " " + dbName + " > \"" + exportedFile+"\"");
             Directory.CreateDirectory(exportPath);
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo
+            Process process = new Process();
+            ProcessStartInfo startInfo = new ProcessStartInfo
             {
-                WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden,
+                WorkingDirectory = binPath,
+                
                 FileName = "cmd.exe",
-                Arguments = "/C mysqldump -u " + userName + " -p " + password + " " + dbName + " > " + exportedFile
+                Arguments = "/C /K mysqldump -u " + userName + " -p" + password + " " + dbName + " > \"" + exportedFile + "\""
+                //Arguments = "mysqldump"
             };
+
             process.StartInfo = startInfo;
             process.Start();
+          
             process.WaitForExit();
-            return process.ExitCode;
+            //Debug.Print(process.ExitCode + "");
+            return process.ExitCode == 1 ? 0 : process.ExitCode;
         }
     }
 }

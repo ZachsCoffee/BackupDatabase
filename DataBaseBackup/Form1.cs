@@ -91,7 +91,9 @@ namespace DataBaseBackup
             {
 
             }
-            
+
+            //giati ksekina me to database panel gemizw to textbox
+            binFolderPath.TextBox.Text = generalVariables.GetVariable("dbBinFolder").ToString();
         }
         
         //CUSTOM METHODS
@@ -101,6 +103,7 @@ namespace DataBaseBackup
             {
                 case "databaseButton":
                     SwitchPanels(0, "Database");
+                    binFolderPath.TextBox.Text = generalVariables.GetVariable("dbBinFolder").ToString();
                     break;
                 case "serversButton":
                     SwitchPanels(1, "Servers");
@@ -989,7 +992,7 @@ namespace DataBaseBackup
 
         private void exportButton_Click(object sender, EventArgs e)
         {
-            int code = ExportDB.Export(binFolderPath.TextBox.Text,userNameTextBox.Text,passwordTextBox.Text, dbNameExport.Text,out string exportFile);
+            int code = ExportDB.Export(generalVariables.GetVariable("dbBinFolder").ToString(), userNameTextBox.Text,passwordTextBox.Text, dbNameExport.Text,out string exportFile);
             if (code == 0)
             {
                 MessageBox.Show("Export complete successful.", "Export complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
