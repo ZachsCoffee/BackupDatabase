@@ -39,8 +39,6 @@
             this.schedulesListBox.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.schedulesListBox.FormattingEnabled = true;
             this.schedulesListBox.ItemHeight = 17;
-            this.schedulesListBox.Items.AddRange(new object[] {
-            "[minutes:hours] [d/a/t/e] [databe name] [domain name of server]"});
             this.schedulesListBox.Location = new System.Drawing.Point(23, 55);
             this.schedulesListBox.Margin = new System.Windows.Forms.Padding(10);
             this.schedulesListBox.Name = "schedulesListBox";
@@ -68,6 +66,7 @@
             this.deleteSchedules.TabIndex = 10;
             this.deleteSchedules.Text = "Delete";
             this.deleteSchedules.UseVisualStyleBackColor = true;
+            this.deleteSchedules.Click += new System.EventHandler(this.Delete_Schedule);
             // 
             // BackupSchedules
             // 

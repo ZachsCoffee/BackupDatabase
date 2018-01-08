@@ -233,7 +233,6 @@ namespace DataBaseBackup
             string username = parts[3];
 
             Ftp ftpServer = new Ftp(serverType,host,port,username);//edw bale ta xaraktitistika tou ftp server, wste meta na ta parei to scedule, ola ta pedia
-
             Schedule schedule = new Schedule()
             {
                 FullAutomatic = fullAutomaticRadio.Checked,
