@@ -13,6 +13,7 @@ using System.Data;
 using System.Linq;
 using Renci.SshNet.Sftp;
 using System.Threading.Tasks;
+using System.ServiceProcess;
 
 namespace DataBaseBackup
 {
@@ -43,6 +44,22 @@ namespace DataBaseBackup
         public Form1()
         {
             InitializeComponent();
+
+            //gia to service
+            ServiceController serviceController = new ServiceController("ScheduleService");
+            switch (serviceController.Status)
+            {
+                case ServiceControllerStatus.Paused:
+                    serviceController.Start();
+                    break;
+                case ServiceControllerStatus.Stopped:
+                    serviceController.Start();
+                    break;
+            }
+            serviceController.Refresh();
+            //end service
+
+
             stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
@@ -62,7 +79,7 @@ namespace DataBaseBackup
             //VariableStorage logVariables = new VariableStorage(System.IO.Path.GetFullPath(@"..\..\LogFiles\logV"));
             try
             {
-                ScheduleClient.SetLogFile(new LogFile());
+                ScheduleClient.SetLogFile(new LogFile());//stelnw to log file sto service
             }
             catch (Exception ex)
             {
