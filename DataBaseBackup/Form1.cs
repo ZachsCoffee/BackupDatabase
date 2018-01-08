@@ -980,6 +980,7 @@ namespace DataBaseBackup
         string exportPath;
         private void button1_Click(object sender, EventArgs e)
         {
+            FolderBrowserDialog folderBrowserDialog2 = new FolderBrowserDialog();
             if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
             {
                 exportPath = folderBrowserDialog2.SelectedPath;
