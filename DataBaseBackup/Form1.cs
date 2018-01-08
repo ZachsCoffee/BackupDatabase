@@ -41,7 +41,8 @@ namespace DataBaseBackup
         private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
 
         public static string serverSettings; //mia static gia na krataw to server pou epelexse o xristis.
-        
+        public static string ftpServerPassword;
+
         public Form1()
         {
             InitializeComponent();

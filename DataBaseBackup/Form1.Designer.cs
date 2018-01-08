@@ -51,6 +51,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.browseImportDatabase = new System.Windows.Forms.Button();
             this.saveBinFolder = new System.Windows.Forms.Button();
@@ -163,9 +166,6 @@
             this.SelectHost = new System.Windows.Forms.Panel();
             this.FtpDownload = new System.Windows.Forms.ComboBox();
             this.SelectDB = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -453,6 +453,39 @@
             this.label3.Size = new System.Drawing.Size(155, 21);
             this.label3.TabIndex = 2;
             this.label3.Text = "Import database";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label39.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label39.Location = new System.Drawing.Point(341, 305);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(72, 19);
+            this.label39.TabIndex = 2;
+            this.label39.Text = "Password";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label38.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label38.Location = new System.Drawing.Point(181, 305);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(81, 19);
+            this.label38.TabIndex = 2;
+            this.label38.Text = "User name";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Century Gothic", 10.25F);
+            this.label37.ForeColor = System.Drawing.SystemColors.GrayText;
+            this.label37.Location = new System.Drawing.Point(11, 305);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(123, 19);
+            this.label37.TabIndex = 2;
+            this.label37.Text = "Database name";
             // 
             // label1
             // 
@@ -1749,47 +1782,14 @@
             this.SelectDB.TabIndex = 7;
             this.SelectDB.Text = "Select Server";
             // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label37.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label37.Location = new System.Drawing.Point(11, 305);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(123, 19);
-            this.label37.TabIndex = 2;
-            this.label37.Text = "Database name";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label38.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label38.Location = new System.Drawing.Point(181, 305);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(81, 19);
-            this.label38.TabIndex = 2;
-            this.label38.Text = "User name";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.label39.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.label39.Location = new System.Drawing.Point(341, 305);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(72, 19);
-            this.label39.TabIndex = 2;
-            this.label39.Text = "Password";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
-            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.backupPanel);
+            this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.databasePanel);
             this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.panel1);
