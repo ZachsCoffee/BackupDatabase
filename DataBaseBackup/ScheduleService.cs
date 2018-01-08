@@ -18,6 +18,7 @@ namespace DataBaseBackup
     {
         private ScheduleServer scheduleServer;
         private LogFile log1;
+        private VariableStorage logVariables;
 
         public ScheduleService()
         {
@@ -27,7 +28,7 @@ namespace DataBaseBackup
         protected override void OnStart(string[] args)
         {
             log1 = new LogFile();//Logfile initiation
-            //initial variables
+            logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));//initial variables
             scheduleServer = new ScheduleServer()
             {
                 onAddSchedule = OnAddSchedule,
@@ -164,7 +165,11 @@ namespace DataBaseBackup
                     {
                         UploadFileWithFTP(finalFile, schedule);
                     }
-                    File.Delete(finalFile);
+                    if (schedule.WithCompress)
+                    {
+                        File.Delete(finalFile);
+                    }
+                    
                     //UploadFile(finalFile, schedule);
                 }
                 else// NOT ok
@@ -245,7 +250,16 @@ namespace DataBaseBackup
             }
             catch (Exception e)
             {
-                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
+                string logType = "error";
+                string desc = "upload failed";
+                log1.UpdateLogFile(log1.getId().ToString(), logType, DateTime.Now, desc);
+                if (logVariables.GetVariable("errorLogs").ToString() == "true")
+                {
+                    string body = "The following log have been created to your database backup:\n";
+                    body += "Id= " + log1.getId().ToString() + " type= "+ logType+" at " + DateTime.Now + " with the following reason : "+ desc;
+                    log1.sendMail(body, logVariables.GetVariable("email").ToString());
+                }
+
             }
 
 
