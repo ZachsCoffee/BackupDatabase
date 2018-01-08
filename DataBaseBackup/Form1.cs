@@ -41,7 +41,7 @@ namespace DataBaseBackup
         private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
 
         public static string serverSettings; //mia static gia na krataw to server pou epelexse o xristis.
-        public static string ftpServerPassword;
+      
 
         public Form1()
         {
@@ -233,6 +233,7 @@ namespace DataBaseBackup
             string username = parts[3];
 
             Ftp ftpServer = new Ftp(serverType,host,port,username);//edw bale ta xaraktitistika tou ftp server, wste meta na ta parei to scedule, ola ta pedia
+            ftpServer.Password = Upload.password;
             Schedule schedule = new Schedule()
             {
                 FullAutomatic = fullAutomaticRadio.Checked,
@@ -476,6 +477,11 @@ namespace DataBaseBackup
             serverSettings = selectFtp;
             Upload up = new Upload();
             up.ShowDialog();
+            if(ftpServers.SelectedIndex < 0)
+            {
+                MessageBox.Show("Please Select Server", "Select Server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             //validation
             if (this.ValidateChildren())//ama petuxan ola ta validation tote kanonika ginete to schedule
@@ -977,6 +983,7 @@ namespace DataBaseBackup
 
         private void button8_Click(object sender, EventArgs e)//refresh button gia to logpanel
         {
+            dataGridView1.Rows.Clear();
             log1.updateGridView(dataGridView1);
         }
 
