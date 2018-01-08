@@ -1000,7 +1000,7 @@ namespace DataBaseBackup
         string exportPath;
         private void button1_Click(object sender, EventArgs e)
         {
-            Process.Start(ExportDB.exportPath);
+            Process.Start(ExportDB.GetExportsFolder());
         }
 
         private void exportButton_Click(object sender, EventArgs e)

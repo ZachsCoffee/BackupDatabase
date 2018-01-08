@@ -6,7 +6,13 @@ namespace DataBaseBackup.Class
 {
     public class ExportDB
     {
-        public static string exportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Exports\");
+        private static string exportPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Exports\");
+
+        public static string GetExportsFolder()
+        {
+            Directory.CreateDirectory(exportPath);
+            return exportPath;
+        }
 
         public static int Export(string binPath, string userName, string password, string dbName, out string exportedFile)
         {

@@ -25,8 +25,9 @@ namespace DataBaseBackup.Class
 
         public LogFile()
         {
-            this.startupPath = System.IO.Path.GetFullPath(@"..\..\LogFiles\test1.txt");
-            this.LogVariablePath = Path.GetFullPath(@"..\..\LogFiles\logV");
+            Directory.CreateDirectory(@".\LogFiles\");
+            this.startupPath = System.IO.Path.GetFullPath(@".\LogFiles\test1.txt");
+            this.LogVariablePath = Path.GetFullPath(@".\LogFiles\logV");
 
             logVariables = new VariableStorage(LogVariablePath);
             ObjStr = new ObjectStream(startupPath);
@@ -35,6 +36,7 @@ namespace DataBaseBackup.Class
 
         public LogFile(string startupPath, string logVariablesPath)
         {
+            Directory.CreateDirectory(@".\LogFiles\");
             this.startupPath = startupPath;
             this.LogVariablePath = logVariablesPath;
 
