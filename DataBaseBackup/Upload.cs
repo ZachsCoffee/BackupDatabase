@@ -36,6 +36,7 @@ namespace DataBaseBackup
                 return;
             }
             password = textBox1.Text.ToString();
+            
         }
     }
 }
