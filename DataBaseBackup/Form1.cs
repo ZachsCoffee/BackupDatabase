@@ -37,8 +37,8 @@ namespace DataBaseBackup
         //Initiation of logFile variables
 
         private LogFile log1 = new LogFile();
-        private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@"..\..\LogFiles\logV"));
-        private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
+        private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));
+        private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@".\var\genV"));
 
         public static string serverSettings; //mia static gia na krataw to server pou epelexse o xristis.
       
@@ -46,6 +46,10 @@ namespace DataBaseBackup
         public Form1()
         {
             InitializeComponent();
+
+            //gia to logfiles folder
+            Directory.CreateDirectory(Path.GetFullPath(@".\LogFiles"));
+
             Fillinit();
             try
             {
