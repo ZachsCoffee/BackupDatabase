@@ -75,6 +75,7 @@ namespace DataBaseBackup.Class
                 if (!schedule.BackupOnce)// kai einai repeat
                 {
                     timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                    SetElapsed(schedule, timer);
                     //timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                     //timer.Start();
                 }
@@ -87,10 +88,15 @@ namespace DataBaseBackup.Class
                 }
 
                 timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                SetElapsed(schedule, timer);
                 //timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                 //timer.Start();
             }
 
+        }
+
+        private void SetElapsed(Schedule schedule, System.Timers.Timer timer)
+        {
             timer.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
                 System.Timers.Timer insideTimer = sender as System.Timers.Timer;
@@ -106,11 +112,7 @@ namespace DataBaseBackup.Class
                 }
             };
             schedule.Timer = timer;
-            if (timer.Interval != 0)
-            {
-                schedule.Timer.Start();
-            }
-
+            schedule.Timer.Start();
         }
 
         private void OnSetLog(LogFile logFile)
