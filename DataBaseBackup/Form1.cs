@@ -116,7 +116,7 @@ namespace DataBaseBackup
             {
                 case "databaseButton":
                     SwitchPanels(0, "Database");
-                    binFolderPath.TextBox.Text = generalVariables.GetVariable("dbBinFolder").ToString();
+                    
                     break;
                 case "serversButton":
                     SwitchPanels(1, "Servers");
