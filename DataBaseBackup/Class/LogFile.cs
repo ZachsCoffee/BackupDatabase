@@ -31,7 +31,7 @@ namespace DataBaseBackup.Class
 
             logVariables = new VariableStorage(LogVariablePath);
             ObjStr = new ObjectStream(startupPath);
-            Int32.Parse(logVariables.GetVariable("Id").ToString());
+            Id=Int32.Parse(logVariables.GetVariable("Id").ToString());
         }
 
         public LogFile(string startupPath, string logVariablesPath)
