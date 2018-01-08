@@ -37,8 +37,8 @@ namespace DataBaseBackup
         //Initiation of logFile variables
 
         private LogFile log1 = new LogFile();
-        private VariableStorage logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));
-        private VariableStorage generalVariables = new VariableStorage(Path.GetFullPath(@"..\..\var\genV"));
+        private VariableStorage logVariables;
+        private VariableStorage generalVariables;
 
         public static string serverSettings; //mia static gia na krataw to server pou epelexse o xristis.
       
@@ -49,7 +49,9 @@ namespace DataBaseBackup
 
             //gia to logfiles folder
             Directory.CreateDirectory(Path.GetFullPath(@".\LogFiles"));
-
+            Directory.CreateDirectory(Path.GetFullPath(@".\var"));
+            logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));
+            generalVariables = new VariableStorage(Path.GetFullPath(@".\var\genV"));
             Fillinit();
             try
             {
@@ -99,7 +101,12 @@ namespace DataBaseBackup
             }
 
             //giati ksekina me to database panel gemizw to textbox
-            binFolderPath.TextBox.Text = generalVariables.GetVariable("dbBinFolder").ToString();
+            object dbBinFolder = generalVariables.GetVariable("dbBinFolder");
+            if (dbBinFolder != null)
+            {
+                binFolderPath.TextBox.Text = dbBinFolder.ToString();
+            }
+            
         }
         
         //CUSTOM METHODS
