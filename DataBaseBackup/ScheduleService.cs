@@ -45,15 +45,25 @@ namespace DataBaseBackup
         
         protected override void OnStop()
         {
-            scheduleServer.StopServer();// stamatw ton server
-
-            //pernw olh thn lista, gia na stamathsw kai olous tous timers
-            List<Schedule> schedules = scheduleServer.ScheduleList;
-            foreach (Schedule schedule in schedules)
+            try
             {
-                schedule.Timer.Close();
+                scheduleServer.StopServer();// stamatw ton server
+                //pernw olh thn lista, gia na stamathsw kai olous tous timers
+                List<Schedule> schedules = scheduleServer.ScheduleList;
+                foreach (Schedule schedule in schedules)
+                {
+                    if (schedule.Timer != null)
+                    {
+                        schedule.Timer.Close();
+                    }
+                    
+                }
+                //end stop timers
             }
-            //end stop timers
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void OnAddSchedule(Schedule schedule)
@@ -85,6 +95,7 @@ namespace DataBaseBackup
                 timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                 timer.Start();
             }
+            schedule.Timer = timer;
         }
 
         private void OnSetLog(LogFile logFile)
