@@ -28,7 +28,7 @@ namespace DataBaseBackup
         protected override void OnStart(string[] args)
         {
             log1 = new LogFile();//Logfile initiation
-            logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));//initial variables
+            logVariables = new VariableStorage(log1.LogVariablePath);//initial variables
             scheduleServer = new ScheduleServer()
             {
                 onAddSchedule = OnAddSchedule,
