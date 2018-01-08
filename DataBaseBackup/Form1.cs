@@ -14,6 +14,7 @@ using System.Linq;
 using Renci.SshNet.Sftp;
 using System.Threading.Tasks;
 using System.ServiceProcess;
+using System.Diagnostics;
 
 namespace DataBaseBackup
 {
@@ -983,11 +984,7 @@ namespace DataBaseBackup
         string exportPath;
         private void button1_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog folderBrowserDialog2 = new FolderBrowserDialog();
-            if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
-            {
-                exportPath = folderBrowserDialog2.SelectedPath;
-            }
+            Process.Start(ExportDB.exportPath);
         }
 
         private void exportButton_Click(object sender, EventArgs e)
