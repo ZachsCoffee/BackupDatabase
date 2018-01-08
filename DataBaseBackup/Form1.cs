@@ -603,7 +603,7 @@ namespace DataBaseBackup
             DialogResult dialogResult = MessageBox.Show("This will clear the entire log file.\n Are you sure?", "Warning", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                System.IO.File.WriteAllText(@"..\..\LogFiles\test1.txt", string.Empty);
+                System.IO.File.WriteAllText(@".\LogFiles\test1.txt", string.Empty);
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -1045,6 +1045,11 @@ namespace DataBaseBackup
             {
                 MessageBox.Show("Please make sure, username, passwrod, database name, and bin folder path is correct.", "Export failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            log1.UpdateLogFile(log1.getId().ToString(),"info",DateTime.Now,"test");
         }
 
 

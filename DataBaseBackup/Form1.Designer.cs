@@ -166,6 +166,7 @@
             this.SelectHost = new System.Windows.Forms.Panel();
             this.FtpDownload = new System.Windows.Forms.ComboBox();
             this.SelectDB = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel2.SuspendLayout();
@@ -1343,6 +1344,7 @@
             // logPanel
             // 
             this.logPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logPanel.Controls.Add(this.button9);
             this.logPanel.Controls.Add(this.button8);
             this.logPanel.Controls.Add(this.button6);
             this.logPanel.Controls.Add(this.button2);
@@ -1782,17 +1784,27 @@
             this.SelectDB.TabIndex = 7;
             this.SelectDB.Text = "Select Server";
             // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(17, 388);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 17;
+            this.button9.Text = "button9";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(787, 533);
+            this.Controls.Add(this.logPanel);
             this.Controls.Add(this.backupPanel);
             this.Controls.Add(this.downloadPanel);
             this.Controls.Add(this.serversPanel);
             this.Controls.Add(this.databasePanel);
-            this.Controls.Add(this.logPanel);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -1988,6 +2000,7 @@
         private System.Windows.Forms.Label label39;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Button button9;
     }
 }
 
