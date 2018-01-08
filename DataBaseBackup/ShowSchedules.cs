@@ -24,8 +24,14 @@ namespace DataBaseBackup
             foreach (Schedule schedule in schedules)
             {
                 schedulesListBox.Items.Add(schedule);
-                Debug.Print("aaa");
+                //Debug.Print("aaa");
             }
+        }
+
+        private void Delete_Schedule(object sender, EventArgs e)
+        {
+            Schedule schedule = (Schedule) schedulesListBox.SelectedItem;
+            ScheduleClient.DeleteSchedule(schedule.ID);
         }
     }
 }
