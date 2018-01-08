@@ -38,11 +38,11 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label1.Location = new System.Drawing.Point(135, 73);
+            this.label1.Location = new System.Drawing.Point(90, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 21);
+            this.label1.Size = new System.Drawing.Size(226, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Enter password:";
+            this.label1.Text = "Enter ftp server password:";
             // 
             // textBox1
             // 
@@ -60,7 +60,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 24);
             this.button1.TabIndex = 10;
-            this.button1.Text = "Start Upload";
+            this.button1.Text = "Test connection";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 

@@ -68,7 +68,7 @@ namespace DataBaseBackup
 
             }
             
-            stream.ClearFile();
+            //stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
             //ola ta nea panels prepei na mpoun se auton ton pinaka, kai meta sthn switch (method MenuClick)
