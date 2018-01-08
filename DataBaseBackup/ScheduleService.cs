@@ -28,7 +28,7 @@ namespace DataBaseBackup
         protected override void OnStart(string[] args)
         {
             log1 = new LogFile();//Logfile initiation
-            logVariables = new VariableStorage(Path.GetFullPath(@".\LogFiles\logV"));//initial variables
+            //initial variables
             scheduleServer = new ScheduleServer()
             {
                 onAddSchedule = OnAddSchedule,
@@ -70,7 +70,7 @@ namespace DataBaseBackup
         private void OnAddSchedule(Schedule schedule)
         {
             System.Timers.Timer timer = new System.Timers.Timer();
-            timer.Interval = 0;
+
             if (schedule.BackupNow)// 8elei na ginei backup twra
             {
                 new Thread(() =>
@@ -80,9 +80,15 @@ namespace DataBaseBackup
 
                 if (!schedule.BackupOnce)// kai einai repeat
                 {
-                    timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                    timer.Interval = (schedule.BackupDateTime - DateTime.Now).TotalMilliseconds;//to pote apo twra 8a ginei to backup
+
+                    SetElapsed(schedule, timer);
                     //timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                     //timer.Start();
+                }
+                else
+                {
+                    timer.AutoReset = false;
                 }
             }
             else// einai backup meta
@@ -92,31 +98,35 @@ namespace DataBaseBackup
                     timer.AutoReset = false;
                 }
 
-                timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                timer.Interval = (schedule.BackupDateTime - DateTime.Now).TotalMilliseconds;//to pote apo twra 8a ginei to backup
+                //Debug.Print(timer.Interval + "");
+                SetElapsed(schedule, timer);
                 //timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                 //timer.Start();
             }
 
-            timer.Elapsed += (object sender, ElapsedEventArgs e) => 
-            {
-                System.Timers.Timer insideTimer = sender as System.Timers.Timer;
-                if (insideTimer.Enabled)//gia asfaleia blepw ama einai enable o timer
-                {
-                    Backup(schedule);
-                    if (!insideTimer.AutoReset)// ama den einai autoreset, tote einai mono gia mia fora, ara ton stamatw
-                    {
-                        insideTimer.Close();// apodesmeuw tous porous tou timer
-                    }
+        }
 
-                    //na ginei to backup
+        private void SetElapsed(Schedule schedule, System.Timers.Timer timer)
+        {
+            timer.Elapsed += (object sender, ElapsedEventArgs e) =>
+            {
+                Backup(schedule);
+                try
+                {
+                    if (!timer.AutoReset)
+                    {
+                        timer.Close();
+                    }
                 }
+                catch (Exception ex)
+                {
+
+                }
+                //na ginei to backup
             };
             schedule.Timer = timer;
-            if (timer.Interval != 0)
-            {
-                schedule.Timer.Start();
-            }
-            
+            schedule.Timer.Start();
         }
 
         private void OnSetLog(LogFile logFile)
@@ -137,9 +147,9 @@ namespace DataBaseBackup
             {
                 //gia na ektelestei h entolh sto shell, h entolh gia na kanei export thn DB
                 int exitCode = ExportDB.Export(
-                    schedule.MySqlBinFolderPath, 
-                    schedule.FtpServer.getUsername(), 
-                    schedule.FtpServer.Password, 
+                    schedule.MySqlBinFolderPath,
+                    schedule.DBusername,
+                    schedule.DBpassword,
                     schedule.DBName,
                     out string exportedFilePath
                 );
@@ -165,17 +175,13 @@ namespace DataBaseBackup
                     {
                         UploadFileWithFTP(finalFile, schedule);
                     }
-                    if (schedule.WithCompress)
-                    {
-                        File.Delete(finalFile);
-                    }
-                    
+                    File.Delete(finalFile);
                     //UploadFile(finalFile, schedule);
                 }
                 else// NOT ok
                 {
                     //TODO: na mpainei log gia oti kati phge straba sto export.
-                    log1.UpdateLogFile(log1.getId().ToString(),"error",DateTime.Now,"export fail");//Id,Type,Datetime,Description
+                    log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "export fail");//Id,Type,Datetime,Description
                 }
             }
         }
@@ -220,7 +226,7 @@ namespace DataBaseBackup
             {
                 log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
             }
-         
+
 
         }
 
@@ -250,16 +256,7 @@ namespace DataBaseBackup
             }
             catch (Exception e)
             {
-                string logType = "error";
-                string desc = "upload failed";
-                log1.UpdateLogFile(log1.getId().ToString(), logType, DateTime.Now, desc);
-                if (logVariables.GetVariable("errorLogs").ToString() == "true")
-                {
-                    string body = "The following log have been created to your database backup:\n";
-                    body += "Id= " + log1.getId().ToString() + " type= "+ logType+" at " + DateTime.Now + " with the following reason : "+ desc;
-                    log1.sendMail(body, logVariables.GetVariable("email").ToString());
-                }
-
+                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
             }
 
 
@@ -278,7 +275,7 @@ namespace DataBaseBackup
                 zipFilePath = fi.Name + ".zip";
                 zip.Save(zipFilePath);
             }
-            
+
             return zipFilePath;
 
         }

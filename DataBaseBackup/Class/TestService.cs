@@ -2,6 +2,7 @@
 using Renci.SshNet;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -74,10 +75,15 @@ namespace DataBaseBackup.Class
 
                 if (!schedule.BackupOnce)// kai einai repeat
                 {
-                    timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                    timer.Interval = (schedule.BackupDateTime - DateTime.Now).TotalMilliseconds;//to pote apo twra 8a ginei to backup
+                    
                     SetElapsed(schedule, timer);
                     //timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                     //timer.Start();
+                }
+                else
+                {
+                    timer.AutoReset = false;
                 }
             }
             else// einai backup meta
@@ -87,7 +93,8 @@ namespace DataBaseBackup.Class
                     timer.AutoReset = false;
                 }
 
-                timer.Interval = (schedule.BackupDateTime - DateTime.Now).Milliseconds;//to pote apo twra 8a ginei to backup
+                timer.Interval = (schedule.BackupDateTime - DateTime.Now).TotalMilliseconds;//to pote apo twra 8a ginei to backup
+                Debug.Print(timer.Interval + "");
                 SetElapsed(schedule, timer);
                 //timer.Elapsed += Timer_Elapsed;// ti 8elw na ginei otan perasei ena interval
                 //timer.Start();
@@ -99,17 +106,8 @@ namespace DataBaseBackup.Class
         {
             timer.Elapsed += (object sender, ElapsedEventArgs e) =>
             {
-                System.Timers.Timer insideTimer = sender as System.Timers.Timer;
-                if (insideTimer.Enabled)//gia asfaleia blepw ama einai enable o timer
-                {
-                    Backup(schedule);
-                    if (!insideTimer.AutoReset)// ama den einai autoreset, tote einai mono gia mia fora, ara ton stamatw
-                    {
-                        insideTimer.Close();// apodesmeuw tous porous tou timer
-                    }
-
+                Backup(schedule);
                     //na ginei to backup
-                }
             };
             schedule.Timer = timer;
             schedule.Timer.Start();
@@ -134,8 +132,8 @@ namespace DataBaseBackup.Class
                 //gia na ektelestei h entolh sto shell, h entolh gia na kanei export thn DB
                 int exitCode = ExportDB.Export(
                     schedule.MySqlBinFolderPath,
-                    schedule.FtpServer.getUsername(),
-                    schedule.FtpServer.Password,
+                    schedule.DBusername,
+                    schedule.DBpassword,
                     schedule.DBName,
                     out string exportedFilePath
                 );

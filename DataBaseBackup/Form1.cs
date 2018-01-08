@@ -276,7 +276,10 @@ namespace DataBaseBackup
                 WithCompress = compressCheckBox.Checked,
                 FtpServer = ftpServer,
                 DBName = backupDatabaseName.Text,
-                DBFilePath = databaseFilePath.Text
+                DBFilePath = databaseFilePath.Text,
+                DBpassword = Upload.dbPassword,
+                DBusername = Upload.dbUsername,
+                MySqlBinFolderPath = generalVariables.GetVariable("dbBinFolder").ToString()
             };
 
             if (schedule.BackupOnce && !schedule.BackupNow)

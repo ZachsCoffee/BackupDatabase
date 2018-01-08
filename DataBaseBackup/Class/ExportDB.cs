@@ -24,9 +24,9 @@ namespace DataBaseBackup.Class
             ProcessStartInfo startInfo = new ProcessStartInfo
             {
                 WorkingDirectory = binPath,
-                
+                WindowStyle = ProcessWindowStyle.Hidden,
                 FileName = "cmd.exe",
-                Arguments = "/C /K mysqldump -u " + userName + " -p" + password + " " + dbName + " > \"" + exportedFile + "\""
+                Arguments = " /C mysqldump -u " + userName + " -p" + password + " " + dbName + " > \"" + exportedFile + "\""
                 //Arguments = "mysqldump"
             };
 

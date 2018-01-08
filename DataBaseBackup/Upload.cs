@@ -18,7 +18,7 @@ namespace DataBaseBackup
             NotTested, OK, Failed, Testing
         }
 
-        public static string password;
+        public static string password, dbPassword, dbUsername;
         public Upload()
         {
             InitializeComponent();
@@ -39,6 +39,8 @@ namespace DataBaseBackup
                 {
                     MessageBox.Show("ConnectionStatus: OK");
                     password = textBox1.Text.ToString();
+                    dbPassword = databasePassword.Text;
+                    dbUsername = databaseUsername.Text;
                     this.Close();
                 }
                 else{

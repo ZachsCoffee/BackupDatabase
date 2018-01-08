@@ -13,10 +13,11 @@ namespace DataBaseBackup.Class
         private Timer timer;// me ton timer 8a ginete to schedule.
 
         //START NEW FIELDS
-        public DateTime BackupDateTime { get; set; }// ka8e poso interval 8a kanei backup
-        public string MySqlBinFolderPath { get; set; }
+        public DateTime BackupDateTime;// ka8e poso interval 8a kanei backup
+        public string MySqlBinFolderPath;
+        public string DBusername;
+        public string DBpassword;
 
-        
         private string
             dbName,// ama exei dialeksei full auto backup, tote auto den prepei na einai null
             dbFilePath = null;// ama exei dialeksei manual backup tote auto den prepei na einai null
