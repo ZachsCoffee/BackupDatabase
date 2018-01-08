@@ -144,6 +144,7 @@ namespace DataBaseBackup
                     {
                         UploadFileWithFTP(finalFile, schedule);
                     }
+                    File.Delete(finalFile);
                     //UploadFile(finalFile, schedule);
                 }
                 else// NOT ok
@@ -243,7 +244,7 @@ namespace DataBaseBackup
                 zipFilePath = fi.Name + ".zip";
                 zip.Save(zipFilePath);
             }
-            File.Delete(zipFilePath);
+            
             return zipFilePath;
 
         }
