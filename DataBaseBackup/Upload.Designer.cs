@@ -32,65 +32,85 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.domainNameServer = new System.Windows.Forms.Label();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century Gothic", 12.25F);
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(28, 79);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(224, 21);
+            this.label1.Size = new System.Drawing.Size(142, 21);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Please enter password for";
+            this.label1.Text = "Enter password:";
             // 
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.textBox1.Location = new System.Drawing.Point(16, 75);
+            this.textBox1.Location = new System.Drawing.Point(12, 122);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(220, 24);
+            this.textBox1.Size = new System.Drawing.Size(169, 24);
             this.textBox1.TabIndex = 1;
             this.textBox1.UseSystemPasswordChar = true;
             // 
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Century Gothic", 9.25F);
-            this.button1.Location = new System.Drawing.Point(112, 105);
+            this.button1.Location = new System.Drawing.Point(32, 220);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(124, 24);
             this.button1.TabIndex = 10;
-            this.button1.Text = "Test connection";
+            this.button1.Text = "Start Upload";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // domainNameServer
+            // listBox1
             // 
-            this.domainNameServer.AutoSize = true;
-            this.domainNameServer.Font = new System.Drawing.Font("Century Gothic", 10.25F);
-            this.domainNameServer.ForeColor = System.Drawing.SystemColors.GrayText;
-            this.domainNameServer.Location = new System.Drawing.Point(85, 40);
-            this.domainNameServer.Margin = new System.Windows.Forms.Padding(10);
-            this.domainNameServer.Name = "domainNameServer";
-            this.domainNameServer.Size = new System.Drawing.Size(151, 19);
-            this.domainNameServer.TabIndex = 12;
-            this.domainNameServer.Text = "domain name server";
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(187, 79);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(207, 121);
+            this.listBox1.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label2.Location = new System.Drawing.Point(234, 280);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 21);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Not Tested";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century Gothic", 12.25F);
+            this.label3.Location = new System.Drawing.Point(64, 280);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(169, 21);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "Connection Status:";
             // 
             // Upload
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(260, 151);
-            this.Controls.Add(this.domainNameServer);
+            this.ClientSize = new System.Drawing.Size(445, 344);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Upload";
-            this.Text = "Password";
+            this.Text = "Upload";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -101,6 +121,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label domainNameServer;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
     }
 }
