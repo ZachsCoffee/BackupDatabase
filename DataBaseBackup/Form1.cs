@@ -26,7 +26,7 @@ namespace DataBaseBackup
 
         private Panel[] panels;
         private Panel currentPanel;
-        static SftpClient sftpclient;
+        SftpClient sftpclient;
         Sftp sftp=null;
         ObjectStream stream = new ObjectStream("saveServer");
         List<string> Allnames = new List<string>(); //lista gia na krataw ta arxeio pou thelei na katevasei
@@ -45,22 +45,27 @@ namespace DataBaseBackup
         {
             InitializeComponent();
 
-            //gia to service
-            /*
-            ServiceController serviceController = new ServiceController("ScheduleService");
-            switch (serviceController.Status)
+            try
             {
-                case ServiceControllerStatus.Paused:
-                    serviceController.Start();
-                    break;
-                case ServiceControllerStatus.Stopped:
-                    serviceController.Start();
-                    break;
+                //gia to service
+                ServiceController serviceController = new ServiceController("ScheduleService");
+                switch (serviceController.Status)
+                {
+                    case ServiceControllerStatus.Paused:
+                        serviceController.Start();
+                        break;
+                    case ServiceControllerStatus.Stopped:
+                        serviceController.Start();
+                        break;
+                }
+                serviceController.Refresh();
+                //end service
             }
-            serviceController.Refresh();
-            //end service
-*/
+            catch (Exception ex)
+            {
 
+            }
+            
             stream.ClearFile();
             SetDownloadPanelNotVisble(); //kanw not visible ta download panel
 
@@ -185,9 +190,9 @@ namespace DataBaseBackup
             }
         }
 
-        public static ConnectionStatus testConnectionSFTP(string domainName, string port, string username, string password)
+        private void testConnectionSFTP()
         {
-            using (sftpclient = new SftpClient(domainName, Convert.ToInt32(port), username, password)) // dimiourgia antikeimenou gia sindeso sftp
+            using (sftpclient = new SftpClient(domainName.Text, (int)port.Value, username.Text, password.Text)) // dimiourgia antikeimenou gia sindeso sftp
             {
 
                 try
@@ -203,15 +208,18 @@ namespace DataBaseBackup
                     MessageBox.Show(sochEx.Message, "Port Number Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
+
                 if (sftpclient.IsConnected) //elenxos gia to connection
                 {
-                    return ConnectionStatus.OK;
+                    SetConnectionStatus(ConnectionStatus.OK);
+                    saveServer.Enabled = true;
                 }
                 else
                 {
-                    return ConnectionStatus.Failed;
+                    SetConnectionStatus(ConnectionStatus.Failed);
                 }
-                
+                sftpclient.Disconnect();
+                sftpclient.Dispose();
 
 
             }
@@ -281,14 +289,7 @@ namespace DataBaseBackup
             {
                 if (serverType.SelectedItem.ToString().Equals("SFTP"))
                 {
-                    
-                    ConnectionStatus connectionStatus = testConnectionSFTP(domainName.Text, port.Value.ToString(), username.Text, password.Text);
-                    SetConnectionStatus(connectionStatus);
-                    if (connectionStatus == ConnectionStatus.OK)
-                    {
-
-                        saveServer.Enabled = true;
-                    }
+                    testConnectionSFTP();
                 }
                 else
                 {
@@ -343,6 +344,8 @@ namespace DataBaseBackup
                 foreach (Object obj in list)
                     serversListBox.Items.Add(obj);
                 
+
+
             }
             else
             {
@@ -977,6 +980,7 @@ namespace DataBaseBackup
         string exportPath;
         private void button1_Click(object sender, EventArgs e)
         {
+            FolderBrowserDialog folderBrowserDialog2 = new FolderBrowserDialog();
             if (folderBrowserDialog2.ShowDialog() == DialogResult.OK)
             {
                 exportPath = folderBrowserDialog2.SelectedPath;
@@ -988,11 +992,11 @@ namespace DataBaseBackup
             int code = ExportDB.Export(binFolderPath.TextBox.Text,userNameTextBox.Text,passwordTextBox.Text, dbNameExport.Text,out string exportFile);
             if (code == 0)
             {
-
+                MessageBox.Show("Export complete successful.", "Export complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Export Failed!");
+                MessageBox.Show("Please make sure, username, passwrod, database name, and bin folder path is correct.", "Export failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

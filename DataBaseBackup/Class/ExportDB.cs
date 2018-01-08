@@ -8,6 +8,7 @@ namespace DataBaseBackup.Class
 
         public static int Export(string binPath, string userName, string password, string dbName, out string exportedFile)
         {
+
             exportedFile = exportPath + dbName + DateTime.Now.ToString(" dd-MM-yy H-mm-ss FFFFF") + ".txt";
 
             Directory.CreateDirectory(exportPath);
@@ -20,7 +21,7 @@ namespace DataBaseBackup.Class
             };
             process.StartInfo = startInfo;
             process.Start();
-
+            process.WaitForExit();
             return process.ExitCode;
         }
     }
