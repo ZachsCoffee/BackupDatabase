@@ -166,6 +166,7 @@ namespace DataBaseBackup
                     }
                     File.Delete(finalFile);
                     //UploadFile(finalFile, schedule);
+                    log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "Success backup");//Id,Type,Datetime,Description
                 }
                 else// NOT ok
                 {

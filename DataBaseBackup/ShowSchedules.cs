@@ -31,6 +31,7 @@ namespace DataBaseBackup
         private void Delete_Schedule(object sender, EventArgs e)
         {
             Schedule schedule = (Schedule) schedulesListBox.SelectedItem;
+            schedulesListBox.Items.RemoveAt(schedulesListBox.SelectedIndex);
             ScheduleClient.DeleteSchedule(schedule.ID);
         }
     }
