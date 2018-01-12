@@ -289,9 +289,9 @@ namespace DataBaseBackup
             else
             {
                 DateTime tempDateTime = DateTime.Now;
-                tempDateTime.AddDays(Convert.ToDouble(daysNumber.Value));
-                tempDateTime.AddHours(Convert.ToDouble(hoursNumber.Value));
-                tempDateTime.AddMinutes(Convert.ToDouble(minutesNumber.Value));
+                tempDateTime = tempDateTime.AddDays(Convert.ToDouble(daysNumber.Value));
+                tempDateTime = tempDateTime.AddHours(Convert.ToDouble(hoursNumber.Value));
+                tempDateTime = tempDateTime.AddMinutes(Convert.ToDouble(minutesNumber.Value));
                 schedule.BackupDateTime = tempDateTime;
             }
             return schedule;
@@ -310,16 +310,17 @@ namespace DataBaseBackup
 
         private void editFtpServer_Click(object sender, EventArgs e)
         {
-            actionTitle.Text = "Edit server";
-            configServersPanel.Visible = true;
-            string[] line=serversListBox.SelectedItem.ToString().Split(',');
-            serverType.SelectedItem = line[0];
-            domainName.Text = line[1];
-            port.Value = Convert.ToUInt32(line[2]);
-            username.Text = line[3];
-            password.Text = "";
-
-
+            if (serversListBox.SelectedIndex != -1)
+            {
+                actionTitle.Text = "Edit server";
+                configServersPanel.Visible = true;
+                string[] line = serversListBox.SelectedItem.ToString().Split(',');
+                serverType.SelectedItem = line[0];
+                domainName.Text = line[1];
+                port.Value = Convert.ToUInt32(line[2]);
+                username.Text = line[3];
+                password.Text = "";
+            }
         }
 
         private void makeAction_Click(object sender, EventArgs e)
