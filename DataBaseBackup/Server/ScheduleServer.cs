@@ -25,7 +25,7 @@ namespace DataBaseBackup.Server
         public OnError onError { get; set; }
         public OnSetLog onSetLog { get; set; }
 
-        public LogFile Log { get; private set; }
+        public LogFile Log { get; set; }
 
         private bool isStoped = true;
         private List<Schedule> schedules;
@@ -110,6 +110,7 @@ namespace DataBaseBackup.Server
         private void SetLogFile(NetworkStream stream)
         {
             Log = (LogFile)new BinaryFormatter().Deserialize(stream);
+            onSetLog?.Invoke(Log);
         }
 
         private void RemoveSchedule(NetworkStream stream)

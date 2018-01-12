@@ -99,7 +99,7 @@ namespace DataBaseBackup
             }
             catch (Exception ex)
             {
-
+                Debug.Print("Error");
             }
 
             //giati ksekina me to database panel gemizw to textbox

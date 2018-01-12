@@ -17,7 +17,6 @@ namespace DataBaseBackup
     partial class ScheduleService : ServiceBase
     {
         private ScheduleServer scheduleServer;
-        private LogFile log1;
         private VariableStorage logVariables;
 
         public ScheduleService()
@@ -27,7 +26,7 @@ namespace DataBaseBackup
         
         protected override void OnStart(string[] args)
         {
-            //log1 = new LogFile();//Logfile initiation
+            //scheduleServer.Log = new LogFile();//Logfile initiation
             //initial variables
             scheduleServer = new ScheduleServer()
             {
@@ -120,7 +119,7 @@ namespace DataBaseBackup
 
         private void OnSetLog(LogFile logFile)
         {
-            log1 = new LogFile(logFile.StartupPath, logFile.LogVariablePath);
+            scheduleServer.Log = new LogFile(logFile.StartupPath, logFile.LogVariablePath);
         }
 
         private void OnRemoveSchedule(Schedule schedule)
@@ -166,12 +165,12 @@ namespace DataBaseBackup
                     }
                     File.Delete(finalFile);
                     //UploadFile(finalFile, schedule);
-                    log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "Success backup");//Id,Type,Datetime,Description
+                    scheduleServer.Log.UpdateLogFile(scheduleServer.Log.getId().ToString(), "success", DateTime.Now, "Success backup");//Id,Type,Datetime,Description
                 }
                 else// NOT ok
                 {
                     //TODO: na mpainei log gia oti kati phge straba sto export.
-                    log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "export fail");//Id,Type,Datetime,Description
+                    scheduleServer.Log.UpdateLogFile(scheduleServer.Log.getId().ToString(), "error", DateTime.Now, "export fail");//Id,Type,Datetime,Description
                 }
             }
         }
@@ -209,12 +208,12 @@ namespace DataBaseBackup
                 while (byteRead != 0);
                 fs.Close();
                 FtpStream.Close();
-                log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");
+                scheduleServer.Log.UpdateLogFile(scheduleServer.Log.getId().ToString(), "success", DateTime.Now, "upload completed");
 
             }
             catch (WebException e)
             {
-                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed "+e.Message+" "+e.StackTrace);
+                scheduleServer.Log.UpdateLogFile(scheduleServer.Log.getId().ToString(), "error", DateTime.Now, "upload failed "+e.Message+" "+e.StackTrace);
             }
 
 
@@ -238,7 +237,7 @@ namespace DataBaseBackup
                         client.UploadFile(stream, fi.Name);
                         client.Disconnect();
                         client.Dispose();
-                        log1.UpdateLogFile(log1.getId().ToString(), "success", DateTime.Now, "upload completed");
+                        scheduleServer.Log.UpdateLogFile(scheduleServer.Log.getId().ToString(), "success", DateTime.Now, "upload completed");
                     }
 
                 }
@@ -246,7 +245,7 @@ namespace DataBaseBackup
             }
             catch (Exception e)
             {
-                log1.UpdateLogFile(log1.getId().ToString(), "error", DateTime.Now, "upload failed");
+                scheduleServer.Log.UpdateLogFile(scheduleServer.Log.getId().ToString(), "error", DateTime.Now, "upload failed");
             }
 
 
